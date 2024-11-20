@@ -14,7 +14,7 @@ pub use self::secp256k1::ecrecover;
 #[cfg(not(feature = "secp256k1"))]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
-    use k256::ecdsa::{Error, RecoveryId, Signature, VerifyingKey};
+    use k256::ecdsa::{self, Error, RecoveryId, Signature};
     use primitives::{alloy_primitives::B512, keccak256, B256};
 
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
@@ -28,18 +28,35 @@ mod secp256k1 {
         }
         let recid = RecoveryId::from_byte(recid).expect("recovery ID is valid");
 
-        // recover key
-        let recovered_key = VerifyingKey::recover_from_prehash(&msg[..], &sig, recid)?;
-        // hash it
-        let mut hash = keccak256(
-            &recovered_key
-                .to_encoded_point(/* compress = */ false)
-                .as_bytes()[1..],
-        );
-
-        // truncate to 20 bytes
-        hash[..12].fill(0);
-        Ok(hash)
+        #[cfg(feature = "axvm")]
+        {
+            use axvm::intrinsics::keccak256 as axvm_keccak256;
+            use axvm_ecc::VerifyingKey;
+            let recovered_key = VerifyingKey::recover_from_prehash(&msg[..], &sig, recid)?.0;
+            // hash it
+            let mut hash = axvm_keccak256(
+                &recovered_key
+                    .to_encoded_point(/* compress = */ false)
+                    .as_bytes()[1..],
+            );
+            // truncate to 20 bytes
+            hash[..12].fill(0);
+            Ok(B256::from(hash))
+        }
+        #[cfg(not(feature = "axvm"))]
+        {
+            // recover key
+            let recovered_key = ecdsa::VerifyingKey::recover_from_prehash(&msg[..], &sig, recid)?;
+            // hash it
+            let mut hash = keccak256(
+                &recovered_key
+                    .to_encoded_point(/* compress = */ false)
+                    .as_bytes()[1..],
+            );
+            // truncate to 20 bytes
+            hash[..12].fill(0);
+            Ok(hash)
+        }
     }
 }
 
