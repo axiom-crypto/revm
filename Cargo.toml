@@ -31,6 +31,9 @@ members = [
     "examples/uniswap_get_reserves",
     "examples/uniswap_v2_usdc_swap",
     #"examples/custom_opcodes",
+
+    # tests
+    "tests/openvm/tests",
 ]
 
 [workspace.dependencies]
@@ -48,6 +51,27 @@ interpreter = { path = "crates/interpreter", package = "revm-interpreter", versi
 inspector = { path = "crates/inspector", package = "revm-inspector", version = "1.0.0", default-features = false }
 precompile = { path = "crates/precompile", package = "revm-precompile", version = "11.0.1", default-features = false }
 statetest-types = { path = "crates/statetest-types", package = "revm-statetest-types", version = "1.0.0", default-features = false }
+
+num-bigint-dig = { version = "0.8.4", default-features = false }
+num-traits = { version = "0.2.19", default-features = false }
+
+# openvm
+openvm = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-pairing-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-keccak256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-sdk = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-build = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-pairing-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-rv32im-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-algebra-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-algebra-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-ecc-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-ecc-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-pairing-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-stark-sdk = { git = "ssh://git@github.com/openvm-org/stark-backend.git" }
 
 [workspace.package]
 license = "MIT"

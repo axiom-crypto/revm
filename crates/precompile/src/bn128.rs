@@ -4,6 +4,17 @@ use crate::{
     PrecompileWithAddress,
 };
 use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
+#[cfg(feature = "openvm")]
+use openvm_ecc_guest::{
+    weierstrass::{IntrinsicCurve, WeierstrassPoint},
+    AffinePoint, Group as openvmGroup,
+};
+#[cfg(feature = "openvm")]
+use openvm_pairing_guest::{
+    algebra::IntMod,
+    bn254::{Bn254, Fp, Fp2, G1Affine, Scalar},
+    pairing::PairingCheck,
+};
 use std::vec::Vec;
 
 pub mod add {
@@ -94,9 +105,20 @@ pub const PAIR_ELEMENT_LEN: usize = 64 + 128;
 /// # Panics
 ///
 /// Panics if the input is not at least 32 bytes long.
+#[cfg(not(feature = "openvm"))]
 #[inline]
 pub fn read_fq(input: &[u8]) -> Result<Fq, PrecompileError> {
     Fq::from_slice(&input[..32]).map_err(|_| PrecompileError::Bn128FieldPointNotAMember)
+}
+
+#[cfg(feature = "openvm")]
+#[inline]
+pub fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
+    if input.len() < 32 {
+        Err(PrecompileError::Bn128FieldPointNotAMember)
+    } else {
+        Ok(Fp::from_be_bytes(&input[..32]))
+    }
 }
 
 /// Reads the `x` and `y` points from the input slice.
@@ -104,6 +126,7 @@ pub fn read_fq(input: &[u8]) -> Result<Fq, PrecompileError> {
 /// # Panics
 ///
 /// Panics if the input is not at least 64 bytes long.
+#[cfg(not(feature = "openvm"))]
 #[inline]
 pub fn read_point(input: &[u8]) -> Result<G1, PrecompileError> {
     let px = read_fq(&input[0..32])?;
@@ -111,7 +134,16 @@ pub fn read_point(input: &[u8]) -> Result<G1, PrecompileError> {
     new_g1_point(px, py)
 }
 
+#[cfg(feature = "openvm")]
+#[inline]
+pub fn read_point(input: &[u8]) -> Result<G1Affine, PrecompileError> {
+    let px = read_fq(&input[0..32])?;
+    let py = read_fq(&input[32..64])?;
+    new_g1_point(px, py)
+}
+
 /// Creates a new `G1` point from the given `x` and `y` coordinates.
+#[cfg(not(feature = "openvm"))]
 pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, PrecompileError> {
     if px == Fq::zero() && py == Fq::zero() {
         Ok(G1::zero())
@@ -122,22 +154,42 @@ pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, PrecompileError> {
     }
 }
 
+#[cfg(feature = "openvm")]
+pub fn new_g1_point(px: Fp, py: Fp) -> Result<G1Affine, PrecompileError> {
+    G1Affine::from_xy(px, py).ok_or(PrecompileError::Bn128AffineGFailedToCreate)
+}
+
 pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult {
     if gas_cost > gas_limit {
         return Err(PrecompileError::OutOfGas.into());
     }
 
     let input = right_pad::<ADD_INPUT_LEN>(input);
-
     let p1 = read_point(&input[..64])?;
     let p2 = read_point(&input[64..])?;
 
     let mut output = [0u8; 64];
-    if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
-        sum.x().to_big_endian(&mut output[..32]).unwrap();
-        sum.y().to_big_endian(&mut output[32..]).unwrap();
+    #[cfg(not(feature = "openvm"))]
+    {
+        if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
+            sum.x().to_big_endian(&mut output[..32]).unwrap();
+            sum.y().to_big_endian(&mut output[32..]).unwrap();
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
     }
-    Ok(PrecompileOutput::new(gas_cost, output.into()))
+    #[cfg(feature = "openvm")]
+    {
+        let sum = p1 + p2;
+        // TODO: we should add as_be_bytes to SW point.
+        // manually reverse to avoid allocation
+        let x_bytes: &[u8] = sum.x.as_le_bytes();
+        let y_bytes: &[u8] = sum.y.as_le_bytes();
+        for i in 0..32 {
+            output[i] = x_bytes[31 - i];
+            output[i + 32] = y_bytes[31 - i];
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
 }
 
 pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult {
@@ -149,17 +201,35 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
 
     let p = read_point(&input[..64])?;
 
-    // `Fr::from_slice` can only fail when the length is not 32.
-    let fr = bn::Fr::from_slice(&input[64..96]).unwrap();
-
     let mut output = [0u8; 64];
-    if let Some(mul) = AffineG1::from_jacobian(p * fr) {
-        mul.x().to_big_endian(&mut output[..32]).unwrap();
-        mul.y().to_big_endian(&mut output[32..]).unwrap();
+    #[cfg(not(feature = "openvm"))]
+    {
+        // `Fr::from_slice` can only fail when the length is not 32.
+        let fr = bn::Fr::from_slice(&input[64..96]).unwrap();
+
+        if let Some(mul) = AffineG1::from_jacobian(p * fr) {
+            mul.x().to_big_endian(&mut output[..32]).unwrap();
+            mul.y().to_big_endian(&mut output[32..]).unwrap();
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
     }
-    Ok(PrecompileOutput::new(gas_cost, output.into()))
+    #[cfg(feature = "openvm")]
+    {
+        let scalar = Scalar::from_be_bytes(&input[64..96]);
+
+        let res = Bn254::msm(&[scalar], &[p]);
+        // manually reverse to avoid allocation
+        let x_bytes: &[u8] = res.x.as_le_bytes();
+        let y_bytes: &[u8] = res.y.as_le_bytes();
+        for i in 0..32 {
+            output[i] = x_bytes[31 - i];
+            output[i + 32] = y_bytes[31 - i];
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
 }
 
+#[allow(non_snake_case)]
 pub fn run_pair(
     input: &[u8],
     pair_per_point_cost: u64,
@@ -180,46 +250,71 @@ pub fn run_pair(
     } else {
         let elements = input.len() / PAIR_ELEMENT_LEN;
 
+        #[cfg(not(feature = "openvm"))]
         let mut points = Vec::with_capacity(elements);
+
+        #[cfg(feature = "openvm")]
+        let mut P = Vec::with_capacity(elements);
+        #[cfg(feature = "openvm")]
+        let mut Q = Vec::with_capacity(elements);
 
         // read points
         for idx in 0..elements {
+            // At each idx, there is (G1, G2) which is 6 Fp points
             let read_fq_at = |n: usize| {
                 debug_assert!(n < PAIR_ELEMENT_LEN / 32);
                 let start = idx * PAIR_ELEMENT_LEN + n * 32;
                 // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
                 // per iteration. This is guaranteed to be in-bounds.
                 let slice = unsafe { input.get_unchecked(start..start + 32) };
-                Fq::from_slice(slice).map_err(|_| PrecompileError::Bn128FieldPointNotAMember)
+                read_fq(slice)
             };
-            let ax = read_fq_at(0)?;
-            let ay = read_fq_at(1)?;
-            let bay = read_fq_at(2)?;
-            let bax = read_fq_at(3)?;
-            let bby = read_fq_at(4)?;
-            let bbx = read_fq_at(5)?;
+            // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
+            let g1_x = read_fq_at(0)?;
+            let g1_y = read_fq_at(1)?;
+            let g2_x_c1 = read_fq_at(2)?;
+            let g2_x_c0 = read_fq_at(3)?;
+            let g2_y_c1 = read_fq_at(4)?;
+            let g2_y_c0 = read_fq_at(5)?;
 
-            let a = new_g1_point(ax, ay)?;
-            let b = {
-                let ba = Fq2::new(bax, bay);
-                let bb = Fq2::new(bbx, bby);
-                // TODO: check whether or not we need these zero checks
-                if ba.is_zero() && bb.is_zero() {
-                    G2::zero()
-                } else {
-                    G2::from(
-                        AffineG2::new(ba, bb)
-                            .map_err(|_| PrecompileError::Bn128AffineGFailedToCreate)?,
-                    )
-                }
-            };
+            #[cfg(not(feature = "openvm"))]
+            {
+                let g1 = new_g1_point(g1_x, g1_y)?;
+                let g2 = {
+                    let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
+                    let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
+                    // TODO: check whether or not we need these zero checks
+                    if g2_x.is_zero() && g2_y.is_zero() {
+                        G2::zero()
+                    } else {
+                        G2::from(
+                            AffineG2::new(g2_x, g2_y)
+                                .map_err(|_| PrecompileError::Bn128AffineGFailedToCreate)?,
+                        )
+                    }
+                };
+                points.push((g1, g2));
+            }
 
-            points.push((a, b));
+            #[cfg(feature = "openvm")]
+            {
+                let g1 = AffinePoint::new(g1_x, g1_y);
+                let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
+                let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
+                let g2 = AffinePoint::new(g2_x, g2_y);
+
+                P.push(g1);
+                Q.push(g2);
+            }
         }
 
-        let mul = bn::pairing_batch(&points);
+        #[cfg(not(feature = "openvm"))]
+        let success = bn::pairing_batch(&points) == Gt::one();
 
-        mul == Gt::one()
+        #[cfg(feature = "openvm")]
+        let success = Bn254::pairing_check(&P, &Q).is_ok();
+
+        success
     };
     Ok(PrecompileOutput::new(gas_used, bool_to_bytes32(success)))
 }
