@@ -14,8 +14,10 @@ pub use self::secp256k1::ecrecover;
 #[cfg(feature = "axvm")]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
-    use k256::ecdsa::{self, Error, RecoveryId, Signature};
-    use primitives::{alloy_primitives::B512, keccak256, B256};
+    use axvm::intrinsics::keccak256;
+    use axvm_ecc::VerifyingKey;
+    use k256::ecdsa::{Error, RecoveryId, Signature};
+    use primitives::{alloy_primitives::B512, B256};
 
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
         // parse signature
@@ -28,11 +30,9 @@ mod secp256k1 {
         }
         let recid = RecoveryId::from_byte(recid).expect("recovery ID is valid");
 
-        use axvm::intrinsics::keccak256 as axvm_keccak256;
-        use axvm_ecc::VerifyingKey;
         let recovered_key = VerifyingKey::recover_from_prehash(&msg[..], &sig, recid)?.0;
         // hash it
-        let mut hash = axvm_keccak256(
+        let mut hash = keccak256(
             &recovered_key
                 .to_encoded_point(/* compress = */ false)
                 .as_bytes()[1..],
