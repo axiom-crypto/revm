@@ -49,6 +49,10 @@ inspector = { path = "crates/inspector", package = "revm-inspector", version = "
 precompile = { path = "crates/precompile", package = "revm-precompile", version = "11.0.1", default-features = false }
 statetest-types = { path = "crates/statetest-types", package = "revm-statetest-types", version = "1.0.0", default-features = false }
 
+# axvm
+axvm = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+axvm-ecc = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+
 [workspace.package]
 license = "MIT"
 authors = ["Dragan Rakita <dragan0rakita@gmail.com>"]
