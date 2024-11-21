@@ -23,6 +23,10 @@ all = "warn"
 
 [dependencies]
 revm-primitives = { path = "../primitives", version = "9.0.1", default-features = false }
+
+axvm = { workspace = true, optional = true }
+axvm-ecc = { workspace = true, optional = true }
+# static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
 
 # ecRecover
@@ -73,7 +77,7 @@ serde_json = "1.0"
 serde_derive = "1.0"
 
 [features]
-default = ["std", "c-kzg", "secp256k1", "portable", "blst"]
+default = ["std", "c-kzg", "portable", "blst"]
 std = [
     "revm-primitives/std",
     "k256/std",
@@ -115,6 +119,8 @@ secp256k1 = ["dep:secp256k1"]
 
 # Enables the BLS12-381 precompiles.
 blst = ["dep:blst"]
+
+axvm = ["dep:axvm", "dep:axvm-ecc"]
 
 [[bench]]
 name = "bench"
