@@ -11,7 +11,7 @@ pub use self::secp256k1::ecrecover;
 #[cfg(feature = "axvm")]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
-    use axvm::intrinsics::keccak256;
+    use axvm_keccak256_guest::keccak256;
     use axvm_ecc::VerifyingKey;
     use k256::ecdsa::{Error, RecoveryId, Signature};
     use primitives::{alloy_primitives::B512, B256};

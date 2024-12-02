@@ -29,6 +29,7 @@ statetest-types = { path = "crates/statetest-types", package = "revm-statetest-t
 # axvm
 axvm = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
 axvm-ecc = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+axvm-keccak256-guest = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
 
 [workspace.package]
 license = "MIT"
