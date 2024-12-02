@@ -28,7 +28,7 @@ wiring.workspace = true
 specification.workspace = true
 
 axvm = { workspace = true, optional = true }
-axvm-ecc = { workspace = true, optional = true }
+axvm-ecc-guest = { workspace = true, optional = true }
 axvm-keccak256-guest = { workspace = true, optional = true }
 
 # static precompile sets.
@@ -116,7 +116,7 @@ secp256k1 = ["dep:secp256k1"]
 # Enables the BLS12-381 precompiles.
 blst = ["dep:blst"]
 
-axvm = ["dep:axvm", "dep:axvm-ecc", "dep:axvm-keccak256-guest"]
+axvm = ["dep:axvm", "dep:axvm-ecc-guest", "dep:axvm-keccak256-guest"]
 
 [[bench]]
 name = "bench"
