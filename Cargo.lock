@@ -705,12 +705,12 @@ checksum = "0c4b4d0bd25bd0b74681c0ad21497610ce1b7c91b1022cd21c80c6fbdd9476b0"
 [[package]]
 name = "axvm"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
- "axvm-moduli-setup",
+ "axvm-algebra-moduli-setup",
+ "axvm-ecc-sw-setup",
  "axvm-platform",
  "axvm-rv32im-guest",
- "axvm-sw-setup",
  "hex-literal",
  "num-bigint-dig",
  "num-traits",
@@ -718,9 +718,9 @@ dependencies = [
 ]
 
 [[package]]
-name = "axvm-algebra"
+name = "axvm-algebra-guest"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
  "axvm-platform",
  "num-bigint-dig",
@@ -729,12 +729,24 @@ dependencies = [
 ]
 
 [[package]]
-name = "axvm-ecc"
+name = "axvm-algebra-moduli-setup"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
+dependencies = [
+ "axvm-macros-common",
+ "quote",
+ "syn 2.0.70",
+]
+
+[[package]]
+name = "axvm-ecc-guest"
+version = "0.1.0"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
  "axvm",
- "axvm-algebra",
+ "axvm-algebra-guest",
+ "axvm-algebra-moduli-setup",
+ "axvm-ecc-sw-setup",
  "axvm-platform",
  "ecdsa",
  "elliptic-curve",
@@ -751,9 +763,19 @@ dependencies = [
 ]
 
 [[package]]
+name = "axvm-ecc-sw-setup"
+version = "0.1.0"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
+dependencies = [
+ "axvm-macros-common",
+ "quote",
+ "syn 2.0.70",
+]
+
+[[package]]
 name = "axvm-keccak256-guest"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
  "axvm-platform",
  "serde",
@@ -763,27 +785,17 @@ dependencies = [
 [[package]]
 name = "axvm-macros-common"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
- "syn 2.0.70",
-]
-
-[[package]]
-name = "axvm-moduli-setup"
-version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
-dependencies = [
- "axvm-macros-common",
- "quote",
  "syn 2.0.70",
 ]
 
 [[package]]
 name = "axvm-platform"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
- "axvm-moduli-setup",
+ "axvm-algebra-moduli-setup",
  "bincode 2.0.0-rc.3",
  "getrandom",
  "libm",
@@ -794,19 +806,9 @@ dependencies = [
 [[package]]
 name = "axvm-rv32im-guest"
 version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
+source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#14a79fbb495d36c2cd970329a6d0f972943a24b3"
 dependencies = [
  "axvm-platform",
-]
-
-[[package]]
-name = "axvm-sw-setup"
-version = "0.1.0"
-source = "git+ssh://git@github.com/axiom-crypto/afs-prototype.git#15f5656ab6f107aeba63a31ae5be61ca72c6741e"
-dependencies = [
- "axvm-macros-common",
- "quote",
- "syn 2.0.70",
 ]
 
 [[package]]
@@ -3167,7 +3169,7 @@ version = "11.0.1"
 dependencies = [
  "aurora-engine-modexp",
  "axvm",
- "axvm-ecc",
+ "axvm-ecc-guest",
  "axvm-keccak256-guest",
  "blst",
  "c-kzg",
