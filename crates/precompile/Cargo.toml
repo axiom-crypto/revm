@@ -24,9 +24,10 @@ all = "warn"
 [dependencies]
 revm-primitives = { path = "../primitives", version = "9.0.1", default-features = false }
 
-axvm = { workspace = true, optional = true }
-axvm-ecc-guest = { workspace = true, optional = true }
-axvm-keccak256-guest = { workspace = true, optional = true }
+# axvm
+axvm = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git", optional = true }
+axvm-ecc-guest = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git", optional = true }
+axvm-keccak256-guest = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git", optional = true }
 
 # static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
