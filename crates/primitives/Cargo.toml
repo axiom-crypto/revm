@@ -27,6 +27,7 @@ alloy-primitives = { version = "0.8.0", default-features = false, features = [
     "rlp",
 ] }
 hashbrown = "0.14"
+rustc-hash = { version = "2.1.0", optional = true }
 auto_impl = "1.2"
 bitvec = { version = "1", default-features = false, features = ["alloc"] }
 bitflags = { version = "2.6.0", default-features = false }
@@ -64,6 +65,7 @@ std = [
     "bitflags/std",
 ]
 hashbrown = []
+rustc-hash = ["dep:rustc-hash"]
 serde = [
     "dep:serde",
     "alloy-eips/serde",

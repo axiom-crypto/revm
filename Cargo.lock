@@ -3525,6 +3525,7 @@ dependencies = [
  "hashbrown 0.14.5",
  "hex",
  "kzg-rs",
+ "rustc-hash",
  "serde",
 ]
 

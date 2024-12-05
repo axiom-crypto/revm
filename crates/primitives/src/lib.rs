@@ -35,8 +35,12 @@ pub use eip7702::{
 pub use env::*;
 
 cfg_if::cfg_if! {
-    if #[cfg(all(not(feature = "hashbrown"), feature = "std"))] {
+    if #[cfg(all(not(feature = "hashbrown"), not(feature = "rustc-hash"), feature = "std"))] {
         pub use std::collections::{hash_map, hash_set, HashMap, HashSet};
+        use hashbrown as _;
+    } else if #[cfg(all(feature = "rustc-hash", feature = "std"))] {
+        pub use std::collections::{hash_map, hash_set};
+        pub use rustc_hash::{FxHashMap as HashMap, FxHashSet as HashSet};
         use hashbrown as _;
     } else {
         pub use hashbrown::{hash_map, hash_set, HashMap, HashSet};
