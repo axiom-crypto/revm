@@ -36,7 +36,7 @@ mod secp256k1 {
         );
         let public_key = recovered_key.as_affine();
         let mut encoded = [0u8; 64];
-        encoded.copy_from_slice(&public_key.x().to_be_bytes());
+        encoded[..32].copy_from_slice(&public_key.x().to_be_bytes());
         encoded[32..].copy_from_slice(&public_key.y().to_be_bytes());
         // hash it
         let mut hash = keccak256(&encoded);
