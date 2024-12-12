@@ -110,7 +110,7 @@ pub fn read_fq(input: &[u8]) -> Result<Fq, PrecompileError> {
 
 #[cfg(feature = "axvm")]
 #[inline]
-pub fn read_fp(input: &[u8]) -> Result<Fp, PrecompileError> {
+pub fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
     if input.len() < 32 {
         Err(PrecompileError::Bn128FieldPointNotAMember)
     } else {
@@ -134,8 +134,8 @@ pub fn read_point(input: &[u8]) -> Result<G1, PrecompileError> {
 #[cfg(feature = "axvm")]
 #[inline]
 pub fn read_point(input: &[u8]) -> Result<G1Affine, PrecompileError> {
-    let px = read_fp(&input[0..32])?;
-    let py = read_fp(&input[32..64])?;
+    let px = read_fq(&input[0..32])?;
+    let py = read_fq(&input[32..64])?;
     new_g1_point(px, py)
 }
 
@@ -257,11 +257,7 @@ pub fn run_pair(
                 // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
                 // per iteration. This is guaranteed to be in-bounds.
                 let slice = unsafe { input.get_unchecked(start..start + 32) };
-                #[cfg(not(feature = "axvm"))]
-                let res = read_fq(slice);
-                #[cfg(feature = "axvm")]
-                let res = read_fp(slice);
-                res
+                read_fq(slice)
             };
             // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
             let g1_x = read_fq_at(0)?;
