@@ -3286,6 +3286,7 @@ dependencies = [
  "serde_derive",
  "serde_json",
  "sha2",
+ "substrate-bn",
 ]
 
 [[package]]
@@ -3973,6 +3974,19 @@ dependencies = [
  "quote",
  "rustversion",
  "syn 2.0.70",
+]
+
+[[package]]
+name = "substrate-bn"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "72b5bbfa79abbae15dd642ea8176a21a635ff3c00059961d1ea27ad04e5b441c"
+dependencies = [
+ "byteorder",
+ "crunchy",
+ "lazy_static",
+ "rand",
+ "rustc-hex",
 ]
 
 [[package]]

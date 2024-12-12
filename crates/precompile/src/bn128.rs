@@ -3,14 +3,15 @@ use crate::{
     Address, Precompile, PrecompileError, PrecompileOutput, PrecompileResult,
     PrecompileWithAddress,
 };
-use axvm_ecc_guest::msm;
-use axvm_ecc_guest::AffinePoint;
-use axvm_ecc_guest::{weierstrass::WeierstrassPoint, Group};
+#[cfg(feature = "axvm")]
+use axvm_ecc_guest::{msm, weierstrass::WeierstrassPoint, AffinePoint, Group as AxvmGroup};
+#[cfg(feature = "axvm")]
 use axvm_pairing_guest::{
     algebra::IntMod,
     bn254::{Bn254, Fp, Fp2, G1Affine, Scalar},
     pairing::PairingCheck,
 };
+use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
 use std::vec::Vec;
 
 pub mod add {
@@ -101,8 +102,15 @@ pub const PAIR_ELEMENT_LEN: usize = 64 + 128;
 /// # Panics
 ///
 /// Panics if the input is not at least 32 bytes long.
+#[cfg(not(feature = "axvm"))]
 #[inline]
-pub fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
+pub fn read_fq(input: &[u8]) -> Result<Fq, PrecompileError> {
+    Fq::from_slice(&input[..32]).map_err(|_| PrecompileError::Bn128FieldPointNotAMember)
+}
+
+#[cfg(feature = "axvm")]
+#[inline]
+pub fn read_fp(input: &[u8]) -> Result<Fp, PrecompileError> {
     if input.len() < 32 {
         Err(PrecompileError::Bn128FieldPointNotAMember)
     } else {
@@ -115,14 +123,35 @@ pub fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
 /// # Panics
 ///
 /// Panics if the input is not at least 64 bytes long.
+#[cfg(not(feature = "axvm"))]
 #[inline]
-pub fn read_point(input: &[u8]) -> Result<G1Affine, PrecompileError> {
+pub fn read_point(input: &[u8]) -> Result<G1, PrecompileError> {
     let px = read_fq(&input[0..32])?;
     let py = read_fq(&input[32..64])?;
     new_g1_point(px, py)
 }
 
+#[cfg(feature = "axvm")]
+#[inline]
+pub fn read_point(input: &[u8]) -> Result<G1Affine, PrecompileError> {
+    let px = read_fp(&input[0..32])?;
+    let py = read_fp(&input[32..64])?;
+    new_g1_point(px, py)
+}
+
 /// Creates a new `G1` point from the given `x` and `y` coordinates.
+#[cfg(not(feature = "axvm"))]
+pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, PrecompileError> {
+    if px == Fq::zero() && py == Fq::zero() {
+        Ok(G1::zero())
+    } else {
+        AffineG1::new(px, py)
+            .map(Into::into)
+            .map_err(|_| PrecompileError::Bn128AffineGFailedToCreate)
+    }
+}
+
+#[cfg(feature = "axvm")]
 pub fn new_g1_point(px: Fp, py: Fp) -> Result<G1Affine, PrecompileError> {
     // TODO: this check should be within from_xy?
     if px == <Fp as IntMod>::ZERO && py == <Fp as IntMod>::ZERO {
@@ -138,14 +167,25 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
 
     let input = right_pad::<ADD_INPUT_LEN>(input);
-
     let p1 = read_point(&input[..64])?;
     let p2 = read_point(&input[64..])?;
 
-    let sum = p1 + p2;
-    // TODO: we should add as_be_bytes to SW point.
-    let output = [sum.x.to_be_bytes(), sum.y.to_be_bytes()].concat();
-    Ok(PrecompileOutput::new(gas_cost, output.into()))
+    #[cfg(not(feature = "axvm"))]
+    {
+        let mut output = [0u8; 64];
+        if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
+            sum.x().to_big_endian(&mut output[..32]).unwrap();
+            sum.y().to_big_endian(&mut output[32..]).unwrap();
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
+    #[cfg(feature = "axvm")]
+    {
+        let sum = p1 + p2;
+        // TODO: we should add as_be_bytes to SW point.
+        let output = [sum.x.to_be_bytes(), sum.y.to_be_bytes()].concat();
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
 }
 
 pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult {
@@ -156,11 +196,27 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     let input = right_pad::<MUL_INPUT_LEN>(input);
 
     let p = read_point(&input[..64])?;
-    let scalar = Scalar::from_be_bytes(&input[64..96]);
 
-    let res = msm(&[scalar], &[p]);
-    let output = [res.x.to_be_bytes(), res.y.to_be_bytes()].concat();
-    Ok(PrecompileOutput::new(gas_cost, output.into()))
+    #[cfg(not(feature = "axvm"))]
+    {
+        // `Fr::from_slice` can only fail when the length is not 32.
+        let fr = bn::Fr::from_slice(&input[64..96]).unwrap();
+
+        let mut output = [0u8; 64];
+        if let Some(mul) = AffineG1::from_jacobian(p * fr) {
+            mul.x().to_big_endian(&mut output[..32]).unwrap();
+            mul.y().to_big_endian(&mut output[32..]).unwrap();
+        }
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
+    #[cfg(feature = "axvm")]
+    {
+        let scalar = Scalar::from_be_bytes(&input[64..96]);
+
+        let res = msm(&[scalar], &[p]);
+        let output = [res.x.to_be_bytes(), res.y.to_be_bytes()].concat();
+        Ok(PrecompileOutput::new(gas_cost, output.into()))
+    }
 }
 
 #[allow(non_snake_case)]
@@ -184,7 +240,12 @@ pub fn run_pair(
     } else {
         let elements = input.len() / PAIR_ELEMENT_LEN;
 
+        #[cfg(not(feature = "axvm"))]
+        let mut points = Vec::with_capacity(elements);
+
+        #[cfg(feature = "axvm")]
         let mut P = Vec::with_capacity(elements);
+        #[cfg(feature = "axvm")]
         let mut Q = Vec::with_capacity(elements);
 
         // read points
@@ -196,25 +257,58 @@ pub fn run_pair(
                 // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
                 // per iteration. This is guaranteed to be in-bounds.
                 let slice = unsafe { input.get_unchecked(start..start + 32) };
-                read_fq(slice)
+                #[cfg(not(feature = "axvm"))]
+                let res = read_fq(slice);
+                #[cfg(feature = "axvm")]
+                let res = read_fp(slice);
+                res
             };
+            // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
             let g1_x = read_fq_at(0)?;
             let g1_y = read_fq_at(1)?;
-            let g2_x_c0 = read_fq_at(2)?;
-            let g2_x_c1 = read_fq_at(3)?;
-            let g2_y_c0 = read_fq_at(4)?;
-            let g2_y_c1 = read_fq_at(5)?;
+            let g2_x_c1 = read_fq_at(2)?;
+            let g2_x_c0 = read_fq_at(3)?;
+            let g2_y_c1 = read_fq_at(4)?;
+            let g2_y_c0 = read_fq_at(5)?;
 
-            let g1 = AffinePoint::new(g1_x, g1_y);
-            let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
-            let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
-            let g2 = AffinePoint::new(g2_x, g2_y);
+            #[cfg(not(feature = "axvm"))]
+            {
+                let g1 = new_g1_point(g1_x, g1_y)?;
+                let g2 = {
+                    let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
+                    let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
+                    // TODO: check whether or not we need these zero checks
+                    if g2_x.is_zero() && g2_y.is_zero() {
+                        G2::zero()
+                    } else {
+                        G2::from(
+                            AffineG2::new(g2_x, g2_y)
+                                .map_err(|_| PrecompileError::Bn128AffineGFailedToCreate)?,
+                        )
+                    }
+                };
+                points.push((g1, g2));
+            }
 
-            P.push(g1);
-            Q.push(g2);
+            #[cfg(feature = "axvm")]
+            {
+                let g1 = AffinePoint::new(g1_x, g1_y);
+                let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
+                let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
+                let g2 = AffinePoint::new(g2_x, g2_y);
+
+                P.push(g1);
+                Q.push(g2);
+            }
         }
 
-        Bn254::pairing_check(&P, &Q).is_ok()
+        #[cfg(not(feature = "axvm"))]
+        let success = bn::pairing_batch(&points) == Gt::one();
+
+        #[cfg(feature = "axvm")]
+        let success = pairing_check(&P, &Q);
+
+        success
     };
     Ok(PrecompileOutput::new(gas_used, bool_to_bytes32(success)))
 }
