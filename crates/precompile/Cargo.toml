@@ -28,8 +28,9 @@ wiring.workspace = true
 specification.workspace = true
 
 axvm = { workspace = true, optional = true }
-axvm-ecc-guest = { workspace = true, optional = true }
+axvm-ecc-guest = { workspace = true }
 axvm-keccak256-guest = { workspace = true, optional = true }
+axvm-pairing-guest = { workspace = true, features = ["bn254"] }
 
 # static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
@@ -49,9 +50,6 @@ ripemd = { version = "0.1", default-features = false }
 
 # modexp
 aurora-engine-modexp = { version = "1.1", default-features = false }
-
-# ecAdd, ecMul, ecPairing
-bn = { package = "substrate-bn", version = "0.6", default-features = false }
 
 # KZG point evaluation precompile
 c-kzg = { version = "1.0.3", default-features = false, optional = true, features = [
