@@ -11,15 +11,15 @@ pub const ECRECOVER: PrecompileWithAddress = PrecompileWithAddress(
 
 pub use self::secp256k1::ecrecover;
 
-#[cfg(feature = "axvm")]
+#[cfg(feature = "openvm")]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
-    use axvm_ecc_guest::{algebra::IntMod, ecdsa::VerifyingKey, weierstrass::WeierstrassPoint};
-    use axvm_keccak256_guest::keccak256;
     use k256::{
         ecdsa::{Error, RecoveryId, Signature},
         Secp256k1,
     };
+    use openvm_ecc_guest::{algebra::IntMod, ecdsa::VerifyingKey, weierstrass::WeierstrassPoint};
+    use openvm_keccak256_guest::keccak256;
     use primitives::{alloy_primitives::B512, B256};
 
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
@@ -49,7 +49,7 @@ mod secp256k1 {
     }
 }
 
-#[cfg(not(any(feature = "secp256k1", feature = "axvm")))]
+#[cfg(not(any(feature = "secp256k1", feature = "openvm")))]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
     use k256::ecdsa::{Error, RecoveryId, Signature, VerifyingKey};

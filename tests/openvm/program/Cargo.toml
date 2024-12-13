@@ -1,0 +1,15 @@
+[workspace]
+[package]
+name = "ec-precompile-test-programs"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openvm = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+openvm-algebra-moduli-setup = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+openvm-algebra-complex-macros = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+openvm-platform = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+revm-precompile = { path = "../../../crates/precompile", default-features = false, features = [
+    "openvm",
+] }
