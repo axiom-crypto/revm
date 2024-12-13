@@ -5,11 +5,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
-openvm-algebra-moduli-setup = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
-openvm-algebra-complex-macros = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
-openvm-platform = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
-openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/afs-prototype.git" }
+openvm = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-algebra-moduli-setup = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-algebra-complex-macros = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-platform = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm-algebra-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
     "openvm",
 ] }
