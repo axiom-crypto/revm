@@ -13,5 +13,5 @@ openvm-algebra-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", bra
 openvm-pairing-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
 openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
-    "openvm",
+    "openvm", "openvm-sha2",
 ] }

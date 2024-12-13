@@ -11,5 +11,5 @@ openvm-algebra-complex-macros = { git = "ssh://git@github.com/openvm-org/openvm.
 openvm-platform = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
 openvm-algebra-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
-    "openvm",
+    "openvm", "openvm-sha2",
 ] }

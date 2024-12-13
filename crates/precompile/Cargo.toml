@@ -31,10 +31,10 @@ specification.workspace = true
 openvm = { workspace = true, optional = true }
 openvm-ecc-guest = { workspace = true, optional = true }
 openvm-keccak256-guest = { workspace = true, optional = true }
+openvm-sha256-guest = { workspace = true, optional = true }
 openvm-pairing-guest = { workspace = true, optional = true, features = [
     "bn254",
 ] }
-openvm-sha256-guest = { workspace = true }
 
 # static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
@@ -126,6 +126,10 @@ openvm = [
     "openvm-ecc-guest/k256",
     "dep:openvm-keccak256-guest",
     "dep:openvm-pairing-guest",
+]
+
+openvm-sha2 = [
+    "dep:openvm-sha256-guest",
 ]
 
 [[bench]]
