@@ -7,7 +7,7 @@ use openvm_algebra_transpiler::{Fp2TranspilerExtension, ModularTranspilerExtensi
 use openvm_build::{GuestOptions, TargetFilter};
 use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::new_air_test_with_min_segments;
-use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
+use openvm_ecc_circuit::{CurveConfig, Rv32WeierstrassConfig, WeierstrassExtension};
 use openvm_ecc_transpiler::EccTranspilerExtension;
 use openvm_pairing_circuit::{PairingCurve, PairingExtension, Rv32PairingConfig};
 use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
@@ -28,7 +28,7 @@ fn test_ec_pairing_precompile() {
     let sdk = Sdk;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../program");
+    pkg_dir.push("../programs/pairing");
     let ec_precompile = sdk
         .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
         .unwrap();
@@ -78,6 +78,61 @@ fn test_ec_pairing_precompile() {
     .unwrap();
     let expected =
         hex::decode("0000000000000000000000000000000000000000000000000000000000000001").unwrap();
+
+    let io = [input, expected]
+        .into_iter()
+        .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
+    new_air_test_with_min_segments(config, exe, io, 1, false);
+}
+
+#[test]
+fn test_ec_add_precompile() {
+    let sdk = Sdk;
+    let guest_opts = GuestOptions::default();
+    let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
+    pkg_dir.push("../programs/ec_add");
+    let ec_precompile = sdk
+        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
+        .unwrap();
+
+    let transpiler = Transpiler::<F>::default()
+        .with_extension(Rv32ITranspilerExtension)
+        .with_extension(Rv32MTranspilerExtension)
+        .with_extension(Rv32IoTranspilerExtension)
+        .with_extension(ModularTranspilerExtension)
+        .with_extension(EccTranspilerExtension);
+    let exe = sdk.transpile(ec_precompile, transpiler).unwrap();
+
+    // Config
+    let config = Rv32WeierstrassConfig {
+        system: SystemConfig::default().with_continuations(),
+        base: Default::default(),
+        mul: Default::default(),
+        io: Default::default(),
+        modular: ModularExtension::new(vec![BN254_MODULUS.clone()]),
+        weierstrass: WeierstrassExtension::new(vec![CurveConfig {
+            modulus: BN254_MODULUS.clone(),
+            scalar: BN254_ORDER.clone(),
+            a: BigUint::zero(),
+            b: BigUint::from_u8(3u8).unwrap(),
+        }]),
+    };
+
+    let input = hex::decode(
+        "\
+         18b18acfb4c2c30276db5411368e7185b311dd124691610c5d3b74034e093dc9\
+         063c909c4720840cb5134cb9f59fa749755796819658d32efc0d288198f37266\
+         07c2b7f58a84bd6145f00c9c2bc0bb1a187f20ff2c92963a88019e7c6a014eed\
+         06614e20c147e940f2d70da3f74c9a17df361706a4485c742bd6788478fa17d7",
+    )
+    .unwrap();
+    let expected = hex::decode(
+        "\
+        2243525c5efd4b9c3d3c45ac0ca3fe4dd85e830a4ce6b65fa1eeaee202839703\
+        301d1d33be6da8e509df21cc35964723180eed7532537db9ae5e7d48f195c915",
+    )
+    .unwrap();
 
     let io = [input, expected]
         .into_iter()
