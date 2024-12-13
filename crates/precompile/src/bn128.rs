@@ -5,7 +5,10 @@ use crate::{
 };
 use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
 #[cfg(feature = "openvm")]
-use openvm_ecc_guest::{msm, weierstrass::WeierstrassPoint, AffinePoint, Group as openvmGroup};
+use openvm_ecc_guest::{
+    weierstrass::{IntrinsicCurve, WeierstrassPoint},
+    AffinePoint, Group as openvmGroup,
+};
 #[cfg(feature = "openvm")]
 use openvm_pairing_guest::{
     algebra::IntMod,
@@ -153,12 +156,7 @@ pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, PrecompileError> {
 
 #[cfg(feature = "openvm")]
 pub fn new_g1_point(px: Fp, py: Fp) -> Result<G1Affine, PrecompileError> {
-    // TODO: this check should be within from_xy?
-    if px == <Fp as IntMod>::ZERO && py == <Fp as IntMod>::ZERO {
-        Ok(G1Affine::IDENTITY)
-    } else {
-        G1Affine::from_xy(px, py).ok_or(PrecompileError::Bn128AffineGFailedToCreate)
-    }
+    G1Affine::from_xy(px, py).ok_or(PrecompileError::Bn128AffineGFailedToCreate)
 }
 
 pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult {
@@ -219,7 +217,7 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     {
         let scalar = Scalar::from_be_bytes(&input[64..96]);
 
-        let res = msm(&[scalar], &[p]);
+        let res = Bn254::msm(&[scalar], &[p]);
         // manually reverse to avoid allocation
         let x_bytes: &[u8] = res.x.as_le_bytes();
         let y_bytes: &[u8] = res.y.as_le_bytes();

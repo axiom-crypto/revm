@@ -3,22 +3,15 @@ use std::path::PathBuf;
 use num_bigint_dig::BigUint;
 use num_traits::{FromPrimitive, Zero};
 use openvm_algebra_circuit::{Fp2Extension, ModularExtension};
-use openvm_algebra_transpiler::{Fp2TranspilerExtension, ModularTranspilerExtension};
 use openvm_build::{GuestOptions, TargetFilter};
 use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::new_air_test_with_min_segments;
-use openvm_ecc_circuit::{CurveConfig, Rv32WeierstrassConfig, WeierstrassExtension};
-use openvm_ecc_transpiler::EccTranspilerExtension;
-use openvm_pairing_circuit::{PairingCurve, PairingExtension, Rv32PairingConfig};
+use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
+use openvm_pairing_circuit::{PairingCurve, PairingExtension};
 use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
-use openvm_pairing_transpiler::PairingTranspilerExtension;
-use openvm_rv32im_transpiler::{
-    Rv32ITranspilerExtension, Rv32IoTranspilerExtension, Rv32MTranspilerExtension,
-};
-use openvm_sdk::Sdk;
+use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::AbstractField;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
-use openvm_transpiler::transpiler::Transpiler;
 use primitives::hex;
 
 type F = BabyBear;
@@ -33,32 +26,28 @@ fn test_ec_pairing_precompile() {
         .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
         .unwrap();
 
-    let transpiler = Transpiler::<F>::default()
-        .with_extension(Rv32ITranspilerExtension)
-        .with_extension(Rv32MTranspilerExtension)
-        .with_extension(Rv32IoTranspilerExtension)
-        .with_extension(PairingTranspilerExtension)
-        .with_extension(ModularTranspilerExtension)
-        .with_extension(EccTranspilerExtension)
-        .with_extension(Fp2TranspilerExtension);
-    let exe = sdk.transpile(ec_precompile, transpiler).unwrap();
-
-    // Config
-    let config = Rv32PairingConfig {
-        system: SystemConfig::default().with_continuations(),
-        base: Default::default(),
-        mul: Default::default(),
-        io: Default::default(),
-        modular: ModularExtension::new(vec![BN254_MODULUS.clone()]),
-        fp2: Fp2Extension::new(vec![BN254_MODULUS.clone()]),
-        weierstrass: WeierstrassExtension::new(vec![CurveConfig {
+    let vm_config = SdkVmConfig::builder()
+        .system(SystemConfig::default().with_continuations().into())
+        .rv32i(Default::default())
+        .rv32m(Default::default())
+        .io(Default::default())
+        .keccak(Default::default())
+        .modular(ModularExtension::new(vec![
+            BN254_MODULUS.clone(),
+            BN254_ORDER.clone(),
+        ]))
+        .fp2(Fp2Extension::new(vec![BN254_MODULUS.clone()]))
+        .ecc(WeierstrassExtension::new(vec![CurveConfig {
             modulus: BN254_MODULUS.clone(),
             scalar: BN254_ORDER.clone(),
             a: BigUint::zero(),
             b: BigUint::from_u8(3u8).unwrap(),
-        }]),
-        pairing: PairingExtension::new(vec![PairingCurve::Bn254]),
-    };
+        }]))
+        .pairing(PairingExtension::new(vec![PairingCurve::Bn254]))
+        .build();
+    let exe = sdk
+        .transpile(ec_precompile, vm_config.transpiler())
+        .unwrap();
 
     let input = hex::decode(
         "\
@@ -83,7 +72,7 @@ fn test_ec_pairing_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
 }
 
 #[test]
@@ -96,28 +85,25 @@ fn test_ec_add_precompile() {
         .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
         .unwrap();
 
-    let transpiler = Transpiler::<F>::default()
-        .with_extension(Rv32ITranspilerExtension)
-        .with_extension(Rv32MTranspilerExtension)
-        .with_extension(Rv32IoTranspilerExtension)
-        .with_extension(ModularTranspilerExtension)
-        .with_extension(EccTranspilerExtension);
-    let exe = sdk.transpile(ec_precompile, transpiler).unwrap();
-
-    // Config
-    let config = Rv32WeierstrassConfig {
-        system: SystemConfig::default().with_continuations(),
-        base: Default::default(),
-        mul: Default::default(),
-        io: Default::default(),
-        modular: ModularExtension::new(vec![BN254_MODULUS.clone()]),
-        weierstrass: WeierstrassExtension::new(vec![CurveConfig {
+    let vm_config = SdkVmConfig::builder()
+        .system(SystemConfig::default().with_continuations().into())
+        .rv32i(Default::default())
+        .rv32m(Default::default())
+        .io(Default::default())
+        .modular(ModularExtension::new(vec![
+            BN254_MODULUS.clone(),
+            BN254_ORDER.clone(),
+        ]))
+        .ecc(WeierstrassExtension::new(vec![CurveConfig {
             modulus: BN254_MODULUS.clone(),
             scalar: BN254_ORDER.clone(),
             a: BigUint::zero(),
             b: BigUint::from_u8(3u8).unwrap(),
-        }]),
-    };
+        }]))
+        .build();
+    let exe = sdk
+        .transpile(ec_precompile, vm_config.transpiler())
+        .unwrap();
 
     let input = hex::decode(
         "\
@@ -138,7 +124,7 @@ fn test_ec_add_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
 }
 
 #[test]
@@ -151,28 +137,25 @@ fn test_ec_mul_precompile() {
         .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
         .unwrap();
 
-    let transpiler = Transpiler::<F>::default()
-        .with_extension(Rv32ITranspilerExtension)
-        .with_extension(Rv32MTranspilerExtension)
-        .with_extension(Rv32IoTranspilerExtension)
-        .with_extension(ModularTranspilerExtension)
-        .with_extension(EccTranspilerExtension);
-    let exe = sdk.transpile(ec_precompile, transpiler).unwrap();
-
-    // Config
-    let config = Rv32WeierstrassConfig {
-        system: SystemConfig::default().with_continuations(),
-        base: Default::default(),
-        mul: Default::default(),
-        io: Default::default(),
-        modular: ModularExtension::new(vec![BN254_MODULUS.clone()]),
-        weierstrass: WeierstrassExtension::new(vec![CurveConfig {
+    let vm_config = SdkVmConfig::builder()
+        .system(SystemConfig::default().with_continuations().into())
+        .rv32i(Default::default())
+        .rv32m(Default::default())
+        .io(Default::default())
+        .modular(ModularExtension::new(vec![
+            BN254_MODULUS.clone(),
+            BN254_ORDER.clone(),
+        ]))
+        .ecc(WeierstrassExtension::new(vec![CurveConfig {
             modulus: BN254_MODULUS.clone(),
             scalar: BN254_ORDER.clone(),
             a: BigUint::zero(),
             b: BigUint::from_u8(3u8).unwrap(),
-        }]),
-    };
+        }]))
+        .build();
+    let exe = sdk
+        .transpile(ec_precompile, vm_config.transpiler())
+        .unwrap();
 
     let input = hex::decode(
         "\
@@ -192,5 +175,5 @@ fn test_ec_mul_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
 }
