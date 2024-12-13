@@ -140,3 +140,57 @@ fn test_ec_add_precompile() {
         .collect::<Vec<_>>();
     new_air_test_with_min_segments(config, exe, io, 1, false);
 }
+
+#[test]
+fn test_ec_mul_precompile() {
+    let sdk = Sdk;
+    let guest_opts = GuestOptions::default();
+    let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
+    pkg_dir.push("../programs/ec_mul");
+    let ec_precompile = sdk
+        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
+        .unwrap();
+
+    let transpiler = Transpiler::<F>::default()
+        .with_extension(Rv32ITranspilerExtension)
+        .with_extension(Rv32MTranspilerExtension)
+        .with_extension(Rv32IoTranspilerExtension)
+        .with_extension(ModularTranspilerExtension)
+        .with_extension(EccTranspilerExtension);
+    let exe = sdk.transpile(ec_precompile, transpiler).unwrap();
+
+    // Config
+    let config = Rv32WeierstrassConfig {
+        system: SystemConfig::default().with_continuations(),
+        base: Default::default(),
+        mul: Default::default(),
+        io: Default::default(),
+        modular: ModularExtension::new(vec![BN254_MODULUS.clone()]),
+        weierstrass: WeierstrassExtension::new(vec![CurveConfig {
+            modulus: BN254_MODULUS.clone(),
+            scalar: BN254_ORDER.clone(),
+            a: BigUint::zero(),
+            b: BigUint::from_u8(3u8).unwrap(),
+        }]),
+    };
+
+    let input = hex::decode(
+        "\
+        2bd3e6d0f3b142924f5ca7b49ce5b9d54c4703d7ae5648e61d02268b1a0a9fb7\
+        21611ce0a6af85915e2f1d70300909ce2e49dfad4a4619c8390cae66cefdb204\
+        00000000000000000000000000000000000000000000000011138ce750fa15c2",
+    )
+    .unwrap();
+    let expected = hex::decode(
+        "\
+        070a8d6a982153cae4be29d434e8faef8a47b274a053f5a4ee2a6c9c13c31e5c\
+        031b8ce914eba3a9ffb989f9cdd5b0f01943074bf4f0f315690ec3cec6981afc",
+    )
+    .unwrap();
+
+    let io = [input, expected]
+        .into_iter()
+        .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
+    new_air_test_with_min_segments(config, exe, io, 1, false);
+}
