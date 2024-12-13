@@ -35,6 +35,7 @@ fn test_ec_pairing_precompile() {
         .rv32m(Default::default())
         .io(Default::default())
         .keccak(Default::default())
+        .sha256(Default::default())
         .modular(ModularExtension::new(vec![
             BN254_MODULUS.clone(),
             BN254_ORDER.clone(),

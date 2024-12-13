@@ -5488,6 +5488,7 @@ dependencies = [
  "openvm-ecc-guest",
  "openvm-keccak256-guest",
  "openvm-pairing-guest",
+ "openvm-sha256-guest",
  "p256",
  "rand",
  "revm-primitives 9.0.1",
