@@ -19,6 +19,7 @@ openvm-pairing-circuit.workspace = true
 openvm-pairing-guest.workspace = true
 openvm-ecc-guest.workspace = true
 openvm-keccak256-guest.workspace = true
+openvm-sha256-guest.workspace = true
 num-bigint-dig.workspace = true
 num-traits.workspace = true
 primitives.workspace = true

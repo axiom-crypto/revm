@@ -13,6 +13,9 @@ pub const RIPEMD160: PrecompileWithAddress = PrecompileWithAddress(
     Precompile::Standard(ripemd160_run),
 );
 
+#[cfg(feature = "openvm")]
+use openvm_sha256_guest::sha256;
+
 /// Computes the SHA-256 hash of the input data.
 ///
 /// This function follows specifications defined in the following references:
@@ -24,7 +27,10 @@ pub fn sha256_run(input: &Bytes, gas_limit: u64) -> PrecompileResult {
     if cost > gas_limit {
         Err(PrecompileError::OutOfGas.into())
     } else {
+        #[cfg(not(feature = "openvm"))]
         let output = sha2::Sha256::digest(input);
+        #[cfg(feature = "openvm")]
+        let output = sha256(input);
         Ok(PrecompileOutput::new(cost, output.to_vec().into()))
     }
 }

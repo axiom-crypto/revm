@@ -56,22 +56,23 @@ num-bigint-dig = { version = "0.8.4", default-features = false }
 num-traits = { version = "0.2.19", default-features = false }
 
 # openvm
-openvm = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-keccak256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-sdk = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-build = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-rv32im-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-algebra-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-algebra-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
+openvm = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-pairing-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-keccak256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-sdk = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-build = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-pairing-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-rv32im-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-algebra-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-algebra-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-ecc-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-ecc-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-pairing-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
+openvm-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2"  }
 openvm-stark-sdk = { git = "ssh://git@github.com/openvm-org/stark-backend.git" }
+openvm-sha256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", branch = "feat/sha2" }
 
 [workspace.package]
 license = "MIT"
