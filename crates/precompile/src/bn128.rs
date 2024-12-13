@@ -170,9 +170,9 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     let p1 = read_point(&input[..64])?;
     let p2 = read_point(&input[64..])?;
 
+    let mut output = [0u8; 64];
     #[cfg(not(feature = "openvm"))]
     {
-        let mut output = [0u8; 64];
         if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
             sum.x().to_big_endian(&mut output[..32]).unwrap();
             sum.y().to_big_endian(&mut output[32..]).unwrap();
@@ -183,7 +183,13 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     {
         let sum = p1 + p2;
         // TODO: we should add as_be_bytes to SW point.
-        let output = [sum.x.to_be_bytes(), sum.y.to_be_bytes()].concat();
+        // manually reverse to avoid allocation
+        let x_bytes: &[u8] = sum.x.as_le_bytes();
+        let y_bytes: &[u8] = sum.y.as_le_bytes();
+        for i in 0..32 {
+            output[i] = x_bytes[31 - i];
+            output[i + 32] = y_bytes[31 - i];
+        }
         Ok(PrecompileOutput::new(gas_cost, output.into()))
     }
 }
@@ -197,12 +203,12 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
 
     let p = read_point(&input[..64])?;
 
+    let mut output = [0u8; 64];
     #[cfg(not(feature = "openvm"))]
     {
         // `Fr::from_slice` can only fail when the length is not 32.
         let fr = bn::Fr::from_slice(&input[64..96]).unwrap();
 
-        let mut output = [0u8; 64];
         if let Some(mul) = AffineG1::from_jacobian(p * fr) {
             mul.x().to_big_endian(&mut output[..32]).unwrap();
             mul.y().to_big_endian(&mut output[32..]).unwrap();
@@ -214,7 +220,13 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
         let scalar = Scalar::from_be_bytes(&input[64..96]);
 
         let res = msm(&[scalar], &[p]);
-        let output = [res.x.to_be_bytes(), res.y.to_be_bytes()].concat();
+        // manually reverse to avoid allocation
+        let x_bytes: &[u8] = res.x.as_le_bytes();
+        let y_bytes: &[u8] = res.y.as_le_bytes();
+        for i in 0..32 {
+            output[i] = x_bytes[31 - i];
+            output[i + 32] = y_bytes[31 - i];
+        }
         Ok(PrecompileOutput::new(gas_cost, output.into()))
     }
 }
