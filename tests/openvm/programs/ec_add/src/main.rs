@@ -19,6 +19,8 @@ openvm_ecc_sw_setup::sw_init! {
 }
 
 pub fn main() {
+    setup_all_moduli();
+    setup_all_curves();
     let input = read_vec();
     let expected = read_vec();
 
