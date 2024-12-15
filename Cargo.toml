@@ -6,14 +6,12 @@ members = [
     "crates/primitives",
     "crates/interpreter",
     "crates/precompile",
+    "tests/openvm/tests",
 ]
 resolver = "2"
 default-members = ["crates/revm"]
 
 [workspace.dependencies]
-num-bigint-dig = { version = "0.8.4", default-features = false }
-num-traits = { version = "0.2.19", default-features = false }
-
 # openvm
 openvm = { git = "ssh://git@github.com/openvm-org/openvm.git" }
 openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
