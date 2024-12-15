@@ -12,7 +12,7 @@ use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::AbstractField;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
-use primitives::hex;
+use revm_primitives::hex;
 
 type F = BabyBear;
 

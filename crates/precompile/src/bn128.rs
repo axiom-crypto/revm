@@ -2,6 +2,7 @@ use crate::{
     utilities::{bool_to_bytes32, right_pad},
     Address, Error, Precompile, PrecompileResult, PrecompileWithAddress,
 };
+#[cfg(not(feature = "openvm-bn"))]
 use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
 use revm_primitives::PrecompileOutput;
 use std::vec::Vec;
@@ -9,7 +10,7 @@ use std::vec::Vec;
 use {
     openvm_ecc_guest::{
         weierstrass::{IntrinsicCurve, WeierstrassPoint},
-        AffinePoint, Group as openvmGroup,
+        AffinePoint, Group as _,
     },
     openvm_pairing_guest::{
         algebra::IntMod,

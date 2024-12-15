@@ -17,7 +17,7 @@ openvm_algebra_moduli_setup::moduli_init! {
 }
 
 openvm_algebra_complex_macros::complex_init! {
-    Fp2 { mod_idx = 0 },
+    Bn254Fp2 { mod_idx = 0 },
 }
 
 pub fn main() {
