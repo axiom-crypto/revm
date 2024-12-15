@@ -21,6 +21,9 @@ openvm_algebra_complex_macros::complex_init! {
 }
 
 pub fn main() {
+    setup_all_moduli();
+    setup_all_complex_extensions();
+
     let input = read_vec();
     let expected = read_vec();
 

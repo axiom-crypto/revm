@@ -20,6 +20,8 @@ openvm-ecc-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
 openvm-pairing-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
 openvm-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", features = [
     "test-utils",
+    "parallel",
+    "mimalloc",
 ] }
 openvm-stark-sdk = { git = "ssh://git@github.com/openvm-org/stark-backend.git" }
 

@@ -10,14 +10,19 @@ use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
 use openvm_pairing_circuit::{PairingCurve, PairingExtension};
 use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
 use openvm_sdk::{config::SdkVmConfig, Sdk};
+use openvm_stark_sdk::config::setup_tracing;
 use openvm_stark_sdk::openvm_stark_backend::p3_field::AbstractField;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
 use revm_primitives::hex;
 
 type F = BabyBear;
 
+// These tests should be run with --profile=ethtests for more compiler optimization
+
+// RUST_MIN_STACK=8388608
 #[test]
 fn test_ec_pairing_precompile() {
+    setup_tracing();
     let sdk = Sdk;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
@@ -72,7 +77,7 @@ fn test_ec_pairing_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
 }
 
 #[test]
@@ -124,7 +129,7 @@ fn test_ec_add_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
 }
 
 #[test]
@@ -175,5 +180,5 @@ fn test_ec_mul_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
+    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
 }
