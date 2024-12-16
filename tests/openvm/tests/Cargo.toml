@@ -4,26 +4,26 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-keccak256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-sdk = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-build = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-rv32im-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-algebra-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-algebra-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-ecc-transpiler = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-pairing-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git" }
-openvm-circuit = { git = "ssh://git@github.com/openvm-org/openvm.git", features = [
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.0-alpha", features = [
     "test-utils",
     "parallel",
     "mimalloc",
 ] }
-openvm-stark-sdk = { git = "ssh://git@github.com/openvm-org/stark-backend.git" }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v0.1.0-alpha" }
 
 num-bigint-dig = { version = "0.8.4", default-features = false }
 num-traits = { version = "0.2.19", default-features = false }
