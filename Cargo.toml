@@ -13,21 +13,21 @@ default-members = ["crates/revm"]
 
 [workspace.dependencies]
 # openvm
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "525ac0d3133977527fe1321bbb55f7ddeb824091" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v0.1.3-alpha" }
 
 [workspace.metadata.docs.rs]
