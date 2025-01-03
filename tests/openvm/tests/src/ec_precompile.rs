@@ -3,9 +3,9 @@ use std::path::PathBuf;
 use num_bigint_dig::BigUint;
 use num_traits::{FromPrimitive, Zero};
 use openvm_algebra_circuit::{Fp2Extension, ModularExtension};
-use openvm_build::{GuestOptions, TargetFilter};
+use openvm_build::GuestOptions;
 use openvm_circuit::arch::SystemConfig;
-use openvm_circuit::utils::new_air_test_with_min_segments;
+use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
 use openvm_pairing_circuit::{PairingCurve, PairingExtension};
 use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
@@ -27,9 +27,7 @@ fn test_ec_pairing_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/pairing");
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
-        .unwrap();
+    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
         .system(SystemConfig::default().with_continuations().into())
@@ -77,7 +75,7 @@ fn test_ec_pairing_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
+    air_test_with_min_segments(vm_config, exe, io, 1);
 }
 
 #[test]
@@ -86,9 +84,7 @@ fn test_ec_add_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/ec_add");
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
-        .unwrap();
+    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
         .system(SystemConfig::default().with_continuations().into())
@@ -129,7 +125,7 @@ fn test_ec_add_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
+    air_test_with_min_segments(vm_config, exe, io, 1);
 }
 
 #[test]
@@ -138,9 +134,7 @@ fn test_ec_mul_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/ec_mul");
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
-        .unwrap();
+    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
         .system(SystemConfig::default().with_continuations().into())
@@ -180,5 +174,5 @@ fn test_ec_mul_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, true);
+    air_test_with_min_segments(vm_config, exe, io, 1);
 }

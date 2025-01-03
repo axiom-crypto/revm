@@ -10,7 +10,7 @@ use std::vec::Vec;
 use {
     openvm_ecc_guest::{
         weierstrass::{IntrinsicCurve, WeierstrassPoint},
-        AffinePoint, Group as _,
+        AffinePoint,
     },
     openvm_pairing_guest::{
         algebra::IntMod,
@@ -184,8 +184,8 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
         let sum = p1 + p2;
         // TODO: we should add as_be_bytes to SW point.
         // manually reverse to avoid allocation
-        let x_bytes: &[u8] = sum.x.as_le_bytes();
-        let y_bytes: &[u8] = sum.y.as_le_bytes();
+        let x_bytes: &[u8] = sum.x().as_le_bytes();
+        let y_bytes: &[u8] = sum.y().as_le_bytes();
         for i in 0..32 {
             output[i] = x_bytes[31 - i];
             output[i + 32] = y_bytes[31 - i];
@@ -221,8 +221,8 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
 
         let res = Bn254::msm(&[scalar], &[p]);
         // manually reverse to avoid allocation
-        let x_bytes: &[u8] = res.x.as_le_bytes();
-        let y_bytes: &[u8] = res.y.as_le_bytes();
+        let x_bytes: &[u8] = res.x().as_le_bytes();
+        let y_bytes: &[u8] = res.y().as_le_bytes();
         for i in 0..32 {
             output[i] = x_bytes[31 - i];
             output[i + 32] = y_bytes[31 - i];
