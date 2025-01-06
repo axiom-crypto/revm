@@ -1,12 +1,12 @@
 use std::path::PathBuf;
 
-use openvm_build::{GuestOptions, TargetFilter};
+use openvm_build::GuestOptions;
 use openvm_circuit::arch::SystemConfig;
-use openvm_circuit::utils::new_air_test_with_min_segments;
+use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::AbstractField;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
-use primitives::hex;
+use revm_primitives::hex;
 
 type F = BabyBear;
 
@@ -16,9 +16,7 @@ fn test_sha256_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/sha256");
-    let sha256_precompile = sdk
-        .build(guest_opts.clone(), &pkg_dir, &TargetFilter::default())
-        .unwrap();
+    let sha256_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
         .system(SystemConfig::default().with_continuations().into())
@@ -55,5 +53,5 @@ fn test_sha256_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    new_air_test_with_min_segments(vm_config, exe, io, 1, false);
+    air_test_with_min_segments(vm_config, exe, io, 1);
 }

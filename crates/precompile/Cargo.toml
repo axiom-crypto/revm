@@ -24,15 +24,6 @@ all = "warn"
 [dependencies]
 revm-primitives = { path = "../primitives", version = "9.0.1", default-features = false }
 
-# openvm
-openvm = { workspace = true, optional = true }
-openvm-ecc-guest = { workspace = true, optional = true }
-openvm-keccak256-guest = { workspace = true, optional = true }
-openvm-sha256-guest = { workspace = true, optional = true }
-openvm-pairing-guest = { workspace = true, optional = true, features = [
-    "bn254",
-] }
-
 # static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
 
@@ -73,6 +64,15 @@ p256 = { version = "0.13.2", optional = true, default-features = false, features
 
 # utils
 cfg-if = { version = "1.0", default-features = false }
+
+# Optionally use openvm intrinsics
+openvm = { workspace = true, optional = true }
+openvm-ecc-guest = { workspace = true, optional = true }
+openvm-keccak256-guest = { workspace = true, optional = true }
+openvm-sha256-guest = { workspace = true, optional = true }
+openvm-pairing-guest = { workspace = true, optional = true, features = [
+    "bn254",
+] }
 
 [dev-dependencies]
 criterion = "0.5"
@@ -131,9 +131,7 @@ openvm = ["dep:openvm", "openvm-k256", "openvm-bn"]
 openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest"]
 openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254"]
 
-openvm-sha2 = [
-    "dep:openvm-sha256-guest",
-]
+openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]
 name = "bench"
