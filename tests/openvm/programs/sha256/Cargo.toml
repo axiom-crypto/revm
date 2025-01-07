@@ -1,13 +1,12 @@
 [workspace]
 [package]
-name = "ec-mul-program"
+name = "sha256-program"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "ssh://git@github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha", default-features = false }
-openvm-sha256-guest = { git = "ssh://git@github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v0.1.1-alpha" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
-    "openvm",
     "openvm-sha2",
 ] }
