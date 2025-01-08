@@ -28,4 +28,4 @@ jobs:
 
       - name: Run tests
         working-directory: tests/openvm/tests
-        run: cargo nextest run
+        run: RUST_BACKTRACE=1 cargo nextest run
