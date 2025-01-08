@@ -11,8 +11,8 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
-    name: Lint
+  tests:
+    name: OpenVM Tests
     runs-on:
       - runs-on=${{ github.run_id }}
       - runner=8cpu-linux-x64
@@ -28,4 +28,4 @@ jobs:
 
       - name: Run tests
         working-directory: tests/openvm/tests
-        run: cargo nextest run --cargo-profile=fast
+        run: cargo nextest run
