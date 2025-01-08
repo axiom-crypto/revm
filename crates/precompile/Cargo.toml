@@ -24,6 +24,7 @@ all = "warn"
 [dependencies]
 revm-primitives = { path = "../primitives", version = "9.0.1", default-features = false }
 
+# static precompile sets.
 once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
 
 # ecRecover
@@ -68,6 +69,7 @@ cfg-if = { version = "1.0", default-features = false }
 openvm = { workspace = true, optional = true }
 openvm-ecc-guest = { workspace = true, optional = true }
 openvm-keccak256-guest = { workspace = true, optional = true }
+openvm-sha256-guest = { workspace = true, optional = true }
 openvm-pairing-guest = { workspace = true, optional = true }
 
 [dev-dependencies]
@@ -123,9 +125,10 @@ secp256k1 = ["dep:secp256k1"]
 # Enables the BLS12-381 precompiles.
 blst = ["dep:blst"]
 
-openvm = ["dep:openvm", "openvm-k256", "openvm-bn"]
+openvm = ["dep:openvm", "openvm-k256", "openvm-bn", "openvm-sha2"]
 openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest"]
 openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254"]
+openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]
 name = "bench"
