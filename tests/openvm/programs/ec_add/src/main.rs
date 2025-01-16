@@ -4,8 +4,9 @@
 extern crate alloc;
 
 use openvm::io::read_vec;
-use openvm_pairing_guest::bn254::Bn254Fp;
 use revm_precompile::bn128::{add::BYZANTIUM_ADD_GAS_COST, run_add};
+#[allow(unused_imports)]
+use {openvm_algebra_guest::IntMod, openvm_pairing_guest::bn254::Bn254G1Affine};
 
 openvm::entry!(main);
 
@@ -15,7 +16,7 @@ openvm_algebra_moduli_setup::moduli_init! {
 }
 
 openvm_ecc_sw_setup::sw_init! {
-    Bn254Fp,
+    Bn254G1Affine,
 }
 
 pub fn main() {
