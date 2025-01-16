@@ -43,3 +43,7 @@ debug = true
 [profile.ethtests]
 inherits = "test"
 opt-level = 3
+
+[profile.fast]
+inherits = "test"
+opt-level = 1
