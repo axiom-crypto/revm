@@ -4,7 +4,7 @@ use openvm_build::GuestOptions;
 use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
-use openvm_stark_sdk::openvm_stark_backend::p3_field::AbstractField;
+use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
 use revm_primitives::hex;
 
