@@ -5,13 +5,13 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-algebra-moduli-setup = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-ecc-sw-setup = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "fc90b5d" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-algebra-moduli-setup = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-ecc-sw-setup = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
     "openvm-bn",
 ] }
