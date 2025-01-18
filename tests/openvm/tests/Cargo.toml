@@ -4,28 +4,28 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "1ad4140", features = [
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "be2d4e", features = [
     "test-utils",
     "parallel",
     "mimalloc",
 ] }
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "47a0bda" }
 
-num-bigint-dig = { version = "0.8.4", default-features = false }
-num-traits = { version = "0.2.19", default-features = false }
+num-bigint = { version = "0.4", default-features = false }
+num-traits = { version = "0.2", default-features = false }
 
 revm-primitives = { path = "../../../crates/primitives" }
