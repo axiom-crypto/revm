@@ -10,12 +10,12 @@ use {openvm_algebra_guest::IntMod, openvm_pairing_guest::bn254::Bn254G1Affine};
 
 openvm::entry!(main);
 
-openvm_algebra_moduli_setup::moduli_init! {
+openvm_algebra_moduli_macros::moduli_init! {
     "0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47",
     "0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001"
 }
 
-openvm_ecc_sw_setup::sw_init! {
+openvm_ecc_sw_macros::sw_init! {
     Bn254G1Affine,
 }
 
