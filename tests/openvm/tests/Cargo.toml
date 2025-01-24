@@ -4,21 +4,21 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "40dc754", features = [
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d45b226", features = [
     "test-utils",
     "parallel",
     "mimalloc",
