@@ -13,22 +13,22 @@ default-members = ["crates/revm"]
 
 [workspace.dependencies]
 # openvm
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "d883e92" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "354dd06" }
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "47a0bda" }
 
 [workspace.metadata.docs.rs]
