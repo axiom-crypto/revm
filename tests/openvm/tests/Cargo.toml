@@ -18,12 +18,8 @@ openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", 
 openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
 openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
 openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092", features = [
-    "test-utils",
-    "parallel",
-    "mimalloc",
-] }
-openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v0.4.0-alpha" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092", features = ["test-utils", "parallel", "mimalloc"] }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "18cf1c084ebeb3ca1163e55b87893f1d1fd7fc1f" }
 
 num-bigint = { version = "0.4", default-features = false }
 num-traits = { version = "0.2", default-features = false }
