@@ -21,7 +21,7 @@ openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "
 openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
 openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
 openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "442a9df3937fc47f64b6be8552b6be743c017092" }
-openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "18cf1c084ebeb3ca1163e55b87893f1d1fd7fc1f" }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v1.0.0-rc.0" }
 
 [workspace.metadata.docs.rs]
 all-features = true
