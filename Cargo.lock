@@ -5856,7 +5856,7 @@ dependencies = [
  "serde",
  "serde_json",
  "structopt",
- "thiserror 1.0.69",
+ "thiserror 2.0.11",
  "triehash",
  "walkdir",
 ]
