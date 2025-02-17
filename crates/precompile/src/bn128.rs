@@ -350,8 +350,8 @@ pub fn openvm_pair(
         }
 
         // Use catch unwind to handle panics which could be caused by host hinting
-        let res = std::panic::catch_unwind(|| Bn254::pairing_check(&P, &Q));
-        if let Ok(Ok(())) = res {
+        let res = Bn254::pairing_check(&P, &Q);
+        if let Ok(()) = res {
             true
         } else {
             // If panic, we fallback to bn implementation
