@@ -6,11 +6,16 @@ pub const ECRECOVER: PrecompileWithAddress = PrecompileWithAddress(
     Precompile::Standard(ec_recover_run),
 );
 
+#[cfg(feature = "openvm-k256")]
+pub use self::openvm_secp256k1::ecrecover;
+#[cfg(not(feature = "openvm-k256"))]
 pub use self::secp256k1::ecrecover;
 
 #[cfg(feature = "openvm-k256")]
 #[allow(clippy::module_inception)]
-mod secp256k1 {
+mod openvm_secp256k1 {
+    use std::panic::catch_unwind;
+
     use k256::{
         ecdsa::{Error, RecoveryId, Signature},
         Secp256k1,
@@ -20,6 +25,8 @@ mod secp256k1 {
     use revm_primitives::{alloy_primitives::B512, B256};
 
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
+        let _sig = sig;
+        let _recid = recid;
         // parse signature
         let mut sig = Signature::from_slice(sig.as_slice())?;
         if let Some(sig_normalized) = sig.normalize_s() {
@@ -29,11 +36,19 @@ mod secp256k1 {
         let recid = RecoveryId::from_byte(recid).expect("recovery ID is valid");
 
         // annoying: Signature::to_bytes copies from slice
-        let recovered_key = VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
-            &msg[..],
-            &sig.to_bytes(),
-            recid,
-        );
+        // Use catch unwind to handle panics which could be caused by host hinting
+        let res = catch_unwind(|| {
+            VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
+                &msg[..],
+                &sig.to_bytes(),
+                recid,
+            )
+        });
+        if res.is_err() {
+            // If panic, we fallback to k256 implementation
+            return super::secp256k1::ecrecover(_sig, _recid, msg);
+        }
+        let recovered_key = res.unwrap();
         let public_key = recovered_key.as_affine();
         let mut encoded = [0u8; 64];
         encoded[..32].copy_from_slice(&public_key.x().to_be_bytes());
@@ -46,7 +61,7 @@ mod secp256k1 {
     }
 }
 
-#[cfg(not(any(feature = "secp256k1", feature = "openvm-k256")))]
+#[cfg(not(feature = "secp256k1"))]
 #[allow(clippy::module_inception)]
 mod secp256k1 {
     use k256::ecdsa::{Error, RecoveryId, Signature, VerifyingKey};
@@ -122,7 +137,7 @@ pub fn ec_recover_run(input: &Bytes, gas_limit: u64) -> PrecompileResult {
     let recid = input[63] - 27;
     let sig = <&B512>::try_from(&input[64..128]).unwrap();
 
-    let out = secp256k1::ecrecover(sig, recid, msg)
+    let out = ecrecover(sig, recid, msg)
         .map(|o| o.to_vec().into())
         .unwrap_or_default();
     Ok(PrecompileOutput::new(ECRECOVER_BASE, out))

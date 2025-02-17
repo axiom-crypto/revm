@@ -2,7 +2,6 @@ use crate::{
     utilities::{bool_to_bytes32, right_pad},
     Address, Error, Precompile, PrecompileResult, PrecompileWithAddress,
 };
-#[cfg(not(feature = "openvm-bn"))]
 use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
 use revm_primitives::PrecompileOutput;
 use std::vec::Vec;
@@ -107,7 +106,6 @@ pub const PAIR_ELEMENT_LEN: usize = 64 + 128;
 /// # Panics
 ///
 /// Panics if the input is not at least 32 bytes long.
-#[cfg(not(feature = "openvm-bn"))]
 #[inline]
 pub fn read_fq(input: &[u8]) -> Result<Fq, Error> {
     Fq::from_slice(&input[..32]).map_err(|_| Error::Bn128FieldPointNotAMember)
@@ -115,7 +113,7 @@ pub fn read_fq(input: &[u8]) -> Result<Fq, Error> {
 
 #[cfg(feature = "openvm-bn")]
 #[inline]
-pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
+pub fn read_openvm_fp(input: &[u8]) -> Result<Fp, Error> {
     if input.len() < 32 {
         Err(Error::Bn128FieldPointNotAMember)
     } else {
@@ -128,7 +126,6 @@ pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
 /// # Panics
 ///
 /// Panics if the input is not at least 64 bytes long.
-#[cfg(not(feature = "openvm-bn"))]
 #[inline]
 pub fn read_point(input: &[u8]) -> Result<G1, Error> {
     let px = read_fq(&input[0..32])?;
@@ -138,14 +135,13 @@ pub fn read_point(input: &[u8]) -> Result<G1, Error> {
 
 #[cfg(feature = "openvm-bn")]
 #[inline]
-pub fn read_point(input: &[u8]) -> Result<G1Affine, Error> {
-    let px = read_fq(&input[0..32])?;
-    let py = read_fq(&input[32..64])?;
-    new_g1_point(px, py)
+pub fn read_affine_point(input: &[u8]) -> Result<G1Affine, Error> {
+    let px = read_openvm_fp(&input[0..32])?;
+    let py = read_openvm_fp(&input[32..64])?;
+    new_g1_affine_point(px, py)
 }
 
 /// Creates a new `G1` point from the given `x` and `y` coordinates.
-#[cfg(not(feature = "openvm-bn"))]
 pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, Error> {
     if px == Fq::zero() && py == Fq::zero() {
         Ok(G1::zero())
@@ -157,7 +153,7 @@ pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, Error> {
 }
 
 #[cfg(feature = "openvm-bn")]
-pub fn new_g1_point(px: Fp, py: Fp) -> Result<G1Affine, Error> {
+pub fn new_g1_affine_point(px: Fp, py: Fp) -> Result<G1Affine, Error> {
     G1Affine::from_xy(px, py).ok_or(Error::Bn128AffineGFailedToCreate)
 }
 
@@ -167,12 +163,12 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
 
     let input = right_pad::<ADD_INPUT_LEN>(input);
-    let p1 = read_point(&input[..64])?;
-    let p2 = read_point(&input[64..])?;
 
     let mut output = [0u8; 64];
     #[cfg(not(feature = "openvm-bn"))]
     {
+        let p1 = read_point(&input[..64])?;
+        let p2 = read_point(&input[64..])?;
         if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
             sum.x().to_big_endian(&mut output[..32]).unwrap();
             sum.y().to_big_endian(&mut output[32..]).unwrap();
@@ -181,8 +177,9 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
     #[cfg(feature = "openvm-bn")]
     {
+        let p1 = read_affine_point(&input[..64])?;
+        let p2 = read_affine_point(&input[64..])?;
         let sum = p1 + p2;
-        // TODO: we should add as_be_bytes to SW point.
         // manually reverse to avoid allocation
         let x_bytes: &[u8] = sum.x().as_le_bytes();
         let y_bytes: &[u8] = sum.y().as_le_bytes();
@@ -201,11 +198,10 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
 
     let input = right_pad::<MUL_INPUT_LEN>(input);
 
-    let p = read_point(&input[..64])?;
-
     let mut output = [0u8; 64];
     #[cfg(not(feature = "openvm-bn"))]
     {
+        let p = read_point(&input[..64])?;
         // `Fr::from_slice` can only fail when the length is not 32.
         let fr = bn::Fr::from_slice(&input[64..96]).unwrap();
 
@@ -217,6 +213,7 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
     #[cfg(feature = "openvm-bn")]
     {
+        let p = read_affine_point(&input[..64])?;
         let scalar = Scalar::from_be_bytes(&input[64..96]);
 
         let res = Bn254::msm(&[scalar], &[p]);
@@ -231,8 +228,13 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
 }
 
+#[cfg(feature = "openvm-bn")]
+pub use openvm_pair as run_pair;
+#[cfg(not(feature = "openvm-bn"))]
+pub use run_pair_bn as run_pair;
+
 #[allow(non_snake_case)]
-pub fn run_pair(
+pub fn run_pair_bn(
     input: &[u8],
     pair_per_point_cost: u64,
     pair_base_cost: u64,
@@ -252,13 +254,7 @@ pub fn run_pair(
     } else {
         let elements = input.len() / PAIR_ELEMENT_LEN;
 
-        #[cfg(not(feature = "openvm-bn"))]
         let mut points = Vec::with_capacity(elements);
-
-        #[cfg(feature = "openvm-bn")]
-        let mut P = Vec::with_capacity(elements);
-        #[cfg(feature = "openvm-bn")]
-        let mut Q = Vec::with_capacity(elements);
 
         // read points
         for idx in 0..elements {
@@ -279,44 +275,88 @@ pub fn run_pair(
             let g2_y_c1 = read_fq_at(4)?;
             let g2_y_c0 = read_fq_at(5)?;
 
-            #[cfg(not(feature = "openvm-bn"))]
-            {
-                let g1 = new_g1_point(g1_x, g1_y)?;
-                let g2 = {
-                    let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
-                    let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
-                    // TODO: check whether or not we need these zero checks
-                    if g2_x.is_zero() && g2_y.is_zero() {
-                        G2::zero()
-                    } else {
-                        G2::from(
-                            AffineG2::new(g2_x, g2_y)
-                                .map_err(|_| Error::Bn128AffineGFailedToCreate)?,
-                        )
-                    }
-                };
-                points.push((g1, g2));
-            }
-
-            #[cfg(feature = "openvm-bn")]
-            {
-                let g1 = AffinePoint::new(g1_x, g1_y);
-                let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
-                let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
-                let g2 = AffinePoint::new(g2_x, g2_y);
-
-                P.push(g1);
-                Q.push(g2);
-            }
+            let g1 = new_g1_point(g1_x, g1_y)?;
+            let g2 = {
+                let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
+                let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
+                // TODO: check whether or not we need these zero checks
+                if g2_x.is_zero() && g2_y.is_zero() {
+                    G2::zero()
+                } else {
+                    G2::from(
+                        AffineG2::new(g2_x, g2_y).map_err(|_| Error::Bn128AffineGFailedToCreate)?,
+                    )
+                }
+            };
+            points.push((g1, g2));
         }
 
-        #[cfg(not(feature = "openvm-bn"))]
-        let success = bn::pairing_batch(&points) == Gt::one();
+        bn::pairing_batch(&points) == Gt::one()
+    };
+    Ok(PrecompileOutput::new(gas_used, bool_to_bytes32(success)))
+}
 
-        #[cfg(feature = "openvm-bn")]
-        let success = Bn254::pairing_check(&P, &Q).is_ok();
+#[cfg(feature = "openvm-bn")]
+#[allow(non_snake_case)]
+pub fn openvm_pair(
+    input: &[u8],
+    pair_per_point_cost: u64,
+    pair_base_cost: u64,
+    gas_limit: u64,
+) -> PrecompileResult {
+    let gas_used = (input.len() / PAIR_ELEMENT_LEN) as u64 * pair_per_point_cost + pair_base_cost;
+    if gas_used > gas_limit {
+        return Err(Error::OutOfGas.into());
+    }
 
-        success
+    if input.len() % PAIR_ELEMENT_LEN != 0 {
+        return Err(Error::Bn128PairLength.into());
+    }
+
+    let success = if input.is_empty() {
+        true
+    } else {
+        let elements = input.len() / PAIR_ELEMENT_LEN;
+
+        let mut P = Vec::with_capacity(elements);
+        let mut Q = Vec::with_capacity(elements);
+
+        // read points
+        for idx in 0..elements {
+            // At each idx, there is (G1, G2) which is 6 Fp points
+            let read_fq_at = |n: usize| {
+                debug_assert!(n < PAIR_ELEMENT_LEN / 32);
+                let start = idx * PAIR_ELEMENT_LEN + n * 32;
+                // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
+                // per iteration. This is guaranteed to be in-bounds.
+                let slice = unsafe { input.get_unchecked(start..start + 32) };
+                read_openvm_fp(slice)
+            };
+            // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
+            let g1_x = read_fq_at(0)?;
+            let g1_y = read_fq_at(1)?;
+            let g2_x_c1 = read_fq_at(2)?;
+            let g2_x_c0 = read_fq_at(3)?;
+            let g2_y_c1 = read_fq_at(4)?;
+            let g2_y_c0 = read_fq_at(5)?;
+
+            let g1 = AffinePoint::new(g1_x, g1_y);
+            let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
+            let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
+            let g2 = AffinePoint::new(g2_x, g2_y);
+
+            P.push(g1);
+            Q.push(g2);
+        }
+
+        // Use catch unwind to handle panics which could be caused by host hinting
+        let res = Bn254::pairing_check(&P, &Q);
+        if let Ok(()) = res {
+            true
+        } else {
+            // If panic, we fallback to bn implementation
+            return run_pair_bn(input, pair_per_point_cost, pair_base_cost, gas_limit);
+        }
     };
     Ok(PrecompileOutput::new(gas_used, bool_to_bytes32(success)))
 }
