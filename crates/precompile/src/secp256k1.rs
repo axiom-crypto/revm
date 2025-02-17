@@ -24,9 +24,8 @@ mod openvm_secp256k1 {
     use openvm_keccak256_guest::keccak256;
     use revm_primitives::{alloy_primitives::B512, B256};
 
+    /// This version may panic if host hints incorrectly during the public key recovery.
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
-        let _sig = sig;
-        let _recid = recid;
         // parse signature
         let mut sig = Signature::from_slice(sig.as_slice())?;
         if let Some(sig_normalized) = sig.normalize_s() {
@@ -37,18 +36,11 @@ mod openvm_secp256k1 {
 
         // annoying: Signature::to_bytes copies from slice
         // Use catch unwind to handle panics which could be caused by host hinting
-        let res = catch_unwind(|| {
-            VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
-                &msg[..],
-                &sig.to_bytes(),
-                recid,
-            )
-        });
-        if res.is_err() {
-            // If panic, we fallback to k256 implementation
-            return super::secp256k1::ecrecover(_sig, _recid, msg);
-        }
-        let recovered_key = res.unwrap();
+        let recovered_key = VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
+            &msg[..],
+            &sig.to_bytes(),
+            recid,
+        );
         let public_key = recovered_key.as_affine();
         let mut encoded = [0u8; 64];
         encoded[..32].copy_from_slice(&public_key.x().to_be_bytes());
@@ -137,8 +129,18 @@ pub fn ec_recover_run(input: &Bytes, gas_limit: u64) -> PrecompileResult {
     let recid = input[63] - 27;
     let sig = <&B512>::try_from(&input[64..128]).unwrap();
 
-    let out = ecrecover(sig, recid, msg)
-        .map(|o| o.to_vec().into())
-        .unwrap_or_default();
+    #[cfg(not(feature = "openvm-k256"))]
+    let out = secp256k1::ecrecover(sig, recid, msg);
+    #[cfg(feature = "openvm-k256")]
+    let out = {
+        let res = std::panic::catch_unwind(|| openvm_secp256k1::ecrecover(sig, recid, msg));
+        if let Ok(out) = res {
+            out
+        } else {
+            // Since panic may be caused by host hinting, we call the default k256 ecrecover
+            secp256k1::ecrecover(sig, recid, msg)
+        }
+    };
+    let out = out.map(|o| o.to_vec().into()).unwrap_or_default();
     Ok(PrecompileOutput::new(ECRECOVER_BASE, out))
 }
