@@ -25,6 +25,7 @@ mod openvm_secp256k1 {
     use revm_primitives::{alloy_primitives::B512, B256};
 
     pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
+        let _sig = sig;
         let _recid = recid;
         // parse signature
         let mut sig = Signature::from_slice(sig.as_slice())?;
@@ -45,7 +46,7 @@ mod openvm_secp256k1 {
         });
         if res.is_err() {
             // If panic, we fallback to k256 implementation
-            return super::secp256k1::ecrecover(sig, _recid, msg);
+            return super::secp256k1::ecrecover(_sig, _recid, msg);
         }
         let recovered_key = res.unwrap();
         let public_key = recovered_key.as_affine();
