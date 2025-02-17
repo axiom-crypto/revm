@@ -4,7 +4,7 @@ use crate::{
 };
 use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
 use revm_primitives::PrecompileOutput;
-use std::{panic::catch_unwind, vec::Vec};
+use std::vec::Vec;
 #[cfg(feature = "openvm-bn")]
 use {
     openvm_ecc_guest::{
@@ -228,10 +228,10 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
 }
 
-#[cfg(not(feature = "openvm-bn"))]
-pub use run_pair_bn as run_pair;
 #[cfg(feature = "openvm-bn")]
 pub use openvm_pair as run_pair;
+#[cfg(not(feature = "openvm-bn"))]
+pub use run_pair_bn as run_pair;
 
 #[allow(non_snake_case)]
 pub fn run_pair_bn(
@@ -275,21 +275,21 @@ pub fn run_pair_bn(
             let g2_y_c1 = read_fq_at(4)?;
             let g2_y_c0 = read_fq_at(5)?;
 
-                let g1 = new_g1_point(g1_x, g1_y)?;
-                let g2 = {
-                    let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
-                    let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
-                    // TODO: check whether or not we need these zero checks
-                    if g2_x.is_zero() && g2_y.is_zero() {
-                        G2::zero()
-                    } else {
-                        G2::from(
-                            AffineG2::new(g2_x, g2_y)
-                                .map_err(|_| Error::Bn128AffineGFailedToCreate)?,
-                        )
-                    }
-                };
-                points.push((g1, g2));
+            let g1 = new_g1_point(g1_x, g1_y)?;
+            let g2 = {
+                let g2_x = Fq2::new(g2_x_c0, g2_x_c1);
+                let g2_y = Fq2::new(g2_y_c0, g2_y_c1);
+                // TODO: check whether or not we need these zero checks
+                if g2_x.is_zero() && g2_y.is_zero() {
+                    G2::zero()
+                } else {
+                    G2::from(
+                        AffineG2::new(g2_x, g2_y).map_err(|_| Error::Bn128AffineGFailedToCreate)?,
+                    )
+                }
+            };
+            points.push((g1, g2));
+        }
 
         bn::pairing_batch(&points) == Gt::one()
     };
@@ -350,7 +350,7 @@ pub fn openvm_pair(
         }
 
         // Use catch unwind to handle panics which could be caused by host hinting
-        let res = catch_unwind(|| Bn254::pairing_check(&P, &Q));
+        let res = std::panic::catch_unwind(|| Bn254::pairing_check(&P, &Q));
         if let Ok(Ok(())) = res {
             true
         } else {
