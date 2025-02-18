@@ -6,12 +6,12 @@ use revm_precompile::bn128::{
 
 openvm::entry!(main);
 
-openvm_algebra_moduli_macros::moduli_init! {
+openvm_algebra_guest::moduli_macros::moduli_init! {
     "0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47",
     "0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001"
 }
 
-openvm_algebra_complex_macros::complex_init! {
+openvm_algebra_guest::complex_macros::complex_init! {
     Bn254Fp2 { mod_idx = 0 },
 }
 

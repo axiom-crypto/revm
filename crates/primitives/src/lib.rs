@@ -13,7 +13,7 @@ pub mod db;
 pub mod eip7702;
 pub mod env;
 
-#[cfg(any(feature = "c-kzg", feature = "kzg-rs"))]
+#[cfg(any(feature = "c-kzg", feature = "kzg-rs", feature = "openvm-kzg"))]
 pub mod kzg;
 pub mod precompile;
 pub mod result;
@@ -43,7 +43,7 @@ cfg_if::cfg_if! {
     }
 }
 
-#[cfg(any(feature = "c-kzg", feature = "kzg-rs"))]
+#[cfg(any(feature = "c-kzg", feature = "kzg-rs", feature = "openvm-kzg"))]
 pub use kzg::{EnvKzgSettings, KzgSettings};
 pub use precompile::*;
 pub use result::*;

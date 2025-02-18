@@ -25,7 +25,9 @@ cfg_if::cfg_if! {
                 }
             }
         }
+    } else if #[cfg(feature = "openvm-kzg")] {
+        pub use openvm_kzg::{KzgSettings, EnvKzgSettings};
     } else if #[cfg(feature = "kzg-rs")] {
-        pub use kzg_rs::{KzgSettings,EnvKzgSettings};
+        pub use kzg_rs::{KzgSettings, EnvKzgSettings};
     }
 }
