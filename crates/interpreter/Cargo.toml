@@ -78,3 +78,4 @@ optional_no_base_fee = ["revm-primitives/optional_no_base_fee"]
 optional_beneficiary_reward = ["revm-primitives/optional_beneficiary_reward"]
 
 kzg-rs = ["revm-primitives/kzg-rs"]
+openvm-kzg = ["revm-primitives/openvm-kzg"]
