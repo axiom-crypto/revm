@@ -1,26 +1,34 @@
 [workspace]
-members = ["bins/revme", "bins/revm-test", "crates/revm", "crates/primitives", "crates/interpreter", "crates/precompile", "tests/openvm/tests"]
+members = [
+    "bins/revme",
+    "bins/revm-test",
+    "crates/revm",
+    "crates/primitives",
+    "crates/interpreter",
+    "crates/precompile",
+    "tests/openvm/tests",
+]
 resolver = "2"
 default-members = ["crates/revm"]
 
 [workspace.dependencies]
 # openvm
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "30576cc6ce838f213bf05b2e4ad035d95498c8b3" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.0.0-rc.1" }
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v1.0.0-rc.0" }
 
 [workspace.metadata.docs.rs]
