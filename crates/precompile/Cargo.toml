@@ -29,12 +29,7 @@ once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
 
 # ecRecover
 k256 = { version = "0.13.3", default-features = false, features = ["ecdsa"] }
-secp256k1 = { version = ">=0.28, <=0.29", default-features = false, features = [
-    "alloc",
-    "recovery",
-    "rand",
-    "global-context",
-], optional = true }
+secp256k1 = { version = ">=0.28, <=0.29", default-features = false, features = ["alloc", "recovery", "rand", "global-context"], optional = true }
 
 # SHA2-256 and RIPEMD-160
 sha2 = { version = "0.10", default-features = false }
@@ -47,9 +42,7 @@ aurora-engine-modexp = { version = "1.1", default-features = false }
 bn = { package = "substrate-bn", version = "0.6", default-features = false }
 
 # KZG point evaluation precompile
-c-kzg = { version = "1.0.3", default-features = false, optional = true, features = [
-    "ethereum_kzg_settings",
-] }
+c-kzg = { version = "1.0.3", default-features = false, optional = true, features = ["ethereum_kzg_settings"] }
 
 # Optionally use `kzg-rs` for a pure Rust implementation of KZG point evaluation.
 kzg-rs = { version = "0.2.3", default-features = false, optional = true }
@@ -58,9 +51,7 @@ kzg-rs = { version = "0.2.3", default-features = false, optional = true }
 blst = { version = "0.3.13", optional = true }
 
 # p256verify precompile
-p256 = { version = "0.13.2", optional = true, default-features = false, features = [
-    "ecdsa",
-] }
+p256 = { version = "0.13.2", optional = true, default-features = false, features = ["ecdsa"] }
 
 # utils
 cfg-if = { version = "1.0", default-features = false }
@@ -84,28 +75,14 @@ serde_derive = "1.0"
 
 [features]
 default = ["std", "c-kzg", "portable", "blst"]
-std = [
-    "revm-primitives/std",
-    "k256/std",
-    "once_cell/std",
-    "ripemd/std",
-    "sha2/std",
-    "c-kzg?/std",
-    "secp256k1?/std",
-    "openvm?/std",
-]
+std = ["revm-primitives/std", "k256/std", "once_cell/std", "ripemd/std", "sha2/std", "c-kzg?/std", "secp256k1?/std", "openvm?/std"]
 hashbrown = ["revm-primitives/hashbrown"]
 asm-keccak = ["revm-primitives/asm-keccak"]
 
 optimism = ["revm-primitives/optimism", "secp256r1"]
 # Optimism default handler enabled Optimism handler register by default in EvmBuilder.
-optimism-default-handler = [
-    "optimism",
-    "revm-primitives/optimism-default-handler",
-]
-negate-optimism-default-handler = [
-    "revm-primitives/negate-optimism-default-handler",
-]
+optimism-default-handler = ["optimism", "revm-primitives/optimism-default-handler"]
+negate-optimism-default-handler = ["revm-primitives/negate-optimism-default-handler"]
 
 # Enables the p256verify precompile.
 secp256r1 = ["dep:p256"]
@@ -118,6 +95,7 @@ c-kzg = ["dep:c-kzg", "revm-primitives/c-kzg"]
 kzg-rs = ["dep:kzg-rs", "revm-primitives/kzg-rs"]
 # `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
 openvm-kzg = ["dep:openvm-kzg", "revm-primitives/openvm-kzg"]
+openvm-kzg-intrinsics = ["openvm-kzg/use-intrinsics"]
 
 portable = ["revm-primitives/portable", "c-kzg?/portable"]
 
@@ -130,18 +108,8 @@ secp256k1 = ["dep:secp256k1"]
 blst = ["dep:blst"]
 
 openvm = ["dep:openvm", "openvm-k256", "openvm-bn", "openvm-sha2", "openvm-kzg"]
-openvm-k256 = [
-    "dep:openvm",
-    "openvm-ecc-guest/k256",
-    "openvm-keccak256-guest",
-    "std",
-]
-openvm-bn = [
-    "dep:openvm",
-    "openvm-ecc-guest",
-    "openvm-pairing-guest/bn254",
-    "std",
-]
+openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest", "std"]
+openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254", "std"]
 openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]
