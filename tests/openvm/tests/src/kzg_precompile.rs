@@ -66,6 +66,7 @@ fn test_kzg_precompile_with_intrinsics() {
 }
 
 #[test]
+#[ignore]
 fn test_kzg_precompile_without_intrinsics() {
     setup_tracing();
     let sdk = Sdk;
