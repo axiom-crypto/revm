@@ -5837,7 +5837,7 @@ dependencies = [
  "cfg-if",
  "dyn-clone",
  "enumn",
- "hashbrown 0.14.5",
+ "hashbrown 0.15.2",
  "hex",
  "kzg-rs",
  "openvm-kzg",
@@ -5884,7 +5884,7 @@ version = "0.10.1"
 dependencies = [
  "alloy-rlp",
  "hash-db",
- "hashbrown 0.14.5",
+ "hashbrown 0.15.2",
  "hex",
  "indicatif",
  "k256",
