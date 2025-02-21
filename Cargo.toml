@@ -1,13 +1,5 @@
 [workspace]
-members = [
-    "bins/revme",
-    "bins/revm-test",
-    "crates/revm",
-    "crates/primitives",
-    "crates/interpreter",
-    "crates/precompile",
-    "tests/openvm/tests",
-]
+members = ["bins/revme", "bins/revm-test", "crates/revm", "crates/primitives", "crates/interpreter", "crates/precompile", "tests/openvm/tests"]
 resolver = "2"
 default-members = ["crates/revm"]
 
@@ -33,7 +25,7 @@ openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "
 openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
 openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
 # openvm external lib
-openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "c6028f9f81049c958866cc6df4cd1454955159ae", default-features = false }
+openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "480372aa04dc0b3c2df2a9d31fe5a4c84a8cf13c", default-features = false }
 
 [workspace.metadata.docs.rs]
 all-features = true
