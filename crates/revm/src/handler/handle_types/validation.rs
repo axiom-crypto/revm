@@ -10,7 +10,7 @@ pub type ValidateEnvHandle<'a, DB> =
     Arc<dyn Fn(&Env) -> Result<(), EVMError<<DB as Database>::Error>> + 'a>;
 
 /// Handle that validates transaction environment against the state.
-/// Second parametar is initial gas.
+/// Second parameter is initial gas.
 pub type ValidateTxEnvAgainstState<'a, EXT, DB> =
     Arc<dyn Fn(&mut Context<EXT, DB>) -> Result<(), EVMError<<DB as Database>::Error>> + 'a>;
 
