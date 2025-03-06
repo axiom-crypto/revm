@@ -5,13 +5,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-algebra-moduli-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-ecc-sw-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "91496503cb9a214ce7f8cef3a4a6e35fc6f0d938" }
-revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
-    "openvm-bn",
-] }
+openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-algebra-moduli-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-ecc-sw-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-platform = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-pairing-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm-ecc-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-bn"] }
