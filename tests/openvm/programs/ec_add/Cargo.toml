@@ -5,11 +5,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-algebra-moduli-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-ecc-sw-macros = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-platform = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-algebra-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-pairing-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
-openvm-ecc-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-algebra-moduli-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-ecc-sw-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-bn"] }
