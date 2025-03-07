@@ -3639,32 +3639,46 @@ dependencies = [
  "hex-literal",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm-platform",
- "openvm-rv32im-guest",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "serde",
+]
+
+[[package]]
+name = "openvm"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "bytemuck",
+ "hex-literal",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
 ]
 
 [[package]]
 name = "openvm-algebra-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-traits",
  "openvm-algebra-transpiler",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-mod-circuit-builder",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
  "serde-big-array",
@@ -3678,7 +3692,17 @@ name = "openvm-algebra-complex-macros"
 version = "0.1.0"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
 dependencies = [
- "openvm-macros-common",
+ "openvm-macros-common 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
+name = "openvm-algebra-complex-macros"
+version = "0.1.0"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "openvm-macros-common 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "quote",
  "syn 2.0.98",
 ]
@@ -3690,10 +3714,26 @@ source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f0
 dependencies = [
  "halo2curves-axiom 0.5.3",
  "num-bigint 0.4.6",
- "openvm",
- "openvm-algebra-complex-macros",
- "openvm-algebra-moduli-macros",
- "openvm-platform",
+ "openvm 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-complex-macros 0.1.0 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "serde",
+ "serde-big-array",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-algebra-guest"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "halo2curves-axiom 0.5.3",
+ "num-bigint 0.4.6",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-complex-macros 0.1.0 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
  "serde-big-array",
  "strum_macros",
@@ -3704,7 +3744,17 @@ name = "openvm-algebra-moduli-macros"
 version = "1.0.0-rc.1"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
 dependencies = [
- "openvm-macros-common",
+ "openvm-macros-common 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
+name = "openvm-algebra-moduli-macros"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "openvm-macros-common 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "quote",
  "syn 2.0.98",
 ]
@@ -3712,13 +3762,13 @@ dependencies = [
 [[package]]
 name = "openvm-algebra-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-algebra-guest",
- "openvm-instructions",
- "openvm-instructions-derive",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
  "strum_macros",
@@ -3727,21 +3777,21 @@ dependencies = [
 [[package]]
 name = "openvm-bigint-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "openvm-bigint-transpiler",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
 ]
@@ -3749,12 +3799,12 @@ dependencies = [
 [[package]]
 name = "openvm-bigint-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "num-bigint 0.4.6",
  "num-traits",
- "openvm",
- "openvm-platform",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
  "strum_macros",
 ]
@@ -3762,14 +3812,14 @@ dependencies = [
 [[package]]
 name = "openvm-bigint-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "openvm-bigint-guest",
- "openvm-instructions",
- "openvm-instructions-derive",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
 ]
@@ -3777,13 +3827,13 @@ dependencies = [
 [[package]]
 name = "openvm-build"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "cargo_metadata",
  "dirs",
  "eyre",
  "hex",
- "openvm-platform",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
  "serde_json",
  "tempfile",
@@ -3805,15 +3855,50 @@ dependencies = [
  "eyre",
  "getset",
  "itertools 0.14.0",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
- "openvm-poseidon2-air",
- "openvm-stark-backend",
- "openvm-stark-sdk",
- "p3-baby-bear 0.1.0",
- "p3-symmetric 0.1.0",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-instructions 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-poseidon2-air 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "p3-baby-bear 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "rustc-hash 2.1.1",
+ "serde",
+ "serde-big-array",
+ "static_assertions",
+ "thiserror 1.0.69",
+ "toml",
+ "tracing",
+]
+
+[[package]]
+name = "openvm-circuit"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "async-trait",
+ "backtrace",
+ "bitcode",
+ "cfg-if",
+ "derivative",
+ "derive-new 0.6.0",
+ "derive_more 1.0.0",
+ "enum_dispatch",
+ "eyre",
+ "getset",
+ "itertools 0.13.0",
+ "once_cell",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-poseidon2-air 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
+ "p3-baby-bear 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "rayon",
  "rustc-hash 2.1.1",
@@ -3837,6 +3922,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-circuit-derive"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "itertools 0.13.0",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
 name = "openvm-circuit-primitives"
 version = "1.0.0-rc.1"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
@@ -3847,8 +3943,26 @@ dependencies = [
  "lazy_static",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm-circuit-primitives-derive",
- "openvm-stark-backend",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "rand",
+ "serde",
+ "tracing",
+]
+
+[[package]]
+name = "openvm-circuit-primitives"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "bitcode",
+ "derive-new 0.6.0",
+ "itertools 0.13.0",
+ "lazy_static",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
  "rand",
  "serde",
  "tracing",
@@ -3866,6 +3980,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-circuit-primitives-derive"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "itertools 0.13.0",
+ "proc-macro2",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
 name = "openvm-custom-insn"
 version = "0.1.0"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
@@ -3876,32 +4001,41 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-custom-insn"
+version = "0.1.0"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
 name = "openvm-ecc-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-integer",
  "num-traits",
  "once_cell",
  "openvm-algebra-circuit",
- "openvm-algebra-guest",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-ecc-guest",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-ecc-transpiler",
- "openvm-instructions",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-mod-circuit-builder",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
- "rand",
+ "openvm-stark-backend 1.0.0-rc.0",
  "serde",
  "serde_with",
  "strum",
@@ -3918,17 +4052,43 @@ dependencies = [
  "halo2curves-axiom 0.5.3",
  "hex-literal",
  "itertools 0.14.0",
- "k256",
  "lazy_static",
  "num-bigint 0.4.6",
  "num-traits",
  "once_cell",
- "openvm",
- "openvm-algebra-guest",
- "openvm-algebra-moduli-macros",
- "openvm-ecc-sw-macros",
- "openvm-platform",
- "openvm-rv32im-guest",
+ "openvm 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-ecc-sw-macros 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "rand",
+ "serde",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-ecc-guest"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "ecdsa",
+ "elliptic-curve",
+ "group 0.13.0",
+ "halo2curves-axiom 0.5.3",
+ "hex-literal",
+ "itertools 0.13.0",
+ "k256",
+ "lazy_static",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-ecc-sw-macros 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "p256",
  "rand",
  "serde",
  "strum_macros",
@@ -3939,7 +4099,17 @@ name = "openvm-ecc-sw-macros"
 version = "1.0.0-rc.1"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
 dependencies = [
- "openvm-macros-common",
+ "openvm-macros-common 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
+name = "openvm-ecc-sw-macros"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "openvm-macros-common 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "quote",
  "syn 2.0.98",
 ]
@@ -3947,13 +4117,13 @@ dependencies = [
 [[package]]
 name = "openvm-ecc-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-ecc-guest",
- "openvm-instructions",
- "openvm-instructions-derive",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
 ]
@@ -3968,8 +4138,25 @@ dependencies = [
  "itertools 0.14.0",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm-instructions-derive",
- "openvm-stark-backend",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "serde",
+ "strum",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-instructions"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "backtrace",
+ "derive-new 0.6.0",
+ "itertools 0.13.0",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
  "serde",
  "strum",
  "strum_macros",
@@ -3986,25 +4173,35 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-instructions-derive"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.98",
+]
+
+[[package]]
 name = "openvm-keccak256-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
  "hex-literal",
- "itertools 0.14.0",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "itertools 0.13.0",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-keccak256-transpiler",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "p3-keccak-air",
  "rand",
  "serde",
@@ -4017,9 +4214,9 @@ dependencies = [
 [[package]]
 name = "openvm-keccak256-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-platform",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
  "tiny-keccak",
 ]
@@ -4027,13 +4224,13 @@ dependencies = [
 [[package]]
 name = "openvm-keccak256-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-instructions",
- "openvm-instructions-derive",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-keccak256-guest",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
 ]
@@ -4049,11 +4246,11 @@ dependencies = [
  "hex-literal",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm-algebra-guest",
- "openvm-circuit",
- "openvm-ecc-guest",
- "openvm-pairing-guest",
- "openvm-transpiler",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-circuit 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-pairing-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-transpiler 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
  "serde",
  "serde-big-array",
  "sha2",
@@ -4069,18 +4266,26 @@ dependencies = [
 ]
 
 [[package]]
+name = "openvm-macros-common"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "syn 2.0.98",
+]
+
+[[package]]
 name = "openvm-mod-circuit-builder"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm-circuit",
- "openvm-circuit-primitives",
- "openvm-instructions",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
  "serde_with",
@@ -4090,23 +4295,23 @@ dependencies = [
 [[package]]
 name = "openvm-native-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "itertools 0.13.0",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-native-compiler",
- "openvm-poseidon2-air",
+ "openvm-poseidon2-air 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
  "serde-big-array",
@@ -4118,19 +4323,19 @@ dependencies = [
 [[package]]
 name = "openvm-native-compiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "backtrace",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-integer",
- "openvm-circuit",
- "openvm-instructions",
- "openvm-instructions-derive",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-native-compiler-derive",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "serde",
  "snark-verifier-sdk",
  "strum",
@@ -4141,7 +4346,7 @@ dependencies = [
 [[package]]
 name = "openvm-native-compiler-derive"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4151,22 +4356,22 @@ dependencies = [
 [[package]]
 name = "openvm-native-recursion"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "cfg-if",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "lazy_static",
  "once_cell",
- "openvm-circuit",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-native-circuit",
  "openvm-native-compiler",
  "openvm-native-compiler-derive",
- "openvm-stark-backend",
- "openvm-stark-sdk",
- "p3-dft 0.1.0",
- "p3-fri",
- "p3-merkle-tree",
- "p3-symmetric 0.1.0",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-fri 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-merkle-tree 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "serde_json",
@@ -4177,28 +4382,29 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-traits",
+ "once_cell",
  "openvm-algebra-circuit",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-ecc-circuit",
- "openvm-ecc-guest",
- "openvm-instructions",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-mod-circuit-builder",
- "openvm-pairing-guest",
+ "openvm-pairing-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-pairing-transpiler",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
+ "openvm-stark-backend 1.0.0-rc.0",
  "rand",
  "serde",
  "strum",
@@ -4216,14 +4422,39 @@ dependencies = [
  "lazy_static",
  "num-bigint 0.4.6",
  "num-traits",
- "openvm",
- "openvm-algebra-complex-macros",
- "openvm-algebra-guest",
- "openvm-algebra-moduli-macros",
- "openvm-ecc-guest",
- "openvm-ecc-sw-macros",
- "openvm-platform",
- "openvm-rv32im-guest",
+ "openvm 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-complex-macros 0.1.0 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-ecc-sw-macros 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "rand",
+ "serde",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-pairing-guest"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "group 0.13.0",
+ "halo2curves-axiom 0.5.3",
+ "hex-literal",
+ "itertools 0.13.0",
+ "lazy_static",
+ "num-bigint 0.4.6",
+ "num-traits",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-complex-macros 0.1.0 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-algebra-moduli-macros 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-ecc-sw-macros 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rand",
  "serde",
  "strum_macros",
@@ -4232,13 +4463,13 @@ dependencies = [
 [[package]]
 name = "openvm-pairing-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-instructions",
- "openvm-instructions-derive",
- "openvm-pairing-guest",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-pairing-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
 ]
@@ -4250,7 +4481,19 @@ source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f0
 dependencies = [
  "getrandom 0.2.15",
  "libm",
- "openvm-custom-insn",
+ "openvm-custom-insn 0.1.0 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "stability",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-platform"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "getrandom 0.2.15",
+ "libm",
+ "openvm-custom-insn 0.1.0 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "stability",
  "strum_macros",
 ]
@@ -4263,13 +4506,33 @@ dependencies = [
  "derivative",
  "itertools 0.14.0",
  "lazy_static",
- "openvm-circuit-primitives",
- "openvm-stark-backend",
- "openvm-stark-sdk",
- "p3-monty-31",
- "p3-poseidon2 0.1.0",
- "p3-poseidon2-air",
- "p3-symmetric 0.1.0",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "openvm-stark-sdk 1.0.0-rc.2",
+ "p3-monty-31 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "tracing",
+ "zkhash",
+]
+
+[[package]]
+name = "openvm-poseidon2-air"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "derivative",
+ "itertools 0.13.0",
+ "lazy_static",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
+ "p3-monty-31 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "tracing",
  "zkhash",
@@ -4278,17 +4541,17 @@ dependencies = [
 [[package]]
 name = "openvm-rv32-adapters"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "derive-new 0.6.0",
- "itertools 0.14.0",
- "openvm-circuit",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "itertools 0.13.0",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32im-circuit",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
  "serde-big-array",
@@ -4299,22 +4562,23 @@ dependencies = [
 [[package]]
 name = "openvm-rv32im-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "num-bigint 0.4.6",
  "num-integer",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "once_cell",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend",
+ "openvm-stark-backend 1.0.0-rc.0",
  "rand",
  "serde",
  "serde-big-array",
@@ -4327,20 +4591,29 @@ name = "openvm-rv32im-guest"
 version = "1.0.0-rc.1"
 source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
 dependencies = [
- "openvm-platform",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "strum_macros",
+]
+
+[[package]]
+name = "openvm-rv32im-guest"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "strum_macros",
 ]
 
 [[package]]
 name = "openvm-rv32im-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-instructions",
- "openvm-instructions-derive",
- "openvm-rv32im-guest",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-rv32im-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "serde",
  "strum",
@@ -4350,7 +4623,7 @@ dependencies = [
 [[package]]
 name = "openvm-sdk"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "async-trait",
  "bitcode",
@@ -4360,15 +4633,15 @@ dependencies = [
  "derive_more 1.0.0",
  "eyre",
  "getset",
- "itertools 0.14.0",
+ "itertools 0.13.0",
  "metrics",
- "openvm",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-algebra-circuit",
  "openvm-algebra-transpiler",
  "openvm-bigint-circuit",
  "openvm-bigint-transpiler",
  "openvm-build",
- "openvm-circuit",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-ecc-circuit",
  "openvm-ecc-transpiler",
  "openvm-keccak256-circuit",
@@ -4382,9 +4655,9 @@ dependencies = [
  "openvm-rv32im-transpiler",
  "openvm-sha256-circuit",
  "openvm-sha256-transpiler",
- "openvm-stark-backend",
- "openvm-stark-sdk",
- "openvm-transpiler",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "serde",
  "static_assertions",
  "tracing",
@@ -4393,10 +4666,10 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-air"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-circuit-primitives",
- "openvm-stark-backend",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
  "rand",
  "sha2",
 ]
@@ -4404,21 +4677,21 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-circuit"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
  "bitcode",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
- "openvm-circuit",
- "openvm-circuit-derive",
- "openvm-circuit-primitives",
- "openvm-circuit-primitives-derive",
- "openvm-instructions",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-circuit-primitives-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-rv32im-circuit",
  "openvm-sha256-air",
  "openvm-sha256-transpiler",
- "openvm-stark-backend",
- "openvm-stark-sdk",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-stark-sdk 1.0.0-rc.0",
  "rand",
  "serde",
  "sha2",
@@ -4428,25 +4701,51 @@ dependencies = [
 [[package]]
 name = "openvm-sha256-guest"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm",
- "openvm-platform",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "sha2",
 ]
 
 [[package]]
 name = "openvm-sha256-transpiler"
 version = "1.0.0-rc.1"
-source = "git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11#411e2a2f042c5e86407eaa8b18974d04ca1aba11"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
 dependencies = [
- "openvm-instructions",
- "openvm-instructions-derive",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-instructions-derive 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-sha256-guest",
- "openvm-stark-backend",
- "openvm-transpiler",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "rrs-lib",
  "strum",
+]
+
+[[package]]
+name = "openvm-stark-backend"
+version = "1.0.0-rc.0"
+source = "git+https://github.com/openvm-org/stark-backend.git?rev=bc364134b8315c27bfd29c6e77ac79fe77090137#bc364134b8315c27bfd29c6e77ac79fe77090137"
+dependencies = [
+ "async-trait",
+ "cfg-if",
+ "derivative",
+ "derive-new 0.7.0",
+ "itertools 0.13.0",
+ "mimalloc",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-uni-stark 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "rayon",
+ "rustc-hash 2.1.1",
+ "serde",
+ "thiserror 1.0.69",
+ "tracing",
 ]
 
 [[package]]
@@ -4459,20 +4758,53 @@ dependencies = [
  "derivative",
  "derive-new 0.7.0",
  "itertools 0.14.0",
- "mimalloc",
- "p3-air",
- "p3-challenger",
- "p3-commit",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-uni-stark",
- "p3-util 0.1.0",
- "rayon",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-uni-stark 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
  "rustc-hash 2.1.1",
  "serde",
  "thiserror 1.0.69",
  "tracing",
+]
+
+[[package]]
+name = "openvm-stark-sdk"
+version = "1.0.0-rc.0"
+source = "git+https://github.com/openvm-org/stark-backend.git?rev=bc364134b8315c27bfd29c6e77ac79fe77090137#bc364134b8315c27bfd29c6e77ac79fe77090137"
+dependencies = [
+ "derivative",
+ "derive_more 0.99.19",
+ "ff 0.13.0",
+ "itertools 0.13.0",
+ "metrics",
+ "metrics-tracing-context",
+ "metrics-util",
+ "openvm-stark-backend 1.0.0-rc.0",
+ "p3-baby-bear 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-blake3 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-bn254-fr 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-fri 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-goldilocks 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-keccak 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-merkle-tree 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "rand",
+ "serde",
+ "serde_json",
+ "static_assertions",
+ "toml",
+ "tracing",
+ "tracing-forest",
+ "tracing-subscriber",
+ "zkhash",
 ]
 
 [[package]]
@@ -4487,18 +4819,18 @@ dependencies = [
  "metrics",
  "metrics-tracing-context",
  "metrics-util",
- "openvm-stark-backend",
- "p3-baby-bear 0.1.0",
- "p3-blake3",
- "p3-bn254-fr",
- "p3-dft 0.1.0",
- "p3-fri",
- "p3-goldilocks",
- "p3-keccak",
- "p3-merkle-tree",
- "p3-poseidon",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "p3-baby-bear 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-blake3 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-bn254-fr 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-fri 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-goldilocks 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-keccak 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-merkle-tree 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
  "rand",
  "serde",
  "serde_json",
@@ -4516,22 +4848,22 @@ version = "0.1.0"
 dependencies = [
  "num-bigint 0.4.6",
  "num-traits",
- "openvm",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-algebra-circuit",
  "openvm-algebra-transpiler",
  "openvm-build",
- "openvm-circuit",
+ "openvm-circuit 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-ecc-circuit",
- "openvm-ecc-guest",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-ecc-transpiler",
  "openvm-keccak256-guest",
  "openvm-pairing-circuit",
- "openvm-pairing-guest",
+ "openvm-pairing-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-pairing-transpiler",
  "openvm-rv32im-transpiler",
  "openvm-sdk",
- "openvm-stark-sdk",
- "openvm-transpiler",
+ "openvm-stark-sdk 1.0.0-rc.0",
+ "openvm-transpiler 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "revm-primitives 9.0.1",
  "sha2",
 ]
@@ -4544,9 +4876,26 @@ dependencies = [
  "derive_more 1.0.0",
  "elf",
  "eyre",
- "openvm-instructions",
- "openvm-platform",
- "openvm-stark-backend",
+ "openvm-instructions 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-platform 1.0.0-rc.1 (git+ssh://git@github.com/axiom-crypto/openvm-private.git?rev=411e2a2f042c5e86407eaa8b18974d04ca1aba11)",
+ "openvm-stark-backend 1.0.0-rc.2",
+ "rrs-lib",
+ "strum",
+ "thiserror 1.0.69",
+ "tracing",
+]
+
+[[package]]
+name = "openvm-transpiler"
+version = "1.0.0-rc.1"
+source = "git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0#4285a4f974db90ce11bd21c0642d059cbb8975d0"
+dependencies = [
+ "derive_more 1.0.0",
+ "elf",
+ "eyre",
+ "openvm-instructions 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-platform 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-stark-backend 1.0.0-rc.0",
  "rrs-lib",
  "strum",
  "thiserror 1.0.69",
@@ -4591,8 +4940,17 @@ name = "p3-air"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+]
+
+[[package]]
+name = "p3-air"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
 ]
 
 [[package]]
@@ -4600,11 +4958,25 @@ name = "p3-baby-bear"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-field 0.1.0",
- "p3-mds 0.1.0",
- "p3-monty-31",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-monty-31 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+]
+
+[[package]]
+name = "p3-baby-bear"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-monty-31 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
 ]
@@ -4630,8 +5002,18 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "blake3",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+]
+
+[[package]]
+name = "p3-blake3"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "blake3",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
 ]
 
 [[package]]
@@ -4642,9 +5024,24 @@ dependencies = [
  "ff 0.13.0",
  "halo2curves",
  "num-bigint 0.4.6",
- "p3-field 0.1.0",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+]
+
+[[package]]
+name = "p3-bn254-fr"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "ff 0.13.0",
+ "halo2curves",
+ "num-bigint 0.4.6",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
 ]
@@ -4654,10 +5051,22 @@ name = "p3-challenger"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-field 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "tracing",
+]
+
+[[package]]
+name = "p3-challenger"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "tracing",
 ]
 
@@ -4667,11 +5076,25 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-challenger",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-util 0.1.0",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "serde",
+]
+
+[[package]]
+name = "p3-commit"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "serde",
 ]
 
@@ -4681,10 +5104,23 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "tracing",
+]
+
+[[package]]
+name = "p3-dft"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "tracing",
 ]
 
@@ -4711,8 +5147,25 @@ dependencies = [
  "num-integer",
  "num-traits",
  "nums",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+ "tracing",
+]
+
+[[package]]
+name = "p3-field"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "num-bigint 0.4.6",
+ "num-integer",
+ "num-traits",
+ "nums",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "tracing",
@@ -4738,14 +5191,33 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-challenger",
- "p3-commit",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-interpolation",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-interpolation 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+ "tracing",
+]
+
+[[package]]
+name = "p3-fri"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-interpolation 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "tracing",
@@ -4757,13 +5229,30 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "num-bigint 0.4.6",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-mds 0.1.0",
- "p3-poseidon",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+]
+
+[[package]]
+name = "p3-goldilocks"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "num-bigint 0.4.6",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
 ]
@@ -4773,10 +5262,21 @@ name = "p3-interpolation"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+]
+
+[[package]]
+name = "p3-interpolation"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
 ]
 
 [[package]]
@@ -4785,22 +5285,34 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-field 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "tiny-keccak",
+]
+
+[[package]]
+name = "p3-keccak"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "tiny-keccak",
 ]
 
 [[package]]
 name = "p3-keccak-air"
 version = "0.1.0"
-source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
 dependencies = [
- "p3-air",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "tracing",
 ]
@@ -4811,9 +5323,24 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-field 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+ "tracing",
+ "transpose",
+]
+
+[[package]]
+name = "p3-matrix"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "tracing",
@@ -4839,6 +5366,11 @@ dependencies = [
 name = "p3-maybe-rayon"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
+
+[[package]]
+name = "p3-maybe-rayon"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
 dependencies = [
  "rayon",
 ]
@@ -4855,11 +5387,25 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+]
+
+[[package]]
+name = "p3-mds"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
 ]
 
@@ -4884,12 +5430,29 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-commit",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+ "tracing",
+]
+
+[[package]]
+name = "p3-merkle-tree"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "tracing",
@@ -4902,14 +5465,35 @@ source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd95
 dependencies = [
  "itertools 0.14.0",
  "num-bigint 0.4.6",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-mds 0.1.0",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
- "p3-util 0.1.0",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "serde",
+ "tracing",
+ "transpose",
+]
+
+[[package]]
+name = "p3-monty-31"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "num-bigint 0.4.6",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "serde",
  "tracing",
@@ -4921,9 +5505,20 @@ name = "p3-poseidon"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-field 0.1.0",
- "p3-mds 0.1.0",
- "p3-symmetric 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+]
+
+[[package]]
+name = "p3-poseidon"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
 ]
 
@@ -4933,9 +5528,21 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "gcd",
- "p3-field 0.1.0",
- "p3-mds 0.1.0",
- "p3-symmetric 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+]
+
+[[package]]
+name = "p3-poseidon2"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "gcd",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-mds 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-symmetric 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
 ]
 
@@ -4958,12 +5565,28 @@ name = "p3-poseidon2-air"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
- "p3-air",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-poseidon2 0.1.0",
- "p3-util 0.1.0",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "rand",
+ "tikv-jemallocator",
+ "tracing",
+]
+
+[[package]]
+name = "p3-poseidon2-air"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-poseidon2 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "rand",
  "tikv-jemallocator",
  "tracing",
@@ -4975,7 +5598,17 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-field 0.1.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "serde",
+]
+
+[[package]]
+name = "p3-symmetric"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "serde",
 ]
 
@@ -4996,14 +5629,32 @@ version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
 dependencies = [
  "itertools 0.14.0",
- "p3-air",
- "p3-challenger",
- "p3-commit",
- "p3-dft 0.1.0",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-util 0.1.0",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05)",
+ "serde",
+ "tracing",
+]
+
+[[package]]
+name = "p3-uni-stark"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
+dependencies = [
+ "itertools 0.13.0",
+ "p3-air 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-challenger 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-commit 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-dft 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-field 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-matrix 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-maybe-rayon 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
+ "p3-util 0.1.0 (git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9)",
  "serde",
  "tracing",
 ]
@@ -5012,6 +5663,14 @@ dependencies = [
 name = "p3-util"
 version = "0.1.0"
 source = "git+https://github.com/Plonky3/Plonky3.git?rev=88d7f05#88d7f059500fd956a7c1eb121e08653e5974728d"
+dependencies = [
+ "serde",
+]
+
+[[package]]
+name = "p3-util"
+version = "0.1.0"
+source = "git+https://github.com/Plonky3/Plonky3.git?rev=b0591e9#b0591e9b82d58d10f86359875b5d5fa96433b4cf"
 dependencies = [
  "serde",
 ]
@@ -5794,11 +6453,11 @@ dependencies = [
  "k256",
  "kzg-rs",
  "once_cell",
- "openvm",
- "openvm-ecc-guest",
+ "openvm 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
+ "openvm-ecc-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-keccak256-guest",
  "openvm-kzg",
- "openvm-pairing-guest",
+ "openvm-pairing-guest 1.0.0-rc.1 (git+https://github.com/openvm-org/openvm.git?rev=4285a4f974db90ce11bd21c0642d059cbb8975d0)",
  "openvm-sha256-guest",
  "p256",
  "rand",
