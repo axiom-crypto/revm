@@ -25,7 +25,7 @@ all = "warn"
 revm-primitives = { path = "../primitives", version = "9.0.1", default-features = false }
 
 # static precompile sets.
-once_cell = { version = "1.19", default-features = false, features = ["alloc"] }
+once_cell = { version = "1.20.3", default-features = false, features = ["alloc"] }
 
 # ecRecover
 k256 = { version = "0.13.3", default-features = false, features = ["ecdsa"] }
@@ -74,7 +74,7 @@ serde_json = "1.0"
 serde_derive = "1.0"
 
 [features]
-default = ["std", "c-kzg", "portable", "blst"]
+default = ["openvm"]
 std = ["revm-primitives/std", "k256/std", "once_cell/std", "ripemd/std", "sha2/std", "c-kzg?/std", "secp256k1?/std", "openvm?/std"]
 hashbrown = ["revm-primitives/hashbrown"]
 asm-keccak = ["revm-primitives/asm-keccak"]
@@ -108,8 +108,8 @@ secp256k1 = ["dep:secp256k1"]
 blst = ["dep:blst"]
 
 openvm = ["dep:openvm", "openvm-k256", "openvm-bn", "openvm-sha2", "openvm-kzg"]
-openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest", "std"]
-openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254", "std"]
+openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest"]
+openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254"]
 openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]

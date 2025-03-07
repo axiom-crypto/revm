@@ -5,6 +5,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
-openvm-sha256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "4264a006249d7f82620578a622148d8c7d3d337f" }
+openvm = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
+openvm-sha256-guest = { git = "ssh://git@github.com/axiom-crypto/openvm-private.git", rev = "411e2a2f042c5e86407eaa8b18974d04ca1aba11" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-sha2"] }

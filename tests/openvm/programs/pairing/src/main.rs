@@ -1,3 +1,6 @@
+#![no_std]
+#![no_main]
+
 use openvm::io::read_vec;
 use revm_precompile::bn128::{
     pair::{BYZANTIUM_PAIR_BASE, BYZANTIUM_PAIR_PER_POINT},
