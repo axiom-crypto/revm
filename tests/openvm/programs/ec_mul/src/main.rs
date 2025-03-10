@@ -1,3 +1,6 @@
+#![no_std]
+#![no_main]
+
 use openvm::io::read_vec;
 use revm_precompile::bn128::{mul::BYZANTIUM_MUL_GAS_COST, run_mul};
 #[allow(unused_imports)]

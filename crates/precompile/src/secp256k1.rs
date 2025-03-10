@@ -12,10 +12,7 @@ pub use self::openvm_secp256k1::ecrecover;
 pub use self::secp256k1::ecrecover;
 
 #[cfg(feature = "openvm-k256")]
-#[allow(clippy::module_inception)]
 mod openvm_secp256k1 {
-    use std::panic::catch_unwind;
-
     use k256::{
         ecdsa::{Error, RecoveryId, Signature},
         Secp256k1,
@@ -36,19 +33,11 @@ mod openvm_secp256k1 {
         let recid = RecoveryId::from_byte(recid).expect("recovery ID is valid");
 
         // annoying: Signature::to_bytes copies from slice
-        // Use catch unwind to handle panics which could be caused by host hinting
-        let res = catch_unwind(|| {
-            VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
-                &msg[..],
-                &sig.to_bytes(),
-                recid,
-            )
-        });
-        if res.is_err() {
-            // If panic, we fallback to k256 implementation
-            return super::secp256k1::ecrecover(_sig, _recid, msg);
-        }
-        let recovered_key = res.unwrap();
+        let recovered_key = VerifyingKey::<Secp256k1>::recover_from_prehash_noverify(
+            &msg[..],
+            &sig.to_bytes(),
+            recid,
+        )?;
         let public_key = recovered_key.as_affine();
         let mut encoded = [0u8; 64];
         encoded[..32].copy_from_slice(&public_key.x().to_be_bytes());

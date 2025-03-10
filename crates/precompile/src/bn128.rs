@@ -2,7 +2,9 @@ use crate::{
     utilities::{bool_to_bytes32, right_pad},
     Address, Error, Precompile, PrecompileResult, PrecompileWithAddress,
 };
-use bn::{AffineG1, AffineG2, Fq, Fq2, Group, Gt, G1, G2};
+use bn::{AffineG1, Fq, Group, G1};
+#[cfg(not(feature = "openvm-bn"))]
+use bn::{AffineG2, Fq2, Gt, G2};
 use revm_primitives::PrecompileOutput;
 use std::vec::Vec;
 #[cfg(feature = "openvm-bn")]
@@ -228,13 +230,9 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
 }
 
-#[cfg(feature = "openvm-bn")]
-pub use openvm_pair as run_pair;
 #[cfg(not(feature = "openvm-bn"))]
-pub use run_pair_bn as run_pair;
-
 #[allow(non_snake_case)]
-pub fn run_pair_bn(
+pub fn run_pair(
     input: &[u8],
     pair_per_point_cost: u64,
     pair_base_cost: u64,
@@ -297,8 +295,7 @@ pub fn run_pair_bn(
 }
 
 #[cfg(feature = "openvm-bn")]
-#[allow(non_snake_case)]
-pub fn openvm_pair(
+pub fn run_pair(
     input: &[u8],
     pair_per_point_cost: u64,
     pair_base_cost: u64,
@@ -318,7 +315,9 @@ pub fn openvm_pair(
     } else {
         let elements = input.len() / PAIR_ELEMENT_LEN;
 
+        #[allow(non_snake_case)]
         let mut P = Vec::with_capacity(elements);
+        #[allow(non_snake_case)]
         let mut Q = Vec::with_capacity(elements);
 
         // read points
@@ -349,14 +348,7 @@ pub fn openvm_pair(
             Q.push(g2);
         }
 
-        // Use catch unwind to handle panics which could be caused by host hinting
-        let res = Bn254::pairing_check(&P, &Q);
-        if let Ok(()) = res {
-            true
-        } else {
-            // If panic, we fallback to bn implementation
-            return run_pair_bn(input, pair_per_point_cost, pair_base_cost, gas_limit);
-        }
+        Bn254::pairing_check(&P, &Q).is_ok()
     };
     Ok(PrecompileOutput::new(gas_used, bool_to_bytes32(success)))
 }
