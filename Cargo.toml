@@ -25,7 +25,7 @@ openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "
 openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
 openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
 # openvm external lib
-openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "d1dfef478f0fda3697cd5b9126e2fc64e2da2246", default-features = false }
+openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "78879012403f49e406decc35c643386f73a427cf", default-features = false }
 
 [workspace.metadata.docs.rs]
 all-features = true
