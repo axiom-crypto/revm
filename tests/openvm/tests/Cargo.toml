@@ -4,21 +4,21 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a", features = ["test-utils", "parallel", "mimalloc"] }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd", features = ["test-utils", "parallel", "mimalloc"] }
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "fdb808bec40ff21dce7e462c2c18dbb997207adb" }
 
 num-bigint = { version = "0.4", default-features = false }

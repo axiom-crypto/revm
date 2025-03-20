@@ -5,11 +5,11 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-algebra-moduli-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-ecc-sw-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "7f87e1ddfb420a2c73c141c8ce35990f4c93086a" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-algebra-moduli-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-ecc-sw-macros = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-platform = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3b9cf6df932e3dda20c1538f5c473ea490c256fd" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-bn"] }
