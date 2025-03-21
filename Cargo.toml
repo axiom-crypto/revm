@@ -1,5 +1,13 @@
 [workspace]
-members = ["bins/revme", "bins/revm-test", "crates/revm", "crates/primitives", "crates/interpreter", "crates/precompile", "tests/openvm/tests"]
+members = [
+    "bins/revme",
+    "bins/revm-test",
+    "crates/revm",
+    "crates/primitives",
+    "crates/interpreter",
+    "crates/precompile",
+    "tests/openvm/tests",
+]
 resolver = "2"
 default-members = ["crates/revm"]
 
