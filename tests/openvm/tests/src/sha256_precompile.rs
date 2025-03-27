@@ -12,7 +12,7 @@ type F = BabyBear;
 
 #[test]
 fn test_sha256_precompile() {
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/sha256");

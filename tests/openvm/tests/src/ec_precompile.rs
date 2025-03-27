@@ -23,7 +23,7 @@ type F = BabyBear;
 #[test]
 fn test_ec_pairing_precompile() {
     setup_tracing();
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/pairing");
@@ -80,7 +80,7 @@ fn test_ec_pairing_precompile() {
 
 #[test]
 fn test_ec_add_precompile() {
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/ec_add");
@@ -130,7 +130,7 @@ fn test_ec_add_precompile() {
 
 #[test]
 fn test_ec_mul_precompile() {
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/ec_mul");

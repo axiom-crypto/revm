@@ -19,7 +19,7 @@ use sha2::{Digest, Sha256};
 #[test]
 fn test_kzg_precompile_with_intrinsics() {
     setup_tracing();
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default().with_features(["use-intrinsics"]);
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/kzg_point_evaluation");
@@ -69,7 +69,7 @@ fn test_kzg_precompile_with_intrinsics() {
 #[ignore]
 fn test_kzg_precompile_without_intrinsics() {
     setup_tracing();
-    let sdk = Sdk;
+    let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("../programs/kzg_point_evaluation");
