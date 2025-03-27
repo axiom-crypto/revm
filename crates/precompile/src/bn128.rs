@@ -108,9 +108,25 @@ pub const PAIR_ELEMENT_LEN: usize = 64 + 128;
 /// # Panics
 ///
 /// Panics if the input is not at least 32 bytes long.
+#[cfg(not(feature = "openvm"))]
 #[inline]
 pub fn read_fq(input: &[u8]) -> Result<Fq, Error> {
     Fq::from_slice(&input[..32]).map_err(|_| Error::Bn128FieldPointNotAMember)
+}
+
+#[cfg(feature = "openvm")]
+#[inline]
+pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
+    if input.len() < 32 {
+        Err(Error::Bn128FieldPointNotAMember)
+    } else {
+        let fp = Fp::from_be_bytes(&input[..32]);
+        if fp.is_reduced() {
+            Ok(fp)
+        } else {
+            Err(Error::Bn128FieldPointNotAMember)
+        }
+    }
 }
 
 #[cfg(feature = "openvm-bn")]
@@ -339,10 +355,19 @@ pub fn run_pair(
             let g2_y_c1 = read_fq_at(4)?;
             let g2_y_c0 = read_fq_at(5)?;
 
-            let g1 = AffinePoint::new(g1_x, g1_y);
+            let g1 = new_g1_affine_point(g1_x, g1_y)?;
+            let g1 = AffinePoint {
+                x: g1.x().clone(),
+                y: g1.y().clone(),
+            };
             let g2_x = Fp2::new(g2_x_c0, g2_x_c1);
             let g2_y = Fp2::new(g2_y_c0, g2_y_c1);
-            let g2 = AffinePoint::new(g2_x, g2_y);
+            let g2 = openvm_pairing_guest::bn254::G2Affine::from_xy(g2_x, g2_y)
+                .ok_or(Error::Bn128AffineGFailedToCreate)?;
+            let g2 = AffinePoint {
+                x: g2.x().clone(),
+                y: g2.y().clone(),
+            };
 
             P.push(g1);
             Q.push(g2);
