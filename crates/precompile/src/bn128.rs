@@ -108,13 +108,13 @@ pub const PAIR_ELEMENT_LEN: usize = 64 + 128;
 /// # Panics
 ///
 /// Panics if the input is not at least 32 bytes long.
-#[cfg(not(feature = "openvm"))]
+#[cfg(not(feature = "openvm-bn"))]
 #[inline]
 pub fn read_fq(input: &[u8]) -> Result<Fq, Error> {
     Fq::from_slice(&input[..32]).map_err(|_| Error::Bn128FieldPointNotAMember)
 }
 
-#[cfg(feature = "openvm")]
+#[cfg(feature = "openvm-bn")]
 #[inline]
 pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
     if input.len() < 32 {
@@ -129,21 +129,12 @@ pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
     }
 }
 
-#[cfg(feature = "openvm-bn")]
-#[inline]
-pub fn read_openvm_fp(input: &[u8]) -> Result<Fp, Error> {
-    if input.len() < 32 {
-        Err(Error::Bn128FieldPointNotAMember)
-    } else {
-        Ok(Fp::from_be_bytes(&input[..32]))
-    }
-}
-
 /// Reads the `x` and `y` points from the input slice.
 ///
 /// # Panics
 ///
 /// Panics if the input is not at least 64 bytes long.
+#[cfg(not(feature = "openvm-bn"))]
 #[inline]
 pub fn read_point(input: &[u8]) -> Result<G1, Error> {
     let px = read_fq(&input[0..32])?;
@@ -153,9 +144,9 @@ pub fn read_point(input: &[u8]) -> Result<G1, Error> {
 
 #[cfg(feature = "openvm-bn")]
 #[inline]
-pub fn read_affine_point(input: &[u8]) -> Result<G1Affine, Error> {
-    let px = read_openvm_fp(&input[0..32])?;
-    let py = read_openvm_fp(&input[32..64])?;
+pub fn read_point(input: &[u8]) -> Result<G1Affine, Error> {
+    let px = read_fq(&input[0..32])?;
+    let py = read_fq(&input[32..64])?;
     new_g1_affine_point(px, py)
 }
 
@@ -195,8 +186,8 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
     #[cfg(feature = "openvm-bn")]
     {
-        let p1 = read_affine_point(&input[..64])?;
-        let p2 = read_affine_point(&input[64..])?;
+        let p1 = read_point(&input[..64])?;
+        let p2 = read_point(&input[64..])?;
         let sum = p1 + p2;
         // manually reverse to avoid allocation
         let x_bytes: &[u8] = sum.x().as_le_bytes();
@@ -231,7 +222,7 @@ pub fn run_mul(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     }
     #[cfg(feature = "openvm-bn")]
     {
-        let p = read_affine_point(&input[..64])?;
+        let p = read_point(&input[..64])?;
         let scalar = Scalar::from_be_bytes(&input[64..96]);
 
         let res = Bn254::msm(&[scalar], &[p]);
@@ -345,7 +336,7 @@ pub fn run_pair(
                 // SAFETY: We're reading `6 * 32 == PAIR_ELEMENT_LEN` bytes from `input[idx..]`
                 // per iteration. This is guaranteed to be in-bounds.
                 let slice = unsafe { input.get_unchecked(start..start + 32) };
-                read_openvm_fp(slice)
+                read_fq(slice)
             };
             // https://eips.ethereum.org/EIPS/eip-197, Fp2 is encoded as (a, b) where a * i + b
             let g1_x = read_fq_at(0)?;
