@@ -18,7 +18,7 @@ jobs:
     name: OpenVM Tests
     runs-on:
       - runs-on=${{ github.run_id }}
-      - runner=8cpu-linux-x64
+      - runner=64cpu-linux-x64
       - extras=s3-cache
     steps:
       - uses: runs-on/action@v1
@@ -29,7 +29,7 @@ jobs:
           cache-on-failure: true
       - uses: taiki-e/install-action@nextest
       - name: Rust toolchain
-        run: rustup component add rust-src --toolchain nightly-2024-10-30-x86_64-unknown-linux-gnu
+        run: rustup component add rust-src --toolchain nightly-2025-02-14
 
       - name: Run tests
         working-directory: tests/openvm/tests

@@ -5,6 +5,6 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "efb782371b0fad77c597b77be64bfab75b20c5a6" }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "efb782371b0fad77c597b77be64bfab75b20c5a6" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-bn"] }
