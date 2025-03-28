@@ -5,6 +5,8 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = ["openvm-sha2"] }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
+    "openvm-sha2",
+] }

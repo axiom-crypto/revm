@@ -13,27 +13,27 @@ default-members = ["crates/revm"]
 
 [workspace.dependencies]
 # openvm stark-backend
-openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "b051e8978da9c829a76b262abf4a9736c8d1681e" }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "884f8e6aabf72bde00dc51f1f1121277bff73b1e" }
 # openvm
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
 # openvm extensions
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "3c35e9f369da8dee065a089fb72f3580af7dcaf9" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "f41640c37bc5468a0775a38098053fe37ea3538a" }
 # openvm external lib
-openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "195fa6a4f633706469e384293b31674e14acab80", default-features = false }
+openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "3eedc627d1dc08d0dea42e36b8af825de5b74eb0", default-features = false }
 
 [workspace.metadata.docs.rs]
 all-features = true
