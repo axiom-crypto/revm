@@ -431,7 +431,7 @@ impl fmt::Display for EofValidationError {
             Self::CodeSectionNotAccessed => "Code section was not accessed",
             Self::InvalidTypesSection => "Invalid types section",
             Self::InvalidFirstTypesSection => "Invalid first types section",
-            Self::MaxStackMismatch => "Max stack element mismatchs",
+            Self::MaxStackMismatch => "Max stack element mismatches",
             Self::NoCodeSections => "No code sections",
             Self::SubContainerCalledInTwoModes => "Sub container called in two modes",
             Self::SubContainerNotAccessed => "Sub container not accessed",
