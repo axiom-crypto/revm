@@ -1,7 +1,7 @@
 use crate::{Address, Error, Precompile, PrecompileResult, PrecompileWithAddress};
 cfg_if::cfg_if! {
     if #[cfg(feature = "c-kzg")] {
-        use c_kzg::{Bytes32, Bytes48, KzgProof, KzgSettings};
+        use c_kzg::{Bytes32, Bytes48};
     } else if #[cfg(feature = "kzg-rs")] {
         use kzg_rs::{Bytes32, Bytes48, KzgProof, KzgSettings};
     }
@@ -30,7 +30,7 @@ pub const RETURN_VALUE: &[u8; 64] = &hex!(
 /// | versioned_hash |  z  |  y  | commitment | proof |
 /// |     32         | 32  | 32  |     48     |   48  |
 /// with z and y being padded 32 byte big endian values
-pub fn run(input: &Bytes, gas_limit: u64, env: &Env) -> PrecompileResult {
+pub fn run(input: &Bytes, gas_limit: u64, _env: &Env) -> PrecompileResult {
     if gas_limit < GAS_COST {
         return Err(Error::OutOfGas.into());
     }
@@ -52,7 +52,7 @@ pub fn run(input: &Bytes, gas_limit: u64, env: &Env) -> PrecompileResult {
     let z = as_bytes32(&input[32..64]);
     let y = as_bytes32(&input[64..96]);
     let proof = as_bytes48(&input[144..192]);
-    if !verify_kzg_proof(commitment, z, y, proof, env.cfg.kzg_settings.get()) {
+    if !verify_kzg_proof(commitment, z, y, proof) {
         return Err(Error::BlobVerifyKzgProofFailed.into());
     }
 
@@ -69,14 +69,17 @@ pub fn kzg_to_versioned_hash(commitment: &[u8]) -> [u8; 32] {
 }
 
 #[inline]
-pub fn verify_kzg_proof(
-    commitment: &Bytes48,
-    z: &Bytes32,
-    y: &Bytes32,
-    proof: &Bytes48,
-    kzg_settings: &KzgSettings,
-) -> bool {
-    KzgProof::verify_kzg_proof(commitment, z, y, proof, kzg_settings).unwrap_or(false)
+pub fn verify_kzg_proof(commitment: &Bytes48, z: &Bytes32, y: &Bytes32, proof: &Bytes48) -> bool {
+    cfg_if::cfg_if! {
+        if #[cfg(feature = "c-kzg")] {
+            let kzg_settings = c_kzg::ethereum_kzg_settings(0);
+            kzg_settings.verify_kzg_proof(commitment, z, y, proof).unwrap_or(false)
+        } else if #[cfg(feature = "kzg-rs")] {
+            let env = kzg_rs::EnvKzgSettings::default();
+            let kzg_settings = env.get();
+            KzgProof::verify_kzg_proof(commitment, z, y, proof, kzg_settings).unwrap_or(false)
+        }
+    }
 }
 
 #[inline]

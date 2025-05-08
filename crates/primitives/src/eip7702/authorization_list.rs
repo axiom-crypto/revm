@@ -1,5 +1,5 @@
 pub use alloy_eips::eip7702::{Authorization, SignedAuthorization};
-pub use alloy_primitives::{Parity, Signature};
+pub use alloy_primitives::Signature;
 
 use super::SECP256K1N_HALF;
 use crate::Address;
@@ -45,13 +45,13 @@ impl AuthorizationList {
             //     return Err(InvalidAuthorization::InvalidChainId);
             // }
 
-            // Check y_parity, Parity::Parity means that it was 0 or 1.
-            if !matches!(auth.signature().v(), Parity::Parity(_)) {
+            // Check y_parity. It should be 0 or 1.
+            if let Err(_) = auth.signature() {
                 return Err(InvalidAuthorization::InvalidYParity);
             }
 
             // Check s-value
-            if auth.signature().s() > SECP256K1N_HALF {
+            if auth.s() > SECP256K1N_HALF {
                 return Err(InvalidAuthorization::Eip2InvalidSValue);
             }
 

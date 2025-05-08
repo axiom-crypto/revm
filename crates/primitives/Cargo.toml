@@ -22,8 +22,8 @@ rust_2018_idioms = "deny"
 all = "warn"
 
 [dependencies]
-alloy-eips = { version = "0.3", default-features = false, features = ["k256"] }
-alloy-primitives = { version = "0.8.0", default-features = false, features = [
+alloy-eips = { version = "0.14", default-features = false, features = ["k256"] }
+alloy-primitives = { version = "1.0.0", default-features = false, features = [
     "rlp",
 ] }
 hashbrown = "0.14"
@@ -32,7 +32,7 @@ bitvec = { version = "1", default-features = false, features = ["alloc"] }
 bitflags = { version = "2.6.0", default-features = false }
 
 # For setting the CfgEnv KZGSettings. Enabled by c-kzg flag.
-c-kzg = { version = "1.0.3", default-features = false, optional = true, features = [
+c-kzg = { version = "2.1.1", default-features = false, optional = true, features = [
     "ethereum_kzg_settings",
 ] }
 

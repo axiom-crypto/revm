@@ -19,7 +19,7 @@ cfg_if::cfg_if! {
             pub fn get(&self) -> &c_kzg::KzgSettings {
                 match self {
                     Self::Default => {
-                        c_kzg::ethereum_kzg_settings()
+                        c_kzg::ethereum_kzg_settings(0)
                     }
                     Self::Custom(settings) => settings,
                 }

@@ -122,7 +122,7 @@ pub fn apply_eip7702_auth_list<SPEC: Spec, EXT, DB: Database>(
 
         // 2. Verify the chain id is either 0 or the chain's current ID.
         if !authorization.chain_id().is_zero()
-            && authorization.chain_id() != U256::from(context.evm.inner.env.cfg.chain_id)
+            && *authorization.chain_id() != U256::from(context.evm.inner.env.cfg.chain_id)
         {
             continue;
         }

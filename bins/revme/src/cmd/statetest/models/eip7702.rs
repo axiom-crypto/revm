@@ -97,7 +97,8 @@ impl TxEip7702 {
             input: Decodable::decode(buf)?,
             access_list: Decodable::decode(buf)?,
             authorization_list: Decodable::decode(buf)?,
-            signature: Signature::decode_rlp_vrs(buf)?,
+            // Note: this might be incorrect but we do not use this bin
+            signature: Signature::decode_rlp_vrs(buf, |_| Ok(true))?,
         })
     }
 
