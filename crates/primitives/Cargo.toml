@@ -38,6 +38,7 @@ c-kzg = { version = "1.0.3", default-features = false, optional = true, features
 
 # Optionally use `kzg-rs` for a pure Rust implementation of KZG.
 kzg-rs = { version = "0.2.3", default-features = false, optional = true }
+openvm-kzg = { workspace = true, optional = true }
 
 # utility
 enumn = "0.1"
@@ -111,3 +112,5 @@ c-kzg = ["dep:c-kzg"]
 # `kzg-rs` is not audited but useful for `no_std` environment.
 #   use it with causing and default to `c-kzg` if possible!
 kzg-rs = ["dep:kzg-rs"]
+# `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
+openvm-kzg = ["dep:openvm-kzg"]

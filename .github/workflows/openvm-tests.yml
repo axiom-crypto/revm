@@ -1,0 +1,36 @@
+name: OpenVM Tests
+
+on:
+  push:
+    branches: ["v43-openvm"]
+  pull_request:
+    branches: ["**"]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+
+env:
+  OPENVM_FAST_TEST: 1
+
+jobs:
+  tests:
+    name: OpenVM Tests
+    runs-on:
+      - runs-on=${{ github.run_id }}
+      - runner=64cpu-linux-x64
+      - extras=s3-cache
+    steps:
+      - uses: runs-on/action@v1
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          cache-on-failure: true
+      - uses: taiki-e/install-action@nextest
+      - name: Rust toolchain
+        run: rustup component add rust-src --toolchain nightly-2025-02-14
+
+      - name: Run tests
+        working-directory: tests/openvm/tests
+        run: RUST_BACKTRACE=1 cargo nextest run --cargo-profile=fast

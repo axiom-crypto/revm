@@ -121,6 +121,7 @@ impl<DB: Database> EvmContext<DB> {
         else {
             return Ok(None);
         };
+        println!("called precompile-address: {:?}", address);
 
         let mut result = InterpreterResult {
             result: InstructionResult::Return,
