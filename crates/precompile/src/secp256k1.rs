@@ -1,6 +1,8 @@
 #[cfg(feature = "secp256k1")]
 pub mod bitcoin_secp256k1;
 pub mod k256;
+#[cfg(feature = "openvm-k256")]
+pub mod openvm_secp256k1;
 #[cfg(feature = "libsecp256k1")]
 pub mod parity_libsecp256k1;
 
@@ -42,6 +44,8 @@ cfg_if::cfg_if! {
         pub use bitcoin_secp256k1::ecrecover;
     } else if #[cfg(feature = "libsecp256k1")] {
         pub use parity_libsecp256k1::ecrecover;
+    } else if #[cfg(feature = "openvm-k256")] {
+        pub use openvm_k256::ecrecover;
     } else {
         pub use k256::ecrecover;
     }
