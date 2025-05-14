@@ -12,6 +12,12 @@ cfg_if::cfg_if! {
             encode_g1_point, g1_point_add, g1_point_mul, pairing_check, read_g1_point, read_g2_point,
             read_scalar,
         };
+    } else if #[cfg(feature = "openvm-bn")] {
+        mod openvm;
+        use openvm::{
+            encode_g1_point, g1_point_add, g1_point_mul, pairing_check, read_g1_point, read_g2_point,
+            read_scalar,
+        };
     } else {
         mod arkworks;
         use arkworks::{

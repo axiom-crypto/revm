@@ -1,0 +1,28 @@
+[workspace]
+[package]
+name = "ecrecover-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711", features = [
+    "k256",
+] }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
+    "openvm-k256",
+] }
+revm-primitives = { path = "../../../../crates/primitives", default-features = false }
+
+[features]
+default = []
+
+[profile.release]
+panic = "abort"
+lto = "thin"    # faster compile time
+
+[profile.profiling]
+inherits = "release"
+debug = 2
+strip = false

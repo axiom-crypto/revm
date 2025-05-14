@@ -26,13 +26,13 @@ once_cell = { workspace = true, features = ["alloc"] }
 # ecRecover
 k256 = { workspace = true, features = ["ecdsa"] }
 secp256k1 = { workspace = true, features = [
-	"alloc",
-	"recovery",
-	"rand",
-	"global-context",
+    "alloc",
+    "recovery",
+    "rand",
+    "global-context",
 ], optional = true }
 libsecp256k1 = { workspace = true, features = [
-	"static-context",
+    "static-context",
 ], optional = true }
 
 # SHA2-256 and RIPEMD-160
@@ -53,7 +53,7 @@ ark-serialize = { workspace = true }
 
 # KZG point evaluation precompile
 c-kzg = { workspace = true, optional = true, features = [
-	"ethereum_kzg_settings",
+    "ethereum_kzg_settings",
 ] }
 
 # Optionally use `kzg-rs` for a pure Rust implementation of KZG point evaluation.
@@ -71,29 +71,37 @@ p256 = { workspace = true, optional = true, features = ["ecdsa"] }
 # utils
 cfg-if.workspace = true
 
+# Optionally use openvm intrinsics
+openvm = { workspace = true, optional = true }
+openvm-ecc-guest = { workspace = true, optional = true }
+openvm-keccak256-guest = { workspace = true, optional = true }
+openvm-sha256-guest = { workspace = true, optional = true }
+openvm-pairing-guest = { workspace = true, optional = true }
+openvm-kzg = { workspace = true, optional = true }
+
 [dev-dependencies]
 criterion.workspace = true
 rand = { workspace = true, features = ["std"] }
 rstest.workspace = true
 
 [features]
-default = ["std", "c-kzg", "secp256k1", "portable", "blst"]
+default = ["openvm"]
 std = [
-	"primitives/std",
-	"k256/std",
-	"once_cell/std",
-	"ripemd/std",
-	"sha2/std",
-	"c-kzg?/std",
-	"secp256k1?/std",
-	"libsecp256k1?/std",
-	"aurora-engine-modexp/std",
-	"p256?/std",
-	"ark-bn254/std",
-	"ark-bls12-381/std",
-	"ark-ec/std",
-	"ark-ff/std",
-	"ark-serialize/std",
+    "primitives/std",
+    "k256/std",
+    "once_cell/std",
+    "ripemd/std",
+    "sha2/std",
+    "c-kzg?/std",
+    "secp256k1?/std",
+    "libsecp256k1?/std",
+    "aurora-engine-modexp/std",
+    "p256?/std",
+    "ark-bn254/std",
+    "ark-bls12-381/std",
+    "ark-ec/std",
+    "ark-ff/std",
+    "ark-serialize/std",
 ]
 hashbrown = ["primitives/hashbrown"]
 asm-keccak = ["primitives/asm-keccak"]
@@ -107,6 +115,10 @@ secp256r1 = ["dep:p256"]
 c-kzg = ["dep:c-kzg"]
 # `kzg-rs` is not audited but useful for `no_std` environment, use it with causing and default to `c-kzg` if possible.
 kzg-rs = ["dep:kzg-rs"]
+# `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
+openvm-kzg = ["dep:openvm-kzg"]
+# TODO: always use intrinsics
+openvm-kzg-intrinsics = ["openvm-kzg/use-intrinsics"]
 
 # Compile in portable mode, without ISA extensions.
 # Binary can be executed on all systems.
@@ -123,6 +135,12 @@ blst = ["dep:blst"]
 
 # Enables the substrate implementation of eip1962
 bn = ["dep:bn"]
+# Enable openvm accelerated implementation
+openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254"]
+
+openvm = ["dep:openvm", "openvm-k256", "openvm-bn", "openvm-sha2", "openvm-kzg"]
+openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest"]
+openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]
 name = "bench"

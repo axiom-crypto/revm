@@ -1,0 +1,19 @@
+[workspace]
+[package]
+name = "kzg-point-evaluation-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711" }
+openvm-pairing-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "f0477ab8ee276bf102afb508cbb53a63efed9711", features = [
+    "bls12_381",
+] }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
+    "openvm-kzg",
+] }
+
+[features]
+use-intrinsics = ["revm-precompile/openvm-kzg-intrinsics"]
