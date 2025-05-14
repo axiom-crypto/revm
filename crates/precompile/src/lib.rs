@@ -16,7 +16,7 @@ pub mod bn128;
 pub mod hash;
 pub mod identity;
 pub mod interface;
-#[cfg(any(feature = "c-kzg", feature = "kzg-rs"))]
+#[cfg(any(feature = "c-kzg", feature = "kzg-rs", feature = "openvm-kzg"))]
 pub mod kzg_point_evaluation;
 pub mod modexp;
 pub mod secp256k1;
@@ -161,7 +161,7 @@ impl Precompiles {
 
             // EIP-4844: Shard Blob Transactions
             cfg_if! {
-                if #[cfg(any(feature = "c-kzg", feature = "kzg-rs"))] {
+                if #[cfg(any(feature = "c-kzg", feature = "kzg-rs", feature = "openvm-kzg"))] {
                     let precompile = kzg_point_evaluation::POINT_EVALUATION.clone();
                 } else {
                     let precompile = PrecompileWithAddress(u64_to_address(0x0A), |_,_| Err(PrecompileError::Fatal("c-kzg feature is not enabled".into())));
