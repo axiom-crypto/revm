@@ -4,7 +4,7 @@ use k256::{
 };
 use openvm_ecc_guest::{algebra::IntMod, ecdsa::VerifyingKey, weierstrass::WeierstrassPoint};
 use openvm_keccak256_guest::keccak256;
-use revm_primitives::{alloy_primitives::B512, B256};
+use primitives::{alloy_primitives::B512, B256};
 
 pub fn ecrecover(sig: &B512, mut recid: u8, msg: &B256) -> Result<B256, Error> {
     let _sig = sig;

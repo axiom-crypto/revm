@@ -34,7 +34,7 @@ members = [
     "examples/my_evm",
     "examples/custom_opcodes",
 
-    "tests/openvm/tests",
+    "tests/openvm",
 ]
 resolver = "2"
 default-members = ["crates/revm"]
@@ -112,7 +112,7 @@ rand = "0.8"
 tokio = "1.44"
 
 # openvm stark-backend
-openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "884f8e6aabf72bde00dc51f1f1121277bff73b1e" }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v1.0.1" }
 # openvm
 openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "51f07d50d20174b23091f48e25d9ea421b4e2787" }
 openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "51f07d50d20174b23091f48e25d9ea421b4e2787" }

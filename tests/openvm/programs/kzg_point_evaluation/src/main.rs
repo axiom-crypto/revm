@@ -35,7 +35,7 @@ pub fn main() {
     let expected_output = read_vec();
 
     let gas = GAS_COST;
-    let output = run(&input.into(), gas, &Default::default()).unwrap();
+    let output = run(&input.into(), gas).unwrap();
     assert_eq!(output.gas_used, gas);
     assert_eq!(&output.bytes[..], &expected_output);
 }

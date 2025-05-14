@@ -1,3 +1,5 @@
+use std::vec::Vec;
+
 use {
     openvm_ecc_guest::{
         weierstrass::{IntrinsicCurve, WeierstrassPoint},
@@ -14,15 +16,15 @@ use super::{FQ2_LEN, FQ_LEN, G1_LEN, SCALAR_LEN};
 use crate::PrecompileError;
 
 #[inline]
-pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
+fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
     if input.len() < FQ_LEN {
-        Err(Error::Bn128FieldPointNotAMember)
+        Err(PrecompileError::Bn128FieldPointNotAMember)
     } else {
         let fp = Fp::from_be_bytes(&input[..32]);
         if fp.is_reduced() {
             Ok(fp)
         } else {
-            Err(Error::Bn128FieldPointNotAMember)
+            Err(PrecompileError::Bn128FieldPointNotAMember)
         }
     }
 }
@@ -41,12 +43,12 @@ pub fn read_fq(input: &[u8]) -> Result<Fp, Error> {
 fn read_fq2(input: &[u8]) -> Result<Fp2, PrecompileError> {
     let y = read_fq(&input[..FQ_LEN])?;
     let x = read_fq(&input[FQ_LEN..2 * FQ_LEN])?;
-    Ok(Fq2::new(x, y))
+    Ok(Fp2::new(x, y))
 }
 
 #[inline]
-fn new_g1_affine_point(px: Fp, py: Fp) -> Result<G1Affine, Error> {
-    G1Affine::from_xy(px, py).ok_or(Error::Bn128AffineGFailedToCreate)
+fn new_g1_affine_point(px: Fp, py: Fp) -> Result<G1Affine, PrecompileError> {
+    G1Affine::from_xy(px, py).ok_or(PrecompileError::Bn128AffineGFailedToCreate)
 }
 
 /// Reads a G1 point from the input slice.
@@ -76,8 +78,8 @@ pub(super) fn encode_g1_point(point: G1Affine) -> [u8; G1_LEN] {
     let mut output = [0u8; G1_LEN];
 
     // manually reverse to avoid allocation
-    let x_bytes: &[u8] = sum.x().as_le_bytes();
-    let y_bytes: &[u8] = sum.y().as_le_bytes();
+    let x_bytes: &[u8] = point.x().as_le_bytes();
+    let y_bytes: &[u8] = point.y().as_le_bytes();
     for i in 0..FQ_LEN {
         output[i] = x_bytes[FQ_LEN - 1 - i];
         output[i + FQ_LEN] = y_bytes[FQ_LEN - 1 - i];

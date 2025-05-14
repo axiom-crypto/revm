@@ -11,7 +11,8 @@ use openvm_pairing_guest::bls12_381::{BLS12_381_MODULUS, BLS12_381_ORDER};
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::config::setup_tracing;
-use revm_primitives::{hex, VERSIONED_HASH_VERSION_KZG};
+use primitives::eip4844::VERSIONED_HASH_VERSION_KZG;
+use primitives::hex;
 use sha2::{Digest, Sha256};
 
 // These tests should be run with --profile=fast or --profile=ethtests for more compiler optimization
@@ -22,7 +23,7 @@ fn test_kzg_precompile_with_intrinsics() {
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default().with_features(["use-intrinsics"]);
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../programs/kzg_point_evaluation");
+    pkg_dir.push("programs/kzg_point_evaluation");
     let elf = sdk.build(guest_opts, &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
@@ -72,7 +73,7 @@ fn test_kzg_precompile_without_intrinsics() {
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../programs/kzg_point_evaluation");
+    pkg_dir.push("programs/kzg_point_evaluation");
     let elf = sdk.build(guest_opts, &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()

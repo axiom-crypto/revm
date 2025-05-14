@@ -13,7 +13,7 @@ use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::config::setup_tracing;
 use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
-use revm_primitives::hex;
+use primitives::hex;
 
 type F = BabyBear;
 
@@ -26,7 +26,7 @@ fn test_ec_pairing_precompile() {
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../programs/pairing");
+    pkg_dir.push("programs/pairing");
     let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
@@ -83,7 +83,7 @@ fn test_ec_add_precompile() {
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../programs/ec_add");
+    pkg_dir.push("programs/ec_add");
     let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
@@ -133,7 +133,7 @@ fn test_ec_mul_precompile() {
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("../programs/ec_mul");
+    pkg_dir.push("programs/ec_mul");
     let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
     let vm_config = SdkVmConfig::builder()
