@@ -2,7 +2,7 @@ name: OpenVM Tests
 
 on:
   push:
-    branches: ["v43-openvm"]
+    branches: ["v69-openvm"]
   pull_request:
     branches: ["**"]
 
@@ -32,5 +32,5 @@ jobs:
         run: rustup component add rust-src --toolchain nightly-2025-02-14
 
       - name: Run tests
-        working-directory: tests/openvm/tests
+        working-directory: tests/openvm
         run: RUST_BACKTRACE=1 cargo nextest run --cargo-profile=fast
