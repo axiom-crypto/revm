@@ -185,6 +185,5 @@ inherits = "profiling"
 inherits = "test"
 opt-level = 3
 
-[profile.fast]
-inherits = "test"
+[profile.dev]
 opt-level = 1

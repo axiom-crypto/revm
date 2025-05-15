@@ -10,7 +10,6 @@ use openvm_pairing_circuit::{PairingCurve, PairingExtension};
 use openvm_pairing_guest::bls12_381::{BLS12_381_MODULUS, BLS12_381_ORDER};
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
-use openvm_stark_sdk::config::setup_tracing;
 use primitives::eip4844::VERSIONED_HASH_VERSION_KZG;
 use primitives::hex;
 use sha2::{Digest, Sha256};
@@ -19,7 +18,6 @@ use sha2::{Digest, Sha256};
 
 #[test]
 fn test_kzg_precompile_with_intrinsics() {
-    setup_tracing();
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default().with_features(["use-intrinsics"]);
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
@@ -69,7 +67,6 @@ fn test_kzg_precompile_with_intrinsics() {
 #[test]
 #[ignore]
 fn test_kzg_precompile_without_intrinsics() {
-    setup_tracing();
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();

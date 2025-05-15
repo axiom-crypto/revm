@@ -10,7 +10,6 @@ use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
 use openvm_pairing_circuit::{PairingCurve, PairingExtension};
 use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
 use openvm_sdk::{config::SdkVmConfig, Sdk};
-use openvm_stark_sdk::config::setup_tracing;
 use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
 use primitives::hex;
@@ -22,7 +21,6 @@ type F = BabyBear;
 // RUST_MIN_STACK=8388608
 #[test]
 fn test_ec_pairing_precompile() {
-    setup_tracing();
     let sdk = Sdk::new();
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
