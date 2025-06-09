@@ -1,13 +1,8 @@
 use std::path::PathBuf;
 
-use num_bigint::BigUint;
-use num_traits::{FromPrimitive, Zero};
-use openvm_algebra_circuit::{Fp2Extension, ModularExtension};
 use openvm_build::GuestOptions;
 use openvm_circuit::utils::air_test_with_min_segments;
-use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
-use openvm_pairing_circuit::{PairingCurve, PairingExtension};
-use openvm_pairing_guest::bls12_381::{BLS12_381_MODULUS, BLS12_381_ORDER};
+use openvm_sdk::config::AppConfig;
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use primitives::eip4844::VERSIONED_HASH_VERSION_KZG;
@@ -22,27 +17,13 @@ fn test_kzg_precompile_with_intrinsics() {
     let guest_opts = GuestOptions::default().with_features(["use-intrinsics"]);
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/kzg_point_evaluation");
-    let elf = sdk.build(guest_opts, &pkg_dir, &None).unwrap();
 
-    let vm_config = SdkVmConfig::builder()
-        .system(Default::default())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .keccak(Default::default())
-        .modular(ModularExtension::new(vec![
-            BLS12_381_MODULUS.clone(),
-            BLS12_381_ORDER.clone(),
-        ]))
-        .ecc(WeierstrassExtension::new(vec![CurveConfig {
-            modulus: BLS12_381_MODULUS.clone(),
-            scalar: BLS12_381_ORDER.clone(),
-            a: BigUint::zero(),
-            b: BigUint::from_u8(4).unwrap(),
-        }]))
-        .fp2(Fp2Extension::new(vec![BLS12_381_MODULUS.clone()]))
-        .pairing(PairingExtension::new(vec![PairingCurve::Bls12_381]))
-        .build();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/kzg_point_evaluation/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let elf = sdk
+        .build(guest_opts, &vm_config, &pkg_dir, &None, None)
+        .unwrap();
     let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
 
     // test data from: https://github.com/ethereum/c-kzg-4844/blob/main/tests/verify_kzg_proof/kzg-mainnet/verify_kzg_proof_case_correct_proof_31ebd010e6098750/data.yaml
@@ -71,8 +52,6 @@ fn test_kzg_precompile_without_intrinsics() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/kzg_point_evaluation");
-    let elf = sdk.build(guest_opts, &pkg_dir, &None).unwrap();
-
     let vm_config = SdkVmConfig::builder()
         .system(Default::default())
         .rv32i(Default::default())
@@ -80,6 +59,10 @@ fn test_kzg_precompile_without_intrinsics() {
         .io(Default::default())
         .keccak(Default::default())
         .build();
+    let elf = sdk
+        .build(guest_opts, &vm_config, &pkg_dir, &None, None)
+        .unwrap();
+
     let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
 
     // test data from: https://github.com/ethereum/c-kzg-4844/blob/main/tests/verify_kzg_proof/kzg-mainnet/verify_kzg_proof_case_correct_proof_31ebd010e6098750/data.yaml

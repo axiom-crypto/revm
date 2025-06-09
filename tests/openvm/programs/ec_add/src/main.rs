@@ -2,20 +2,13 @@
 #![no_main]
 
 use openvm::io::read_vec;
-use revm_precompile::bn128::{add::BYZANTIUM_ADD_GAS_COST, run_add};
 #[allow(unused_imports)]
-use {openvm_algebra_guest::IntMod, openvm_pairing_guest::bn254::Bn254G1Affine};
+use openvm_pairing_guest::bn254::Bn254G1Affine;
+use revm_precompile::bn128::{add::BYZANTIUM_ADD_GAS_COST, run_add};
+
+openvm::init!();
 
 openvm::entry!(main);
-
-openvm_algebra_moduli_macros::moduli_init! {
-    "0x30644e72e131a029b85045b68181585d97816a916871ca8d3c208c16d87cfd47",
-    "0x30644e72e131a029b85045b68181585d2833e84879b9709143e1f593f0000001"
-}
-
-openvm_ecc_sw_macros::sw_init! {
-    Bn254G1Affine,
-}
 
 pub fn main() {
     setup_all_moduli();

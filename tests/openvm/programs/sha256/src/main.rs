@@ -11,6 +11,6 @@ pub fn main() {
     let input = read_vec();
     let expected = read_vec();
 
-    let outcome = sha256_run(&input.into(), 260_000).unwrap();
+    let outcome = sha256_run(&input, 260_000).unwrap();
     assert_eq!(outcome.bytes, expected);
 }

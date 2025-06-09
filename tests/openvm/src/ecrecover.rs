@@ -1,11 +1,8 @@
 use std::path::PathBuf;
 
-use openvm_algebra_circuit::ModularExtension;
 use openvm_build::GuestOptions;
-use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::air_test_with_min_segments;
-use openvm_ecc_circuit::{WeierstrassExtension, SECP256K1_CONFIG};
-use openvm_ecc_guest::k256::{SECP256K1_MODULUS, SECP256K1_ORDER};
+use openvm_sdk::config::AppConfig;
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use primitives::{hex, keccak256, Bytes, U256};
@@ -17,20 +14,13 @@ fn test_ecrecover_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ecrecover");
-    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
-    let vm_config = SdkVmConfig::builder()
-        .system(SystemConfig::default().with_continuations().into())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .keccak(Default::default())
-        .modular(ModularExtension::new(vec![
-            SECP256K1_MODULUS.clone(),
-            SECP256K1_ORDER.clone(),
-        ]))
-        .ecc(WeierstrassExtension::new(vec![SECP256K1_CONFIG.clone()]))
-        .build();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ecrecover/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let elf = sdk
+        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
+        .unwrap();
     let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
 
     // Generate secp256k1 signature

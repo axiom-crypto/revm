@@ -1,9 +1,11 @@
 use std::path::PathBuf;
 
 use openvm_build::GuestOptions;
-use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::air_test_with_min_segments;
-use openvm_sdk::{config::SdkVmConfig, Sdk};
+use openvm_sdk::{
+    config::{AppConfig, SdkVmConfig},
+    Sdk,
+};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
 use primitives::hex;
@@ -16,16 +18,12 @@ fn test_sha256_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/sha256");
-    let sha256_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
-
-    let vm_config = SdkVmConfig::builder()
-        .system(SystemConfig::default().with_continuations().into())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .keccak(Default::default())
-        .sha256(Default::default())
-        .build();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/sha256/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let sha256_precompile = sdk
+        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
+        .unwrap();
     let exe = sdk
         .transpile(sha256_precompile, vm_config.transpiler())
         .unwrap();

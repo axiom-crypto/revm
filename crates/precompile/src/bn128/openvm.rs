@@ -2,13 +2,13 @@ use std::vec::Vec;
 
 use {
     openvm_ecc_guest::{
+        algebra::IntMod,
         weierstrass::{IntrinsicCurve, WeierstrassPoint},
         AffinePoint,
     },
-    openvm_pairing_guest::{
-        algebra::IntMod,
+    openvm_pairing::{
         bn254::{Bn254, Fp, Fp2, G1Affine, G2Affine, Scalar},
-        pairing::PairingCheck,
+        PairingCheck,
     },
 };
 

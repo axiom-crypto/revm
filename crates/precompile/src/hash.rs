@@ -26,7 +26,7 @@ pub fn sha256_run(input: &[u8], gas_limit: u64) -> PrecompileResult {
         #[cfg(not(feature = "openvm-sha2"))]
         let output = sha2::Sha256::digest(input);
         #[cfg(feature = "openvm-sha2")]
-        let output = openvm_sha256_guest::sha256(input);
+        let output = openvm_sha2::sha256(input);
         Ok(PrecompileOutput::new(cost, output.to_vec().into()))
     }
 }

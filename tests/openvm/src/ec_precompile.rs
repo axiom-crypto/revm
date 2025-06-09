@@ -1,14 +1,8 @@
 use std::path::PathBuf;
 
-use num_bigint::BigUint;
-use num_traits::{FromPrimitive, Zero};
-use openvm_algebra_circuit::{Fp2Extension, ModularExtension};
 use openvm_build::GuestOptions;
-use openvm_circuit::arch::SystemConfig;
 use openvm_circuit::utils::air_test_with_min_segments;
-use openvm_ecc_circuit::{CurveConfig, WeierstrassExtension};
-use openvm_pairing_circuit::{PairingCurve, PairingExtension};
-use openvm_pairing_guest::bn254::{BN254_MODULUS, BN254_ORDER};
+use openvm_sdk::config::AppConfig;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
 use openvm_stark_sdk::p3_baby_bear::BabyBear;
@@ -25,27 +19,12 @@ fn test_ec_pairing_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/pairing");
-    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
-
-    let vm_config = SdkVmConfig::builder()
-        .system(SystemConfig::default().with_continuations().into())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .keccak(Default::default())
-        .modular(ModularExtension::new(vec![
-            BN254_MODULUS.clone(),
-            BN254_ORDER.clone(),
-        ]))
-        .fp2(Fp2Extension::new(vec![BN254_MODULUS.clone()]))
-        .ecc(WeierstrassExtension::new(vec![CurveConfig {
-            modulus: BN254_MODULUS.clone(),
-            scalar: BN254_ORDER.clone(),
-            a: BigUint::zero(),
-            b: BigUint::from_u8(3u8).unwrap(),
-        }]))
-        .pairing(PairingExtension::new(vec![PairingCurve::Bn254]))
-        .build();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/pairing/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let ec_precompile = sdk
+        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
+        .unwrap();
     let exe = sdk
         .transpile(ec_precompile, vm_config.transpiler())
         .unwrap();
@@ -82,24 +61,13 @@ fn test_ec_add_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ec_add");
-    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
 
-    let vm_config = SdkVmConfig::builder()
-        .system(SystemConfig::default().with_continuations().into())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .modular(ModularExtension::new(vec![
-            BN254_MODULUS.clone(),
-            BN254_ORDER.clone(),
-        ]))
-        .ecc(WeierstrassExtension::new(vec![CurveConfig {
-            modulus: BN254_MODULUS.clone(),
-            scalar: BN254_ORDER.clone(),
-            a: BigUint::zero(),
-            b: BigUint::from_u8(3u8).unwrap(),
-        }]))
-        .build();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ec_add/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let ec_precompile = sdk
+        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
+        .unwrap();
     let exe = sdk
         .transpile(ec_precompile, vm_config.transpiler())
         .unwrap();
@@ -132,24 +100,13 @@ fn test_ec_mul_precompile() {
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ec_mul");
-    let ec_precompile = sdk.build(guest_opts.clone(), &pkg_dir, &None).unwrap();
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ec_mul/openvm.toml")).unwrap();
+    let vm_config = app_config.app_vm_config;
+    let ec_precompile = sdk
+        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
+        .unwrap();
 
-    let vm_config = SdkVmConfig::builder()
-        .system(SystemConfig::default().with_continuations().into())
-        .rv32i(Default::default())
-        .rv32m(Default::default())
-        .io(Default::default())
-        .modular(ModularExtension::new(vec![
-            BN254_MODULUS.clone(),
-            BN254_ORDER.clone(),
-        ]))
-        .ecc(WeierstrassExtension::new(vec![CurveConfig {
-            modulus: BN254_MODULUS.clone(),
-            scalar: BN254_ORDER.clone(),
-            a: BigUint::zero(),
-            b: BigUint::from_u8(3u8).unwrap(),
-        }]))
-        .build();
     let exe = sdk
         .transpile(ec_precompile, vm_config.transpiler())
         .unwrap();

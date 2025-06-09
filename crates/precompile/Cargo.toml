@@ -34,6 +34,7 @@ secp256k1 = { workspace = true, features = [
 libsecp256k1 = { workspace = true, features = [
     "static-context",
 ], optional = true }
+openvm-k256 = { workspace = true, features = ["ecdsa"], optional = true }
 
 # SHA2-256 and RIPEMD-160
 sha2.workspace = true
@@ -74,9 +75,9 @@ cfg-if.workspace = true
 # Optionally use openvm intrinsics
 openvm = { workspace = true, optional = true }
 openvm-ecc-guest = { workspace = true, optional = true }
-openvm-keccak256-guest = { workspace = true, optional = true }
-openvm-sha256-guest = { workspace = true, optional = true }
-openvm-pairing-guest = { workspace = true, optional = true }
+openvm-keccak256 = { workspace = true, optional = true }
+openvm-sha2 = { workspace = true, optional = true }
+openvm-pairing = { workspace = true, optional = true }
 openvm-kzg = { workspace = true, optional = true }
 
 [dev-dependencies]
@@ -129,6 +130,13 @@ portable = ["c-kzg?/portable", "blst?/portable"]
 # In Linux it passes. If you don't require to build wasm on win/mac, it is safe to use it and it is enabled by default.
 secp256k1 = ["dep:secp256k1"]
 libsecp256k1 = ["dep:libsecp256k1"]
+# Use openvm accelerated k256. This is slightly more optimized even compared to directly patching k256 with openvm-k256 due to how byte manipulation is done.
+openvm-k256 = [
+    "dep:openvm",
+    "dep:openvm-k256",
+    "openvm-ecc-guest",
+    "openvm-keccak256",
+]
 
 # Enables the blst implementation of the BLS12-381 precompile.
 blst = ["dep:blst"]
@@ -136,11 +144,9 @@ blst = ["dep:blst"]
 # Enables the substrate implementation of eip1962
 bn = ["dep:bn"]
 # Enable openvm accelerated implementation
-openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing-guest/bn254"]
+openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing/bn254"]
 
 openvm = ["dep:openvm", "openvm-k256", "openvm-bn", "openvm-sha2", "openvm-kzg"]
-openvm-k256 = ["dep:openvm", "openvm-ecc-guest/k256", "openvm-keccak256-guest"]
-openvm-sha2 = ["dep:openvm-sha256-guest"]
 
 [[bench]]
 name = "bench"
