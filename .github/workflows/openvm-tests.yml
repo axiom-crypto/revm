@@ -2,7 +2,7 @@ name: OpenVM Tests
 
 on:
   push:
-    branches: ["v69-openvm"]
+    branches: ["v*-openvm"]
   pull_request:
     branches: ["**"]
 
