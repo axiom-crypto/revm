@@ -1,0 +1,14 @@
+[workspace]
+[package]
+name = "ec-add-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+openvm-pairing = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
+    "openvm-bn",
+] }
