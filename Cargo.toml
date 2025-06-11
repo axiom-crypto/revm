@@ -115,28 +115,28 @@ either = { version = "1.15.0", default-features = false }
 # openvm stark-backend
 openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", rev = "f48090c9febd021f8ee0349bc929a775fb1fa3ad" }
 # openvm
-openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-build = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-build = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-sdk = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
 # openvm extensions
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-keccak256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-sha256-guest = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-pairing-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-rv32im-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-algebra-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-algebra-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-ecc-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-ecc-transpiler = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-pairing-circuit = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
 # openvm guest libs
-openvm-keccak256 = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-sha2 = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-pairing = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0" }
-openvm-k256 = { git = "https://github.com/openvm-org/openvm.git", rev = "c25b262dd75694e798ab090c22f42ffc2e1002a0", package = "k256", default-features = false }
-openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "2ba87b7425479662d901cea33e26cda67981a6b6", default-features = false }
+openvm-keccak256 = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-sha2 = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-pairing = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm-k256 = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1", package = "k256", default-features = false }
+openvm-kzg = { git = "https://github.com/axiom-crypto/openvm-kzg.git", rev = "a07b1983012e97ee21ebf0eef0d4da954d9cc2e5", default-features = false }
 
 # dev-dependencies
 anyhow = "1.0.89"
