@@ -118,7 +118,6 @@ c-kzg = ["dep:c-kzg"]
 kzg-rs = ["dep:kzg-rs"]
 # `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
 openvm-kzg = ["dep:openvm-kzg"]
-# TODO: always use intrinsics
 openvm-kzg-intrinsics = ["openvm-kzg/use-intrinsics"]
 
 # Compile in portable mode, without ISA extensions.
@@ -147,7 +146,7 @@ bn = ["dep:bn"]
 openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing/bn254"]
 
 # We do NOT include `openvm-k256` because it will cause a conflict when patching k256
-openvm = ["dep:openvm", "openvm-bn", "openvm-sha2", "openvm-kzg"]
+openvm = ["dep:openvm", "openvm-bn", "openvm-sha2", "openvm-kzg-intrinsics"]
 
 [[bench]]
 name = "bench"
