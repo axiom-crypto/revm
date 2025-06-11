@@ -1,0 +1,11 @@
+[workspace]
+[package]
+name = "sha256-program"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
+    "openvm-sha2",
+] }
