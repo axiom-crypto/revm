@@ -31,4 +31,9 @@ toml = "0.8.23"
 
 [dev-dependencies]
 rand.workspace = true
-secp256k1.workspace = true
+secp256k1 = { workspace = true, features = [
+    "alloc",
+    "recovery",
+    "rand",
+    "global-context",
+] }
