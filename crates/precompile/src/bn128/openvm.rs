@@ -20,12 +20,7 @@ fn read_fq(input: &[u8]) -> Result<Fp, PrecompileError> {
     if input.len() < FQ_LEN {
         Err(PrecompileError::Bn128FieldPointNotAMember)
     } else {
-        let fp = Fp::from_be_bytes(&input[..32]);
-        if fp.is_reduced() {
-            Ok(fp)
-        } else {
-            Err(PrecompileError::Bn128FieldPointNotAMember)
-        }
+        Fp::from_be_bytes(&input[..32]).ok_or(PrecompileError::Bn128FieldPointNotAMember)
     }
 }
 
@@ -118,7 +113,7 @@ pub(super) fn read_scalar(input: &[u8]) -> Scalar {
         "unexpected scalar length. got {}, expected {SCALAR_LEN}",
         input.len()
     );
-    Scalar::from_be_bytes(input)
+    Scalar::from_be_bytes_unchecked(input)
 }
 
 /// Performs point addition on two G1 points.
