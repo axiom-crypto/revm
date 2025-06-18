@@ -5,7 +5,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", tag = "v1.2.1-rc.1" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", rev = "9ef822c947f14eb436e293971c969cfcb688dbe7" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
     "openvm-sha2",
 ] }
