@@ -1476,7 +1476,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "117725a109d387c937a1533ce01b450cbde6b88abceea8473c4d7a85853cda3c"
 dependencies = [
  "lazy_static",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -1693,6 +1693,7 @@ dependencies = [
  "lock_api",
  "once_cell",
  "parking_lot_core",
+ "rayon",
 ]
 
 [[package]]
@@ -1988,7 +1989,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "976dd42dc7e85965fe702eb8164f21f450704bdde31faefd6471dba214cb594e"
 dependencies = [
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -2937,7 +2938,7 @@ checksum = "e04d7f318608d35d4b61ddd75cbdaee86b023ebe2bd5a66ee0915f0bf93095a9"
 dependencies = [
  "hermit-abi 0.5.0",
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -3029,7 +3030,7 @@ dependencies = [
 [[package]]
 name = "k256"
 version = "0.13.4"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "ecdsa",
  "elliptic-curve",
@@ -3606,8 +3607,8 @@ dependencies = [
 
 [[package]]
 name = "openvm"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "bytemuck",
  "getrandom 0.3.2",
@@ -3620,8 +3621,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-algebra-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3638,8 +3639,8 @@ dependencies = [
  "openvm-mod-circuit-builder",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
  "serde-big-array",
@@ -3649,8 +3650,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-algebra-complex-macros"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -3659,8 +3660,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-algebra-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "halo2curves-axiom",
  "num-bigint 0.4.6",
@@ -3675,8 +3676,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-algebra-moduli-macros"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "num-bigint 0.4.6",
  "num-prime",
@@ -3687,13 +3688,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-algebra-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-algebra-guest",
  "openvm-instructions",
  "openvm-instructions-derive",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -3701,8 +3702,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-bigint-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3715,16 +3716,16 @@ dependencies = [
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
 ]
 
 [[package]]
 name = "openvm-bigint-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-platform",
  "strum_macros 0.26.4",
@@ -3732,14 +3733,14 @@ dependencies = [
 
 [[package]]
 name = "openvm-bigint-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-bigint-guest",
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -3747,8 +3748,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-build"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "cargo_metadata",
  "eyre",
@@ -3759,11 +3760,12 @@ dependencies = [
 
 [[package]]
 name = "openvm-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "backtrace",
  "cfg-if",
+ "dashmap",
  "derivative",
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3776,8 +3778,8 @@ dependencies = [
  "openvm-circuit-primitives-derive",
  "openvm-instructions",
  "openvm-poseidon2-air",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "p3-baby-bear 0.1.0",
  "rand 0.8.5",
  "rustc-hash",
@@ -3790,8 +3792,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-circuit-derive"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "itertools 0.14.0",
  "quote",
@@ -3800,23 +3802,23 @@ dependencies = [
 
 [[package]]
 name = "openvm-circuit-primitives"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "itertools 0.14.0",
  "num-bigint 0.4.6",
  "num-traits",
  "openvm-circuit-primitives-derive",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "rand 0.8.5",
  "tracing",
 ]
 
 [[package]]
 name = "openvm-circuit-primitives-derive"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "itertools 0.14.0",
  "quote",
@@ -3825,15 +3827,15 @@ dependencies = [
 
 [[package]]
 name = "openvm-continuations"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derivative",
  "openvm-circuit",
  "openvm-native-compiler",
  "openvm-native-recursion",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "serde",
  "static_assertions",
 ]
@@ -3841,7 +3843,7 @@ dependencies = [
 [[package]]
 name = "openvm-custom-insn"
 version = "0.1.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3850,8 +3852,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-ecc-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3870,7 +3872,8 @@ dependencies = [
  "openvm-mod-circuit-builder",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "rand 0.8.5",
  "serde",
  "serde_with",
  "strum 0.26.3",
@@ -3878,8 +3881,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-ecc-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "ecdsa",
  "elliptic-curve",
@@ -3897,8 +3900,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-ecc-sw-macros"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-macros-common",
  "quote",
@@ -3907,13 +3910,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-ecc-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-ecc-guest",
  "openvm-instructions",
  "openvm-instructions-derive",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -3921,8 +3924,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-instructions"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "backtrace",
  "derive-new 0.6.0",
@@ -3930,7 +3933,7 @@ dependencies = [
  "num-bigint 0.4.6",
  "num-traits",
  "openvm-instructions-derive",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "serde",
  "strum 0.26.3",
  "strum_macros 0.26.4",
@@ -3938,8 +3941,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-instructions-derive"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "quote",
  "syn 2.0.100",
@@ -3947,8 +3950,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-keccak256"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-keccak256-guest",
  "tiny-keccak",
@@ -3956,8 +3959,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-keccak256-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -3969,8 +3972,8 @@ dependencies = [
  "openvm-instructions",
  "openvm-keccak256-transpiler",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "p3-keccak-air",
  "rand 0.8.5",
  "serde",
@@ -3982,21 +3985,21 @@ dependencies = [
 
 [[package]]
 name = "openvm-keccak256-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-platform",
 ]
 
 [[package]]
 name = "openvm-keccak256-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-keccak256-guest",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -4005,7 +4008,7 @@ dependencies = [
 [[package]]
 name = "openvm-kzg"
 version = "0.1.0-alpha"
-source = "git+https://github.com/axiom-crypto/openvm-kzg.git?rev=56751b25b4f18ba9988355faa288918db0ab3fde#56751b25b4f18ba9988355faa288918db0ab3fde"
+source = "git+https://github.com/axiom-crypto/openvm-kzg.git?branch=feat%2Fnew-execution#13442727360d76004c0df02654eb62b4a1ce89ac"
 dependencies = [
  "bls12_381 0.8.0",
  "hex",
@@ -4020,16 +4023,16 @@ dependencies = [
 
 [[package]]
 name = "openvm-macros-common"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "syn 2.0.100",
 ]
 
 [[package]]
 name = "openvm-mod-circuit-builder"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "itertools 0.14.0",
  "num-bigint 0.4.6",
@@ -4037,8 +4040,8 @@ dependencies = [
  "openvm-circuit",
  "openvm-circuit-primitives",
  "openvm-instructions",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
  "serde_with",
@@ -4047,8 +4050,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-native-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -4062,8 +4065,9 @@ dependencies = [
  "openvm-native-compiler",
  "openvm-poseidon2-air",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-rv32im-transpiler",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
  "serde-big-array",
@@ -4074,8 +4078,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-native-compiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "backtrace",
  "itertools 0.14.0",
@@ -4086,8 +4090,8 @@ dependencies = [
  "openvm-instructions-derive",
  "openvm-native-compiler-derive",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "serde",
  "strum 0.26.3",
  "strum_macros 0.26.4",
@@ -4096,8 +4100,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-native-compiler-derive"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "quote",
  "syn 2.0.100",
@@ -4105,8 +4109,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-native-recursion"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "cfg-if",
  "itertools 0.14.0",
@@ -4115,8 +4119,8 @@ dependencies = [
  "openvm-native-circuit",
  "openvm-native-compiler",
  "openvm-native-compiler-derive",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "p3-dft 0.1.0",
  "p3-fri",
  "p3-merkle-tree",
@@ -4129,8 +4133,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-native-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-instructions",
  "openvm-transpiler",
@@ -4139,8 +4143,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-pairing"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "group 0.13.0",
  "hex-literal 0.4.1",
@@ -4163,8 +4167,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-pairing-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -4186,7 +4190,7 @@ dependencies = [
  "openvm-pairing-transpiler",
  "openvm-rv32-adapters",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "rand 0.8.5",
  "serde",
  "strum 0.26.3",
@@ -4194,8 +4198,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-pairing-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "halo2curves-axiom",
  "hex-literal 0.4.1",
@@ -4215,13 +4219,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-pairing-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-pairing-guest",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -4229,8 +4233,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-platform"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "libm",
  "openvm-custom-insn",
@@ -4239,13 +4243,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-poseidon2-air"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derivative",
  "lazy_static",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "p3-monty-31",
  "p3-poseidon2 0.1.0",
  "p3-poseidon2-air",
@@ -4256,8 +4260,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-rv32-adapters"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "itertools 0.14.0",
@@ -4266,8 +4270,8 @@ dependencies = [
  "openvm-circuit-primitives-derive",
  "openvm-instructions",
  "openvm-rv32im-circuit",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
  "serde-big-array",
@@ -4276,12 +4280,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-rv32im-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
  "eyre",
+ "itertools 0.14.0",
  "num-bigint 0.4.6",
  "num-integer",
  "openvm-circuit",
@@ -4290,7 +4295,7 @@ dependencies = [
  "openvm-circuit-primitives-derive",
  "openvm-instructions",
  "openvm-rv32im-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "rand 0.8.5",
  "serde",
  "serde-big-array",
@@ -4299,8 +4304,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-rv32im-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-custom-insn",
  "p3-field 0.1.0",
@@ -4309,13 +4314,13 @@ dependencies = [
 
 [[package]]
 name = "openvm-rv32im-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-rv32im-guest",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "serde",
@@ -4325,8 +4330,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-sdk"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "async-trait",
  "bitcode",
@@ -4362,10 +4367,11 @@ dependencies = [
  "openvm-rv32im-transpiler",
  "openvm-sha256-circuit",
  "openvm-sha256-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "openvm-transpiler",
  "p3-fri",
+ "rand 0.8.5",
  "rrs-lib",
  "serde",
  "serde_json",
@@ -4377,8 +4383,8 @@ dependencies = [
 
 [[package]]
 name = "openvm-sha2"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-sha256-guest",
  "sha2 0.10.8",
@@ -4386,19 +4392,19 @@ dependencies = [
 
 [[package]]
 name = "openvm-sha256-air"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-circuit-primitives",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "rand 0.8.5",
  "sha2 0.10.8",
 ]
 
 [[package]]
 name = "openvm-sha256-circuit"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "derive-new 0.6.0",
  "derive_more 1.0.0",
@@ -4410,8 +4416,8 @@ dependencies = [
  "openvm-rv32im-circuit",
  "openvm-sha256-air",
  "openvm-sha256-transpiler",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
+ "openvm-stark-sdk",
  "rand 0.8.5",
  "serde",
  "sha2 0.10.8",
@@ -4420,21 +4426,21 @@ dependencies = [
 
 [[package]]
 name = "openvm-sha256-guest"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-platform",
 ]
 
 [[package]]
 name = "openvm-sha256-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "openvm-instructions",
  "openvm-instructions-derive",
  "openvm-sha256-guest",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "openvm-transpiler",
  "rrs-lib",
  "strum 0.26.3",
@@ -4444,31 +4450,6 @@ dependencies = [
 name = "openvm-stark-backend"
 version = "1.1.1"
 source = "git+https://github.com/openvm-org/stark-backend.git?rev=0879de162658b797b8dd6b6ee4429cbb8dd78ba1#0879de162658b797b8dd6b6ee4429cbb8dd78ba1"
-dependencies = [
- "bitcode",
- "cfg-if",
- "derivative",
- "derive-new 0.7.0",
- "itertools 0.14.0",
- "p3-air",
- "p3-challenger",
- "p3-commit",
- "p3-field 0.1.0",
- "p3-matrix 0.1.0",
- "p3-maybe-rayon 0.1.0",
- "p3-uni-stark",
- "p3-util 0.1.0",
- "rayon",
- "rustc-hash",
- "serde",
- "thiserror 1.0.69",
- "tracing",
-]
-
-[[package]]
-name = "openvm-stark-backend"
-version = "1.1.1"
-source = "git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad#f48090c9febd021f8ee0349bc929a775fb1fa3ad"
 dependencies = [
  "bitcode",
  "cfg-if",
@@ -4503,43 +4484,7 @@ dependencies = [
  "metrics",
  "metrics-tracing-context",
  "metrics-util",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=0879de162658b797b8dd6b6ee4429cbb8dd78ba1)",
- "p3-baby-bear 0.1.0",
- "p3-blake3",
- "p3-bn254-fr",
- "p3-dft 0.1.0",
- "p3-fri",
- "p3-goldilocks",
- "p3-keccak",
- "p3-koala-bear",
- "p3-merkle-tree",
- "p3-poseidon",
- "p3-poseidon2 0.1.0",
- "p3-symmetric 0.1.0",
- "rand 0.8.5",
- "serde",
- "serde_json",
- "static_assertions",
- "toml",
- "tracing",
- "tracing-forest",
- "tracing-subscriber 0.3.19",
- "zkhash",
-]
-
-[[package]]
-name = "openvm-stark-sdk"
-version = "1.1.1"
-source = "git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad#f48090c9febd021f8ee0349bc929a775fb1fa3ad"
-dependencies = [
- "derivative",
- "derive_more 0.99.20",
- "ff 0.13.1",
- "itertools 0.14.0",
- "metrics",
- "metrics-tracing-context",
- "metrics-util",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "p3-baby-bear 0.1.0",
  "p3-blake3",
  "p3-bn254-fr",
@@ -4583,7 +4528,7 @@ dependencies = [
  "openvm-pairing-transpiler",
  "openvm-rv32im-transpiler",
  "openvm-sdk",
- "openvm-stark-sdk 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=0879de162658b797b8dd6b6ee4429cbb8dd78ba1)",
+ "openvm-stark-sdk",
  "openvm-transpiler",
  "rand 0.8.5",
  "revm-primitives",
@@ -4594,14 +4539,14 @@ dependencies = [
 
 [[package]]
 name = "openvm-transpiler"
-version = "1.2.1-rc.0"
-source = "git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7#9ef822c947f14eb436e293971c969cfcb688dbe7"
+version = "1.3.0-rc.0"
+source = "git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution#29e11c363b8395089037d6ecf06d2a6d9ed6c2a6"
 dependencies = [
  "elf",
  "eyre",
  "openvm-instructions",
  "openvm-platform",
- "openvm-stark-backend 1.1.1 (git+https://github.com/openvm-org/stark-backend.git?rev=f48090c9febd021f8ee0349bc929a775fb1fa3ad)",
+ "openvm-stark-backend",
  "rrs-lib",
  "thiserror 1.0.69",
 ]
@@ -5861,7 +5806,7 @@ dependencies = [
  "cfg-if",
  "codspeed-criterion-compat",
  "k256 0.13.4 (registry+https://github.com/rust-lang/crates.io-index)",
- "k256 0.13.4 (git+https://github.com/openvm-org/openvm.git?rev=9ef822c947f14eb436e293971c969cfcb688dbe7)",
+ "k256 0.13.4 (git+https://github.com/openvm-org/openvm.git?branch=feat%2Fnew-execution)",
  "kzg-rs",
  "libsecp256k1",
  "once_cell",
@@ -6090,7 +6035,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -6697,7 +6642,7 @@ dependencies = [
  "getrandom 0.3.2",
  "once_cell",
  "rustix",
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
@@ -7374,7 +7319,7 @@ version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "cf221c93e13a30d793f7645a0e7762c55d169dbb0a49671918a2319d289b10bb"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.59.0",
 ]
 
 [[package]]
