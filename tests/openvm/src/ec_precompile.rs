@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 use openvm_build::GuestOptions;
-use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_sdk::config::AppConfig;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
 use openvm_stark_sdk::openvm_stark_backend::p3_field::FieldAlgebra;
@@ -14,20 +13,14 @@ type F = BabyBear;
 
 // RUST_MIN_STACK=8388608
 #[test]
-fn test_ec_pairing_precompile() {
-    let sdk = Sdk::new();
+fn test_ec_pairing_precompile() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/pairing/openvm.toml")).unwrap();
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/pairing");
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/pairing/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-    let exe = sdk
-        .transpile(ec_precompile, vm_config.transpiler())
-        .unwrap();
+    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None, None)?;
 
     let input = hex::decode(
         "\
@@ -52,25 +45,20 @@ fn test_ec_pairing_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io.into())?;
+    Ok(())
 }
 
 #[test]
-fn test_ec_add_precompile() {
-    let sdk = Sdk::new();
+fn test_ec_add_precompile() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ec_add/openvm.toml")).unwrap();
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ec_add");
 
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/ec_add/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-    let exe = sdk
-        .transpile(ec_precompile, vm_config.transpiler())
-        .unwrap();
+    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None, None)?;
 
     let input = hex::decode(
         "\
@@ -78,38 +66,30 @@ fn test_ec_add_precompile() {
          063c909c4720840cb5134cb9f59fa749755796819658d32efc0d288198f37266\
          07c2b7f58a84bd6145f00c9c2bc0bb1a187f20ff2c92963a88019e7c6a014eed\
          06614e20c147e940f2d70da3f74c9a17df361706a4485c742bd6788478fa17d7",
-    )
-    .unwrap();
+    )?;
     let expected = hex::decode(
         "\
         2243525c5efd4b9c3d3c45ac0ca3fe4dd85e830a4ce6b65fa1eeaee202839703\
         301d1d33be6da8e509df21cc35964723180eed7532537db9ae5e7d48f195c915",
-    )
-    .unwrap();
+    )?;
 
     let io = [input, expected]
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io.into())?;
+    Ok(())
 }
 
 #[test]
-fn test_ec_mul_precompile() {
-    let sdk = Sdk::new();
+fn test_ec_mul_precompile() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ec_mul/openvm.toml")).unwrap();
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ec_mul");
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/ec_mul/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let ec_precompile = sdk
-        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-
-    let exe = sdk
-        .transpile(ec_precompile, vm_config.transpiler())
-        .unwrap();
+    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None, None)?;
 
     let input = hex::decode(
         "\
@@ -129,5 +109,6 @@ fn test_ec_mul_precompile() {
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io.into())?;
+    Ok(())
 }

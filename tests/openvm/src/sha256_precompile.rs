@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 use openvm_build::GuestOptions;
-use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_sdk::{
     config::{AppConfig, SdkVmConfig},
     Sdk,
@@ -13,20 +12,14 @@ use primitives::hex;
 type F = BabyBear;
 
 #[test]
-fn test_sha256_precompile() {
-    let sdk = Sdk::new();
+fn test_sha256_precompile() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/sha256/openvm.toml"))?;
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/sha256");
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/sha256/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let sha256_precompile = sdk
-        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-    let exe = sdk
-        .transpile(sha256_precompile, vm_config.transpiler())
-        .unwrap();
+    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None, None)?;
 
     let input = hex::decode(
         "\
@@ -44,12 +37,12 @@ fn test_sha256_precompile() {
         12c85ea5db8c6deb4aab71808dcb408fe3d1e7690c43d37b4ce6cc0166fa7daa",
     )
     .unwrap();
-    let expected =
-        hex::decode("5f4e768d9faaf07a8c7264b937d60ff0b2fd52458e60a235f79c54bea68979dc").unwrap();
+    let expected = hex::decode("5f4e768d9faaf07a8c7264b937d60ff0b2fd52458e60a235f79c54bea68979dc")?;
 
     let io = [input, expected]
         .into_iter()
         .map(|w| w.into_iter().map(F::from_canonical_u8).collect::<Vec<_>>())
         .collect::<Vec<_>>();
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io.into())?;
+    Ok(())
 }

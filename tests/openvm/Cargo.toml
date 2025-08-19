@@ -28,6 +28,7 @@ primitives = { workspace = true }
 
 sha2 = { version = "0.10", default-features = false }
 toml = "0.8.23"
+eyre.workspace = true
 
 [dev-dependencies]
 rand.workspace = true
