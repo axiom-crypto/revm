@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
 use openvm_build::GuestOptions;
-use openvm_circuit::utils::air_test_with_min_segments;
 use openvm_sdk::config::AppConfig;
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
@@ -9,19 +8,15 @@ use primitives::{hex, keccak256, Bytes, U256};
 use secp256k1::{Message, SecretKey, SECP256K1};
 
 #[test]
-fn test_ecrecover_precompile() {
-    let sdk = Sdk::new();
+fn test_ecrecover_precompile() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/ecrecover/openvm.toml")).unwrap();
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default();
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/ecrecover");
 
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/ecrecover/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let elf = sdk
-        .build(guest_opts.clone(), &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-    let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
+    let elf = sdk.build(guest_opts.clone(), &pkg_dir, &None, None)?;
 
     // Generate secp256k1 signature
     let data = hex::decode("1337133713371337").unwrap();
@@ -48,5 +43,6 @@ fn test_ecrecover_precompile() {
     let mut stdin = StdIn::default();
     stdin.write_bytes(expected.as_slice());
     stdin.write_bytes(&message_and_signature);
-    air_test_with_min_segments(vm_config, exe, stdin, 1);
+    sdk.app_prover(elf)?.prove(stdin)?;
+    Ok(())
 }

@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 
 use openvm_build::GuestOptions;
-use openvm_circuit::utils::air_test_with_min_segments;
+use openvm_circuit::openvm_stark_sdk::config::FriParameters;
 use openvm_sdk::config::AppConfig;
 use openvm_sdk::StdIn;
 use openvm_sdk::{config::SdkVmConfig, Sdk};
@@ -12,19 +12,15 @@ use sha2::{Digest, Sha256};
 // These tests should be run with --profile=fast or --profile=ethtests for more compiler optimization
 
 #[test]
-fn test_kzg_precompile_with_intrinsics() {
-    let sdk = Sdk::new();
+fn test_kzg_precompile_with_intrinsics() -> eyre::Result<()> {
+    let app_config: AppConfig<SdkVmConfig> =
+        toml::from_str(include_str!("../programs/kzg_point_evaluation/openvm.toml")).unwrap();
+    let sdk = Sdk::new(app_config)?;
     let guest_opts = GuestOptions::default().with_features(["use-intrinsics"]);
     let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
     pkg_dir.push("programs/kzg_point_evaluation");
 
-    let app_config: AppConfig<SdkVmConfig> =
-        toml::from_str(include_str!("../programs/kzg_point_evaluation/openvm.toml")).unwrap();
-    let vm_config = app_config.app_vm_config;
-    let elf = sdk
-        .build(guest_opts, &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-    let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
+    let elf = sdk.build(guest_opts, &pkg_dir, &None, None)?;
 
     // test data from: https://github.com/ethereum/c-kzg-4844/blob/main/tests/verify_kzg_proof/kzg-mainnet/verify_kzg_proof_case_correct_proof_31ebd010e6098750/data.yaml
 
@@ -42,28 +38,26 @@ fn test_kzg_precompile_with_intrinsics() {
     let mut io = StdIn::default();
     io.write_bytes(&input);
     io.write_bytes(&expected_output);
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io)?;
+    Ok(())
 }
 
 #[test]
 #[ignore]
-fn test_kzg_precompile_without_intrinsics() {
-    let sdk = Sdk::new();
-    let guest_opts = GuestOptions::default();
-    let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
-    pkg_dir.push("programs/kzg_point_evaluation");
+fn test_kzg_precompile_without_intrinsics() -> eyre::Result<()> {
     let vm_config = SdkVmConfig::builder()
         .system(Default::default())
         .rv32i(Default::default())
         .rv32m(Default::default())
         .io(Default::default())
         .keccak(Default::default())
-        .build();
-    let elf = sdk
-        .build(guest_opts, &vm_config, &pkg_dir, &None, None)
-        .unwrap();
-
-    let exe = sdk.transpile(elf, vm_config.transpiler()).unwrap();
+        .build()
+        .optimize();
+    let sdk = Sdk::new(AppConfig::new(FriParameters::new_for_testing(1), vm_config))?;
+    let guest_opts = GuestOptions::default();
+    let mut pkg_dir = PathBuf::from(env!("CARGO_MANIFEST_DIR")).to_path_buf();
+    pkg_dir.push("programs/kzg_point_evaluation");
+    let elf = sdk.build(guest_opts, &pkg_dir, &None, None)?;
 
     // test data from: https://github.com/ethereum/c-kzg-4844/blob/main/tests/verify_kzg_proof/kzg-mainnet/verify_kzg_proof_case_correct_proof_31ebd010e6098750/data.yaml
     let commitment = hex!("8f59a8d2a1a625a17f3fea0fe5eb8c896db3764f3185481bc22f91b4aaffcca25f26936857bc3a7c2539ea8ec3a952b7").to_vec();
@@ -80,5 +74,6 @@ fn test_kzg_precompile_without_intrinsics() {
     let mut io = StdIn::default();
     io.write_bytes(&input);
     io.write_bytes(&expected_output);
-    air_test_with_min_segments(vm_config, exe, io, 1);
+    sdk.app_prover(elf)?.prove(io)?;
+    Ok(())
 }

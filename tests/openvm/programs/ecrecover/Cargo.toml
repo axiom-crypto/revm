@@ -5,14 +5,14 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-openvm = { git = "https://github.com/openvm-org/openvm.git", branch = "feat/new-execution" }
-openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", branch = "feat/new-execution" }
-openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", branch = "feat/new-execution" }
+openvm = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
+openvm-algebra-guest = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
+openvm-ecc-guest = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
 revm-precompile = { path = "../../../../crates/precompile", default-features = false, features = [
     "openvm-k256",
 ] }
 revm-primitives = { path = "../../../../crates/primitives", default-features = false }
-k256 = { git = "https://github.com/openvm-org/openvm.git", branch = "feat/new-execution" }
+k256 = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
 
 [features]
 default = []
