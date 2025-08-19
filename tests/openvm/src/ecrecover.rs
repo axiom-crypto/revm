@@ -11,7 +11,7 @@ use secp256k1::{Message, SecretKey, SECP256K1};
 fn test_ecrecover_precompile() -> eyre::Result<()> {
     // Spawn thread with increased stack size
     let handle = Builder::new()
-        .stack_size(4 * 1024 * 1024) // 4MB stack
+        .stack_size(8 * 1024 * 1024) // 8MB stack
         .spawn(|| -> eyre::Result<()> {
             let app_config: AppConfig<SdkVmConfig> =
                 toml::from_str(include_str!("../programs/ecrecover/openvm.toml")).unwrap();
