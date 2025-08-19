@@ -113,7 +113,7 @@ tokio = "1.44"
 either = { version = "1.15.0", default-features = false }
 
 # openvm stark-backend
-openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git" }
+openvm-stark-sdk = { git = "https://github.com/openvm-org/stark-backend.git", tag = "v1.2.0-rc.2" }
 # openvm
 openvm = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
 openvm-circuit = { git = "https://github.com/openvm-org/openvm.git", branch = "main" }
