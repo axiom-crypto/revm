@@ -91,12 +91,13 @@ optional_eip3607 = ["context/optional_eip3607"]
 optional_no_base_fee = ["context/optional_no_base_fee"]
 
 # Precompiles features
-
-secp256k1 = ["precompile/secp256k1"] # See comments in `precompile`
-c-kzg = [
-	"precompile/c-kzg",
-] # `kzg-rs` is not audited but useful for `no_std` environment, use it with causing and default to `c-kzg` if possible.
+# See comments in `precompile`
+secp256k1 = ["precompile/secp256k1"]
+c-kzg = ["precompile/c-kzg"]
+# `kzg-rs` is not audited but useful for `no_std` environment, use it with causing and default to `c-kzg` if possible.
 kzg-rs = ["precompile/kzg-rs"]
+# `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
+openvm-kzg = ["precompile/openvm-kzg"]
 blst = ["precompile/blst"]
 bn = ["precompile/bn"]
 

@@ -4,6 +4,8 @@ use crate::{Address, PrecompileError, PrecompileOutput, PrecompileResult, Precom
 cfg_if::cfg_if! {
     if #[cfg(feature = "c-kzg")] {
         use c_kzg::{Bytes32, Bytes48};
+    } else if #[cfg(feature = "openvm-kzg")] {
+        use openvm_kzg::{Bytes32, Bytes48, KzgProof};
     } else if #[cfg(feature = "kzg-rs")] {
         use kzg_rs::{Bytes32, Bytes48, KzgProof};
     }
@@ -82,6 +84,10 @@ pub fn verify_kzg_proof(commitment: &Bytes48, z: &Bytes32, y: &Bytes32, proof: &
         if #[cfg(feature = "c-kzg")] {
             let kzg_settings = c_kzg::ethereum_kzg_settings(8);
             kzg_settings.verify_kzg_proof(commitment, z, y, proof).unwrap_or(false)
+        } else if #[cfg(feature = "openvm-kzg")] {
+            let env = openvm_kzg::EnvKzgSettings::default();
+            let kzg_settings = env.get();
+            KzgProof::verify_kzg_proof(commitment, z, y, proof, kzg_settings).unwrap_or(false)
         } else if #[cfg(feature = "kzg-rs")] {
             let env = kzg_rs::EnvKzgSettings::default();
             let kzg_settings = env.get();
