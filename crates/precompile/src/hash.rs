@@ -27,7 +27,10 @@ pub fn sha256_run(input: &[u8], gas_limit: u64) -> PrecompileResult {
     if cost > gas_limit {
         Err(PrecompileError::OutOfGas)
     } else {
+        #[cfg(not(feature = "openvm-sha2"))]
         let output = crypto().sha256(input);
+        #[cfg(feature = "openvm-sha2")]
+        let output = openvm_sha2::sha256(input);
         Ok(PrecompileOutput::new(cost, output.to_vec().into()))
     }
 }
