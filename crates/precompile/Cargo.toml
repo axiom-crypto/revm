@@ -31,14 +31,15 @@ once_cell = { workspace = true, features = ["alloc"] }
 # ecRecover
 k256 = { workspace = true, features = ["ecdsa"] }
 secp256k1 = { workspace = true, features = [
-	"alloc",
-	"recovery",
-	"rand",
-	"global-context",
+    "alloc",
+    "recovery",
+    "rand",
+    "global-context",
 ], optional = true }
 libsecp256k1 = { workspace = true, features = [
-	"static-context",
+    "static-context",
 ], optional = true }
+openvm-k256 = { workspace = true, features = ["ecdsa"], optional = true }
 
 # SHA2-256 and RIPEMD-160
 sha2.workspace = true
@@ -55,7 +56,7 @@ ark-serialize = { workspace = true }
 
 # KZG point evaluation precompile
 c-kzg = { workspace = true, optional = true, features = [
-	"ethereum_kzg_settings",
+    "ethereum_kzg_settings",
 ] }
 
 # Optionally use `kzg-rs` for a pure Rust implementation of KZG point evaluation.
@@ -74,6 +75,14 @@ p256 = { workspace = true, features = ["ecdsa"] }
 cfg-if.workspace = true
 arrayref = "0.3.6"
 
+# Optionally use openvm intrinsics
+openvm = { workspace = true, optional = true }
+openvm-ecc-guest = { workspace = true, optional = true }
+openvm-keccak256 = { workspace = true, optional = true }
+openvm-sha2 = { workspace = true, optional = true }
+openvm-pairing = { workspace = true, optional = true }
+openvm-kzg = { workspace = true, optional = true }
+
 [dev-dependencies]
 criterion.workspace = true
 rand = { workspace = true, features = ["std"] }
@@ -81,7 +90,7 @@ ark-std = { workspace = true }
 rstest.workspace = true
 
 [features]
-default = ["std", "c-kzg", "secp256k1", "portable", "blst"]
+default = ["openvm"]
 std = [
 	"primitives/std",
 	"k256/std",
@@ -111,6 +120,9 @@ asm-sha2 = ["sha2/asm"]
 c-kzg = ["dep:c-kzg"]
 # `kzg-rs` is not audited but useful for `no_std` environment, use it with causing and default to `c-kzg` if possible.
 kzg-rs = ["dep:kzg-rs"]
+# `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
+openvm-kzg = ["dep:openvm-kzg"]
+openvm-kzg-intrinsics = ["openvm-kzg/use-intrinsics"]
 
 # Compile in portable mode, without ISA extensions.
 # Binary can be executed on all systems.
@@ -121,12 +133,24 @@ portable = ["c-kzg?/portable", "blst?/portable"]
 # In Linux it passes. If you don't require to build wasm on win/mac, it is safe to use it and it is enabled by default.
 secp256k1 = ["dep:secp256k1"]
 libsecp256k1 = ["dep:libsecp256k1"]
+# Use openvm accelerated k256. This is slightly more optimized even compared to directly patching k256 with openvm-k256 due to how byte manipulation is done.
+openvm-k256 = [
+    "dep:openvm",
+    "dep:openvm-k256",
+    "openvm-ecc-guest",
+    "openvm-keccak256",
+]
 
 # Enables the blst implementation of the BLS12-381 precompile.
 blst = ["dep:blst"]
 
 # Enables the substrate implementation of eip1962
 bn = ["dep:bn"]
+# Enable openvm accelerated implementation
+openvm-bn = ["dep:openvm", "openvm-ecc-guest", "openvm-pairing/bn254"]
+
+# We do NOT include `openvm-k256` because it will cause a conflict when patching k256
+openvm = ["dep:openvm", "openvm-bn", "openvm-sha2", "openvm-kzg-intrinsics"]
 
 # Use rug (that wraps gmp) for modexp precompile.
 # It is faster library but licences as GPL code, if enabled please make sure to follow the license.
