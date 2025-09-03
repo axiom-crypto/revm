@@ -13,6 +13,9 @@ cfg_if::cfg_if! {
     if #[cfg(feature = "bn")]{
         pub(crate) mod substrate;
         pub(crate) use substrate as crypto_backend;
+    } else if #[cfg(feature = "openvm-bn")] {
+        pub(crate) mod openvm;
+        pub(crate) use openvm as crypto_backend;
     } else {
         pub(crate) use arkworks as crypto_backend;
     }

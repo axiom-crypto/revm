@@ -100,8 +100,9 @@ c-kzg = [
 	"precompile/c-kzg",
 ] # `kzg-rs` is not audited but useful for `no_std` environment, use it with causing and default to `c-kzg` if possible.
 kzg-rs = ["precompile/kzg-rs"]
+# `openvm-kzg` can be used in place of kzg-rs for acceleration on OpenVM guest
+openvm-kzg = ["precompile/openvm-kzg"]
 
-# blst will enabled both for bls precompiles and for kzg precompile.
 blst = ["precompile/blst"]
 bn = ["precompile/bn"]
 asm-sha2 = ["precompile/asm-sha2"]
